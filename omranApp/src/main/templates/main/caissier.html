@@ -1,0 +1,48 @@
+
+<!-- <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>caisserAdminWorking</title>
+</head>
+<body> -->
+    {% extends 'base.html'%}
+    {% block body%}
+    </br>
+    <span >
+      
+        <button class="btn btn-primary" type="submit" name="button_ajouter" >ajouter commande</button>
+        
+      
+      </span>
+    </br>
+    <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th scope="col"># Table</th>
+            <th scope="col">date saisie</th>
+            <th scope="col">prix</th>
+        </tr>
+        </thead>
+        {% for command in commands %}
+      
+        <tbody>
+          <tr>
+            <th scope="row">{{command.tableNum}}</th>
+            <td>{{command.dateComm}}</td>
+            <td>{{command.commPrice}}</td>
+
+            <td><form method="post" action="caissierAdmin/edit-command">{% csrf_token %}
+                <button class="btn btn-warning" type="submit" name="edit" value={{command.id}}>Editer</button>
+                </form>
+            </td>
+
+          </tr>
+          
+        </tbody>
+        {% endfor %}
+      </table>
+      {% endblock body%}
+<!-- </body>
+</html> -->
