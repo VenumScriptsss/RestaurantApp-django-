@@ -23,4 +23,5 @@ urlpatterns = [
     path('caissier', caissierView, name='caissier'),
     path('', loginPage, name='loginPage'),
     path('apply_function', apply_function, name='apply_function'),
+    path('ajouter-command', ajouterEeditCommandView, name='ajouter-command'),
 ]

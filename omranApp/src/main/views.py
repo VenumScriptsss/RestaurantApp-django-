@@ -20,7 +20,6 @@ def loginPage(request):
     return render(request,"main/loginPage.html",context)
 
 
-
 @csrf_exempt
 def apply_function(request):
    
@@ -30,3 +29,13 @@ def apply_function(request):
         comnd.encaisser=True
         comnd.save()
     return render(request,"main/caissierAdmin.html")
+
+
+#-------------ajouter/editer command----------------
+
+
+def ajouterEeditCommandView(request):
+    context = {}
+    if 'ajouterCommand' in request.POST:
+        context['pageType'] = 'Ajouter-Command'
+    return render(request,"main/ajouterEditerComm.html",context)

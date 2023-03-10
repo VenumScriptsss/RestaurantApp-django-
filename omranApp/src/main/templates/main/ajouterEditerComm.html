@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block header%}
+      <link rel="stylesheet" href="{% static 'ajoutereditercomm.css' %}">
+{% endblock header%}
+
+{% block title %}{{pageType}}{% endblock title %}
+
+{% block body%}
+<div class="mainCont">
+    <div class="leftCont">
+        <form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2">
+            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </form>
+          <div class="prodList">
+            {% for prod in prods %}
+                {% if prod is prod.acitve %}
+                    <div class="prod">
+                        <p>{{prod.prodName}}</p>
+                        <p>{{}}</p>
+                    </div>
+                {% endif%}
+            {% endfor%}
+          </div>
+    </div>
+    <div class="rightCont"></div>
+</div>
+{% endblock body%}

@@ -1,0 +1,24 @@
+.mainCont{
+    width: 100%;
+    height: 100%;
+    padding:2em ;
+    display: flex;
+}
+.leftCont{
+    width: 65%;
+    height: auto;
+    border:2px solid red;
+}
+.active-cyan-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+  }
+  .active-cyan input.form-control[type=text] {
+    border-bottom: 1px solid #4dd0e1;
+    box-shadow: 0 1px 0 0 #4dd0e1;
+  }
+.rightCont{
+    width: 35%;
+    height: auto;
+    border:2px solid blue;
+}
