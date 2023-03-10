@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<title>Product Creation Form</title>
+
+<style>
+    .switch-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .switch-label {
+      margin-left: 10px;
+    }
+    </style>
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input {display:none;}
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #4CAF50;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+<style>
+    /* CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #eee;
+    }
+
+    form {
+        margin: 0 auto;
+        width: 50%;
+        max-width: 500px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input[type=text],
+    input[type=number],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+    }
+
+    input[type=file] {
+        margin-bottom: 10px;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .preview {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+{% endblock header %}
+
+{% block body %}
+<h1 style="text-align:center;">Product Creation Form</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="price">Product Price:</label>
+    <input type="number" id="price" name="price" required oninput="formatCurrency(this)" data-type="currency">
+
+
+    <label for="category">Product Category:</label>
+    <select id="category" name="category" required>
+        <option value="">Select Category</option>
+        <option value="Traditionelle">Traditionelle</option>
+        <option value="Modern">Modern</option>
+        <option value="Boissant">Boissant</option>
+    </select>
+
+    <label for="image">Product Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" required>
+    <img id="preview" class="preview" src="#" alt="Preview">
+      
+    <br>
+   
+    <div class="switch-container">
+        <label class="switch">
+          <input type="checkbox" name="active">
+          <span class="slider round"></span>
+        </label>
+        <span class="switch-label">is active</span>
+      </div>
+      <br>
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+function previewImage(event) {
+    var input = event.target;
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = document.getElementById("preview");
+            img.src = e.target.result;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+
+function formatCurrency(input) {
+    // Get the value of the input
+    var value = input.value;
+   
+    // Remove all non-digit characters
+    /* value = value.replace(/[^\d]/g, '');
+
+    // Convert the value to a number and format as currency
+    */
+    // Set the value of the input
+    input.value = value;
+}
+
+</script>
+{% endblock body %}

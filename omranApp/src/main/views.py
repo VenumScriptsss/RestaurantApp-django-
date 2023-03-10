@@ -2,6 +2,7 @@ from django.shortcuts import render
 from main.models import Command
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+
 # Create your views here.
 
 def caissierAdminView(request):
@@ -39,3 +40,11 @@ def ajouterEeditCommandView(request):
     if 'ajouterCommand' in request.POST:
         context['pageType'] = 'Ajouter-Command'
     return render(request,"main/ajouterEditerComm.html",context)
+
+
+def ajouter_modifier_product(request):
+    if request.method == 'POST':
+        print(request.POST)
+    context={}
+    return render(request, "main/ajouter_modifier_product.html",context)
+     
