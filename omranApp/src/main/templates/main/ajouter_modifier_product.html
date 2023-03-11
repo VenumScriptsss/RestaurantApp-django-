@@ -133,13 +133,13 @@
 
 {% block body %}
 <h1 style="text-align:center;">Product Creation Form</h1>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST"  enctype="multipart/form-data">
     {% csrf_token %}
     <label for="name">Product Name:</label>
     <input type="text" id="name" name="name" required>
 
     <label for="price">Product Price:</label>
-    <input type="number" id="price" name="price" required oninput="formatCurrency(this)" data-type="currency">
+    <input type="number" id="price" name="price" required oninput="formatCurrency(this)" data-type="currency" >
 
 
     <label for="category">Product Category:</label>
@@ -156,13 +156,15 @@
       
     <br>
    
-    <div class="switch-container">
+    <input type="hidden" name="active" value="off">
+      <div class="switch-container">
         <label class="switch">
-          <input type="checkbox" name="active">
+          <input type="checkbox" name="active" value="on">
           <span class="slider round"></span>
         </label>
         <span class="switch-label">is active</span>
       </div>
+
       <br>
     <input type="submit" value="Submit">
 </form>
@@ -183,15 +185,18 @@ function previewImage(event) {
 
 function formatCurrency(input) {
     // Get the value of the input
+    var price = document.getElementById("price");
     var value = input.value;
-   
-    // Remove all non-digit characters
-    /* value = value.replace(/[^\d]/g, '');
+    
+    
 
-    // Convert the value to a number and format as currency
-    */
-    // Set the value of the input
-    input.value = value;
+    input.addEventListener("blur", function() {
+    input.value = parseFloat(value).toFixed(2); });
+  input.addEventListener("keydown", function(event) {
+    if (event.keyCode === 13 || event.keyCode === 9) {
+      input.value = parseFloat(value).toFixed(2);
+    }
+  });
 }
 
 </script>
