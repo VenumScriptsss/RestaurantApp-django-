@@ -19,6 +19,11 @@ def caissierView(request):
     context['commands'] = Command.objects.all()
     return render(request,"main/caissier.html",context)
 
+def serveurView(request):
+    context = {}
+    context['commands'] = Command.objects.all()
+    return render(request, "main/serveur.html", context)
+
 def loginPage(request):
     context = {}
     context['commands'] = Command.objects.all()
@@ -39,10 +44,23 @@ def apply_function(request):
 #-------------ajouter/editer command----------------
 
 
-def ajouterEeditCommandView(request):
+def ajouterEditCommandView(request):
     context = {}
-    if 'ajouterCommand' in request.POST:
-        context['pageType'] = 'Ajouter-Command'
+    context['prods'] = Products.objects.all()
+    context['pageType'] = 'Ajouter Command'
+    
+    if 'edit' in request.POST:
+        context['pageType'] = 'Editer Command'
+        comm=Command.objects.get(id=request.POST['edit']) 
+        context['comm'] = comm
+    if 'confEdit' in request.POST:
+        comm = Command.objects.get(id = request.POST['confEdit'])
+        for prod in request.POST:
+            if ['confEdit','csrfmiddlewaretoken'] in request.POST:
+                continue
+            prod = Products.objects.get(id=prod)
+            comm.prods.add(prod)
+        comm.save()
     return render(request,"main/ajouterEditerComm.html",context)
 
 

@@ -11,7 +11,7 @@
     </br>
     <span >
       
-      <button class="btn btn-primary" type="submit" name="button_ajouter" >ajouter commande</button>
+      
       <button class="btn btn-primary" type="submit" name="button_ajouter" >historique</button>
       <button class="btn btn-primary" type="submit" name="button_ajouter" > éditer produit</button>
     
@@ -37,7 +37,7 @@
                       <td>{{command.dateComm}} </td> <!--hab nkheli ghir lw9t w nhar-->
                       <td>{{command.commPrice}}</td>
 
-                      <td><form method="post" action="caissierAdmin/edit-command">{% csrf_token %}
+                      <td><form method="post" action="editer-command">{% csrf_token %}
                           <button class="btn btn-warning" type="submit" name="edit" value={{command.id}}>Editer</button>
                           </form>
                       </td>
@@ -55,7 +55,7 @@
                 
          
       </table>
-
+      <a href="ajouter-command"><button class="btn btn-primary" type="submit" name="button_ajouter" >ajouter commande</button></a>
       <script>
         const container = document.querySelector('#widget');
         

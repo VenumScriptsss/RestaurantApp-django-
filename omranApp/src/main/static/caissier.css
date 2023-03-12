@@ -1,4 +1,12 @@
-#commTable{
-    margin:1em;
-    padding:1em;
+body{
+    height: 100%;
+}
+
+.tableDiv{
+    margin-top: 5em;
+    padding:2em;
+    padding-left: 1em;
+    max-height: 70%;
+    overflow-y: scroll;
+    overflow-x:hidden;
 }

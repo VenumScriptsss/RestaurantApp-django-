@@ -3,51 +3,51 @@
 {% block header%}
   <link rel="stylesheet" href="{% static 'caissier.css' %}">
 {% endblock header%}
+{% block title %} Serveur {% endblock title %}
 {% block body%}
-
 <div class="tableDiv">
-  <table class="table table-hover table-striped" id="commTable">
-      <thead>
+    <table class="table table-hover table-striped" id="commTable">
+        <thead>
         <tr>
-          <th scope="col"># Table</th>
-          <th scope="col">date saisie</th>
-          <th scope="col">prix</th>
-      </tr>
-      </thead>
-      {% for command in commands %}
+            <th scope="col"># Table</th>
+            <th scope="col">plats</th>
+            <th scope="col">date saisie</th>
+            <th scope="col">prix</th>
+        </tr>
+        </thead>
+        {% for command in commands %}
     
-      <tbody>
+        <tbody>
         <tr>
-          <th scope="row">{{command.tableNum}}</th>
-          <td>{{command.dateComm}}</td>
-          <td>{{command.commPrice}}</td>
+            <th scope="row">{{command.tableNum}}</th>
+            <td>{%for prod in command.prods.all%}
+                    {{prod.prodName}},  
+                {% endfor %}
+            </td>
+            <td>{{command.dateComm}}</td>
+            <td>{{command.commPrice}}</td>
 
-          <td><form method="post" action="caissierAdmin/edit-command">{% csrf_token %}
-              <button class="btn btn-warning" type="submit" name="edit" value={{command.id}}>Editer</button>
-              </form>
-          </td>
-          <td>
-                      
-            <button class="btn btn-primary process-button"  name="encaissment" value={{command.id}} onclick="removeComm(this)">Encaisser</button>
-            
-        </td>
+            <td><form method="post" action="editer-command">{% csrf_token %}
+                <button class="btn btn-warning" type="submit" name="edit" value={{command.id}}>Editer</button>
+                </form>
+            </td>
         </tr>
         
-      </tbody>
-      {% endfor %}
+        </tbody>
+        {% endfor %}
     </table>
-  </div>
+</div>
   <div class="text-center"><a href="ajouter-command"><button class="btn btn-success" type="submit" name="ajouterCommand" >Ajouter Commande</button></a></div>
 
   <script>
     const container = document.querySelector('#widget');
     
-    /*  const buttons = document.querySelectorAll('.process-button');
+   /*  const buttons = document.querySelectorAll('.process-button');
     buttons.forEach(function(button) {
     button.addEventListener('click', function() {
         const id =button.getAttribute('value');
-          executeFunction(id);   
-          
+         executeFunction(id);   
+         
       }); }); */
     
       container.addEventListener('click', function(event) {
@@ -59,17 +59,17 @@
     });
 
     function executeFunction(id) {
-      
-    
+     
+   
       $.ajax({
       type: 'POST',
       url: '/apply_function',
       data: {
         'id': id,
-      },
+     },
       success: function(response) {
     console.log("Data was sent successfully. age:",response.ages );
-          updateWidget(response.commands); 
+         updateWidget(response.commands); 
         
         
   },
@@ -84,7 +84,7 @@ function removeComm(obj){
     document.getElementById("commTr_"+obj.value).remove();
 };
     
-  </script>
+ </script>
   {% endblock body%}
 <!-- </body>
 </html> -->

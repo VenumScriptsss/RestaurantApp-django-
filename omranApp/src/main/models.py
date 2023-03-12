@@ -10,7 +10,7 @@ class User(models.Model):
         ('2','caissier'),
         ('3','serveur'),
     ]
-    username = models.CharField(max_length=30,verbose_name="username",null=False)
+    username = models.CharField(max_length=14,verbose_name="username",null=False)
     password = models.CharField(max_length=30,verbose_name="password", null=False)
     userPriority = models.CharField(max_length=1,choices=userPriorityChoices,null=False,verbose_name="usertype")
 
@@ -30,7 +30,7 @@ class Products(models.Model):
     prodName = models.CharField(max_length=30,null=False,help_text='entrer le nom de produit',verbose_name='nom de produit')
     prodPrix = models.IntegerField(null=False,help_text='prix de produit',verbose_name='prix de produit')
     prodCat = models.CharField(max_length=1,choices=prodCatChoices,null=False,help_text='choisit la categorie de ce produit',verbose_name='categorie de produit')
-    isActive = models.BooleanField(help_text='activer ou desactiver ce produit', verbose_name='status de produit')
+    isActive = models.BooleanField(help_text='activer ou desactiver ce produit', verbose_name='status de produit',default=True)
     img=models.ImageField(default='default.jpg',upload_to='profile_pics')
 
     

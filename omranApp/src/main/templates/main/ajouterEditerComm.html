@@ -17,15 +17,44 @@
           </form>
           <div class="prodList">
             {% for prod in prods %}
-                {% if prod is prod.acitve %}
                     <div class="prod">
-                        <p>{{prod.prodName}}</p>
-                        <p>{{}}</p>
+                        <img src="{{prod.img}}" alt="">
+                        <p class="prodname">{{prod.prodName}}</p>
+                        <p class="prodprice">{{prod.prodPrix}}DA</p>
+                        <button class="btn btn-info" id="addprod" value="{{prod.id}}" onclick="addProd(this.value)">ajouter</button>
                     </div>
-                {% endif%}
-            {% endfor%}
+            {% endfor %}
           </div>
     </div>
-    <div class="rightCont"></div>
+    <div class="rightCont">
+      <div class="addedProds" id="RprodList">
+        {% if pageType == "Editer Command" %}
+            <div class="Prod">
+            
+              {% for prod in comm.prods.all %}
+                <img src="{{prod.img}}" alt="">
+                <p class="prodn ame">{{prod.prodName}}</p>
+                <p class="prodprice">{{prod.prodPrix}}DA</p>
+              {% endfor %}  
+      
+            </div>
+          {% endif %}
+      </div>
+
+    </div>
 </div>
+
+
+<script>
+  function addProd(prodId){
+    RightCont = document.getElementById("RprodList");
+    const prod = document.createElement("div");
+    prod.classList.add("prod");
+    pTest = document.createElement('p');
+    pText = document.createTextNode(prodId);
+    pTest.appendChild(pText);
+    prod.appendChild(pTest);
+    RightCont.appendChild(prod);
+  }
+</script>
 {% endblock body%}

@@ -8,6 +8,8 @@
     width: 65%;
     height: auto;
     border:2px solid red;
+    padding: 5em;
+    padding-left:3em;
 }
 .active-cyan-2 input.form-control[type=text]:focus:not([readonly]) {
     border-bottom: 1px solid #4dd0e1;
@@ -21,4 +23,25 @@
     width: 35%;
     height: auto;
     border:2px solid blue;
+}
+.prodList{
+  max-height: 500px;
+  overflow-y: scroll;
+  margin-top: 3em;
+
+}
+.prod{
+  display: flex;
+  border: 2px solid black;
+  margin-bottom:1em;
+  padding-left:4em;
+  padding-right:10px;
+}
+.prod p{
+  font-weight: bold;
+  font-style: oblique;
+  margin-right:3em;
+}
+#addprod {
+  margin-left:auto;
 }
