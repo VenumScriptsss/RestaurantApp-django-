@@ -10,19 +10,30 @@
       <thead>
         <tr>
           <th scope="col"># Table</th>
+          <th scope="col">plats</th>
           <th scope="col">date saisie</th>
           <th scope="col">prix</th>
       </tr>
       </thead>
       {% for command in commands %}
-    
+      {% if command.encaisser is False %}
       <tbody>
         <tr>
-          <th scope="row">{{command.tableNum}}</th>
+          <th scope="row">
+            {% if command.tableNum == 0 %}
+            <p>Emporter</p>
+            {% else %}
+            {{command.tableNum}}
+            {% endif%}
+          </th>
+          <td>{%for prod in command.prods.all%}
+                {{prod.prodName}},  
+              {% endfor %}
+          </td>
           <td>{{command.dateComm}}</td>
           <td>{{command.commPrice}}</td>
 
-          <td><form method="post" action="caissierAdmin/edit-command">{% csrf_token %}
+          <td><form method="post" action="editer-command">{% csrf_token %}
               <button class="btn btn-warning" type="submit" name="edit" value={{command.id}}>Editer</button>
               </form>
           </td>
@@ -34,6 +45,7 @@
         </tr>
         
       </tbody>
+      {% endif %}
       {% endfor %}
     </table>
   </div>

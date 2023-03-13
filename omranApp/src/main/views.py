@@ -41,7 +41,7 @@ def apply_function(request):
     return render(request,"main/caissierAdmin.html")
 
 
-#-------------ajouter/editer command----------------
+#-------------ajouter/editer command----------------lzm tedkhel mn caissier wdir edit w ab3at lform bch tbanlk
 
 
 def ajouterEditCommandView(request):
@@ -53,13 +53,16 @@ def ajouterEditCommandView(request):
         context['pageType'] = 'Editer Command'
         comm=Command.objects.get(id=request.POST['edit']) 
         context['comm'] = comm
+    print(request.POST)
     if 'confEdit' in request.POST:
         comm = Command.objects.get(id = request.POST['confEdit'])
         for prod in request.POST:
-            if ['confEdit','csrfmiddlewaretoken'] in request.POST:
+            if prod in ['confEdit','csrfmiddlewaretoken']:
+                print("skippedd ",request.POST)
                 continue
-            prod = Products.objects.get(id=prod)
+            prod = Products.objects.get(id=request.POST[prod])
             comm.prods.add(prod)
+            comm.commPrice+= prod.prodPrix
         comm.save()
     return render(request,"main/ajouterEditerComm.html",context)
 

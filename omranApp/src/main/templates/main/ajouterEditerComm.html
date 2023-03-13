@@ -25,7 +25,7 @@
                     </div>
             {% endfor %}
           </div>
-    </div>
+    </div><!--  if prod is not there then create for js -->
     <div class="rightCont">
       <div class="addedProds" id="RprodList">
         {% if pageType == "Editer Command" %}
@@ -33,16 +33,20 @@
             
               {% for prod in comm.prods.all %}
                 <img src="{{prod.img}}" alt="">
-                <p class="prodn ame">{{prod.prodName}}</p>
+                <p class="prodname">{{prod.prodName}}</p>
                 <p class="prodprice">{{prod.prodPrix}}DA</p>
               {% endfor %}  
-      
+              
             </div>
-          {% endif %}
+        {% endif %}
+          <form method="post" id="commForm" hidden >{% csrf_token %}
+            <input type="submit" name="confEdit" value="{{comm.id}}" id="confEditBtn">
+          </form>
       </div>
 
     </div>
 </div>
+<button class="btn btn-success" id="triggerConfBtn" onclick="confClckTr()">Confirme</button>
 
 
 <script>
@@ -55,6 +59,18 @@
     pTest.appendChild(pText);
     prod.appendChild(pTest);
     RightCont.appendChild(prod);
+
+    //---------------formHandle---------
+    form = document.getElementById("commForm");
+    input = document.createElement('input');
+    input.setAttribute('name','newProd');
+    input.setAttribute('value',prodId);
+    form.appendChild(input);
+  }
+
+  function confClckTr(){
+    submitBtn = document.getElementById("confEditBtn");
+    submitBtn.click();
   }
 </script>
 {% endblock body%}
