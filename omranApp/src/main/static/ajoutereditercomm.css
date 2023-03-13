@@ -44,3 +44,7 @@
 #addprod {
   margin-left:auto;
 }
+
+#triggerConfBtn{
+  display: none;
+}

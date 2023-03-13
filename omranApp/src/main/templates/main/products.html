@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+{% block title %}
+    Produits
+{% endblock title%}
+{% load static %}
+{% block header%}
+  <link rel="stylesheet" href="{% static 'caissier.css' %}">
+{% endblock header%}
+
+{% block body%}
+
+<div class="tableDiv">
+  <table class="table table-hover table-striped" id="commTable">
+      <thead>
+        <tr>
+          <th scope="col">Nom Produits</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Status</th>
+
+      </tr>
+      </thead>
+      {% for prod in products %}
+      <tbody>
+        <tr>
+          <th scope="row">
+            <p>{{prod.prodName}}</p>
+          </th>
+          <td>{{prod.prodPrix}}</td>
+          <td>{{prod.prodCat}}</td>
+          <td>
+            <form method="post">{% csrf_token %}
+                {% if prod.isActive %}
+                    <button class="btn btn-danger" type="submit" name="act-dis" value="{{prod.id}}">Disactiver</button></td>
+                {% else %}
+                    <button class="btn btn-success" type="submit" name="act-dis" value="{{prod.id}}">Activer</button></td>
+                {% endif %}
+            </form>
+          <td><form method="post" action="ajouterEditer-product">{% csrf_token %}
+              <button class="btn btn-warning" type="submit" name="editPrd" value={{prod.id}}>Editer</button>
+              </form>
+          </td>
+        </tr>
+        
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+  <a href="ajouterEditer-product"><div class="text-center"><button class="btn btn-primary" type="submit" name="button_ajouter" >Ajouter Produit</button></div></a>
+  {% endblock body %}

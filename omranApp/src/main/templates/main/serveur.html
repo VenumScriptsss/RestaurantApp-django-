@@ -16,7 +16,7 @@
         </tr>
         </thead>
         {% for command in commands %}
-    
+        {% if command.encaisser is False %}
         <tbody>
         <tr>
             <th scope="row">{{command.tableNum}}</th>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from main.models import Command
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -25,9 +25,20 @@ def serveurView(request):
     return render(request, "main/serveur.html", context)
 
 def loginPage(request):
-    context = {}
-    context['commands'] = Command.objects.all()
-    return render(request,"main/loginPage.html",context)
+    users = User.objects.all()
+    if 'login' in request.POST:
+        username = request.POST['uname']
+        pw = request.POST['psw']
+        for user in users:
+            if username == user.username and pw == user.password:
+                print("found user")
+                if user.userPriority == '1':
+                    return redirect('caissierAdmin')
+                elif user.userPriority == '2':
+                    return redirect('caissier')
+                elif user.userPriority == '3':
+                    return redirect('serveur')
+    return render(request,"main/loginPage.html")
 
 
 @csrf_exempt
@@ -69,7 +80,8 @@ def ajouterEditCommandView(request):
 
 
 def ajouter_modifier_product(request):
-    if request.method == 'POST':
+    context = {}
+    if 'ajouterPrd' in request.POST:
         product_name = request.POST.get('name')
         price = float(request.POST.get('price'))
         category = request.POST.get('category')
@@ -88,9 +100,33 @@ def ajouter_modifier_product(request):
         
         product = Products(prodName=product_name, prodPrix=price, prodCat=category, isActive=is_active == 'on', img=img_name)
         product.save()
+    
+        return redirect('editer-products')
+    
+    if 'editPrd' in request.POST:
+        prod = Products.objects.get(id=request.POST['editPrd'])
+        context['editing'] = True
+        context['prod'] = prod
 
-    context={}
+    if 'confirmEdit' in request.POST:
+            
+        prod.prodName=request.POST['name']
+        prod.prodPrix=request.POST['price']
+        prod.prodCat=request.POST['category']
+        prod.isActive=request.POST['active']
+        prod.img=request.POST['img']
+        prod.save()
+        return redirect('caissierAdmin')        
+
     return render(request, "main/ajouter_modifier_product.html",context)
 
-
+def editProdsView(request):
+    context = {}
+    prods = Products.objects.all()
+    context['products'] = prods
+    if 'act-dis' in request.POST:
+        prod = Products.objects.get(id=request.POST['act-dis'])
+        prod.isActive = not prod.isActive
+        prod.save()
+    return render(request,"main/products.html",context)
      

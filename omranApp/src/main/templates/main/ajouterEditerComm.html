@@ -27,18 +27,20 @@
           </div>
     </div><!--  if prod is not there then create for js -->
     <div class="rightCont">
-      <div class="addedProds" id="RprodList">
-        {% if pageType == "Editer Command" %}
-            <div class="Prod">
-            
-              {% for prod in comm.prods.all %}
-                <img src="{{prod.img}}" alt="">
-                <p class="prodname">{{prod.prodName}}</p>
-                <p class="prodprice">{{prod.prodPrix}}DA</p>
-              {% endfor %}  
-              
-            </div>
-        {% endif %}
+      {% if pageType == "Editer Command" %}
+      <div class="currProds">
+        <div class="Prod">
+          {% for prod in comm.prods.all %}
+            <img src="{{prod.img}}" alt="">
+            <p class="prodname">{{prod.prodName}}</p>
+            <p class="prodprice">{{prod.prodPrix}}DA</p>
+          {% endfor %}  
+          
+        </div>
+      </div>
+      {% endif %}
+      <div class="newProds" id="RprodList">
+        
           <form method="post" id="commForm" hidden >{% csrf_token %}
             <input type="submit" name="confEdit" value="{{comm.id}}" id="confEditBtn">
           </form>
@@ -50,10 +52,17 @@
 
 
 <script>
+  
+  if(document.getElementById("newProdDiv")){
+    console.log("if working");
+    document.getElementsById("triggerConfBtn").style.display="block";
+  }
+  
   function addProd(prodId){
     RightCont = document.getElementById("RprodList");
     const prod = document.createElement("div");
     prod.classList.add("prod");
+    prod.setAttribute('id','newProdDiv')
     pTest = document.createElement('p');
     pText = document.createTextNode(prodId);
     pTest.appendChild(pText);

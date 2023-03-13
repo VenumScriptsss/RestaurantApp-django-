@@ -21,10 +21,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('caissierAdmin', caissierAdminView, name='caissierAdmin'),
     path('caissier', caissierView, name='caissier'),
-    path('serveur', serveurView, name='sereur'),
+    path('serveur', serveurView, name='serveur'),
     path('', loginPage, name='loginPage'),
     path('apply_function', apply_function, name='apply_function'),
     path('ajouter-command', ajouterEditCommandView, name='ajouter-command'),
     path('editer-command', ajouterEditCommandView, name='editer-command'),
-    path('ajouter-product', ajouter_modifier_product, name='ajouter-product'),
+    path('ajouterEditer-product', ajouter_modifier_product, name='ajouterEditer-product'),
+    path('editer-products', editProdsView, name='editer-products'),
+
 ]
