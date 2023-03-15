@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block header %}
 <title>Product Creation Form</title>
 
@@ -150,30 +150,39 @@
     {% endif %}
 
     <label for="category">Product Category:</label>
-    {% if editing is True%}
-      <input type="text" name="category" value="prod.prodCat">
-    {% else %}
+    
+      
+   
+  
       <select id="category" name="category" required>
           <option value="">Select Category</option>
           <option value="Traditionelle">Traditionelle</option>
           <option value="Modern">Modern</option>
           <option value="Boissant">Boissant</option>
       </select>
+    {% if editing is True%}
+      <script>
+        function setCategory() {
+          var categorySelect = document.getElementById("category");
+          
+          categorySelect.value = "{{prod.prodCat}}";
+        }
+        setCategory()
+        </script>
     {% endif %}
     
 
     <label for="image">Product Image:</label>
     {% if editing is True%}
-    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" value="{{prod.img}}" required>
-    <img id="preview" class="preview" src="{{prod.img}}" alt="Preview">
+   <!--  <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" value="{{prod.img.url}}" required>  -->
+    <img id="preview" class="preview" src="{{prod.img.url}}" >
     {% else %}
     <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(event)" required>
     <img id="preview" class="preview" src="#" alt="Preview">
     {% endif %}
-    
       
     <br>
-   
+    
     <input type="hidden" name="active" value="off">
       <div class="switch-container">
         <label class="switch">
@@ -182,15 +191,28 @@
         </label>
         <span class="switch-label">is active</span>
       </div>
+      {% if prod.isActive is True %}
+        <script>
+   
+            $(document).ready(function() {
+              $('input[name="active"]').prop('checked', true);
+            });
+
+
+        </script>
+      {% endif %}
+
       <br>
     {% if editing is True%}
+       <input type="text" style="display: none;" value="{{prod.id}}" name="id">
       <input type="submit" value="Submit" name="confirmEdit">
     {% else %}  
       <input type="submit" value="Submit" name="ajouterPrd">
     {%endif%}
 </form>
-
 <script>
+
+
 function previewImage(event) {
     var input = event.target;
     if (input.files && input.files[0]) {

@@ -109,24 +109,39 @@ def ajouter_modifier_product(request):
         context['prod'] = prod
 
     if 'confirmEdit' in request.POST:
-            
-        prod.prodName=request.POST['name']
-        prod.prodPrix=request.POST['price']
-        prod.prodCat=request.POST['category']
-        prod.isActive=request.POST['active']
-        prod.img=request.POST['img']
+        print(request.POST)
+
+        
+        prod = Products.objects.get(id=request.POST.get('id'))
+        prod.prodName=request.POST.get('name')
+        prod.prodPrix=float(request.POST.get('price'))
+        prod.prodCat=request.POST.get('category')
+        prod.isActive=request.POST.get('active')=='on'
         prod.save()
+      
         return redirect('caissierAdmin')        
 
     return render(request, "main/ajouter_modifier_product.html",context)
 
 def editProdsView(request):
     context = {}
-    prods = Products.objects.all()
+    prods = Products.objects.all().order_by('prodName')
+    
     context['products'] = prods
     if 'act-dis' in request.POST:
         prod = Products.objects.get(id=request.POST['act-dis'])
         prod.isActive = not prod.isActive
         prod.save()
     return render(request,"main/products.html",context)
-     
+
+
+
+def delete_product(request):
+    context = {}
+    
+    if 'delete_prod' in request.POST:
+        print('done')
+        Products.objects.get(id=request.POST['delete_prod']).delete()
+    prods = Products.objects.all()
+    context['products'] = prods
+    return render(request,"main/products.html",context)

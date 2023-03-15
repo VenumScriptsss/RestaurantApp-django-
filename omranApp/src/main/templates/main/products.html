@@ -31,15 +31,21 @@
           <td>
             <form method="post">{% csrf_token %}
                 {% if prod.isActive %}
-                    <button class="btn btn-danger" type="submit" name="act-dis" value="{{prod.id}}">Disactiver</button></td>
-                {% else %}
                     <button class="btn btn-success" type="submit" name="act-dis" value="{{prod.id}}">Activer</button></td>
+                {% else %}
+                    <button class="btn btn-danger" type="submit" name="act-dis" value="{{prod.id}}">Disactiver</button></td>
                 {% endif %}
             </form>
           <td><form method="post" action="ajouterEditer-product">{% csrf_token %}
               <button class="btn btn-warning" type="submit" name="editPrd" value={{prod.id}}>Editer</button>
               </form>
           </td>
+
+          <td><form method="post" action="delete_product">{% csrf_token %}
+            <button class="btn btn-danger" type="submit" name="delete_prod" value={{prod.id}}>supprimer</button>
+            </form>
+        </td>
+
         </tr>
         
       </tbody>
