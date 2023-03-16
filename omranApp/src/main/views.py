@@ -38,7 +38,7 @@ def loginPage(request):
                     return redirect('caissier')
                 elif user.userPriority == '3':
                     return redirect('serveur')
-    return render(request,"main/loginPage.html")
+    return render(request,"main/login.html")
 
 
 @csrf_exempt
@@ -75,7 +75,8 @@ def ajouterEditCommandView(request):
             comm.prods.add(prod)
             comm.commPrice+= prod.prodPrix
         comm.save()
-    return render(request,"main/ajouterEditerComm.html",context)
+    return render(request,"main/page-1.html",context)
+    """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
 
