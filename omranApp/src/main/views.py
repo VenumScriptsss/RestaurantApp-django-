@@ -62,9 +62,9 @@ def ajouterEditCommandView(request):
     
     if 'edit' in request.POST:
         context['pageType'] = 'Editer Command'
-        comm=Command.objects.get(id=request.POST['edit']) 
+        comm=Command.objects.get(id=request.POST['edit'])
+        print(comm.prods.all())
         context['comm'] = comm
-    print(request.POST)
     if 'confEdit' in request.POST:
         comm = Command.objects.get(id = request.POST['confEdit'])
         for prod in request.POST:

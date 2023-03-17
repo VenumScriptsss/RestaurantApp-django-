@@ -33,8 +33,12 @@
                   <tbody  >
                     
                     <tr id="commTr_{{command.id}}">
-                      <th scope="row">{{command.tableNum}}</th>
-                      <td>{{command.dateComm}} </td> <!--hab nkheli ghir lw9t w nhar-->
+                      <th scope="row">{{command.id}}</th>
+                      <td>{% for prod in command.prods.all%}
+                        {{prod.prodName}}  
+                        {% endfor %}
+                      </td> 
+                      <td>{{command.dateComm}}</td><!--hab nkheli ghir lw9t w nhar-->
                       <td>{{command.commPrice}}</td>
 
                       <td><form method="post" action="editer-command">{% csrf_token %}

@@ -15,6 +15,10 @@
     
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <style>
+      .prods-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
      .u-section-1 {
       background-image: none;
     }
@@ -950,19 +954,21 @@
                       <a href="https://nicepage.com/html-website-builder" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-4">les autres</a>
                     </div>
                   </div>
-                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-4">
-                    <div class="u-container-layout u-container-layout-5">
-                      <div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5">
-                        <div class="u-container-layout u-container-layout-6">
-                          <h5 class="u-align-center u-text u-text-1">title<br>
-                          </h5>
-                          <img class="u-image u-image-round u-radius-14 u-image-1" src="/static/img/d653f4a99eb90427ac1a9837d3945c78922c34b1f87784e69f4d3fcf811cbc8dec3cbb073dac7f481d64ce2f3d68bdae11b687547568b961734e22_1280.jpg" alt="" data-image-width="1280" data-image-height="853">
-                          <h4 class="u-align-center u-text u-text-2">price :<br>
-                          </h4>
-                          <a href="https://nicepage.com/c/tiles-website-templates" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
-                          </a>
+                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-4 prods-container">
+                    <div class="u-container-layout u-container-layout-5" style="display: grid;grid-template-columns: 1fr 1fr 1fr; max-height:200px;">
+                      {% for prod in prods %}
+                        <div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5" >
+                          <div class="u-container-layout u-container-layout-6">
+                            <h5 class="u-align-center u-text u-text-1">{{prod.prodName}}<br>
+                            </h5>
+                            <img class="u-image u-image-round u-radius-14 u-image-1" src="/static/img/d653f4a99eb90427ac1a9837d3945c78922c34b1f87784e69f4d3fcf811cbc8dec3cbb073dac7f481d64ce2f3d68bdae11b687547568b961734e22_1280.jpg" alt="" data-image-width="1280" data-image-height="853">
+                            <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}}DA<br>
+                            </h4>
+                            <button href="https://nicepage.com/c/tiles-website-templates" id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
+                            </button>
+                          </div>  
                         </div>
-                      </div>
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
@@ -971,17 +977,70 @@
                 <div class="u-container-layout u-container-layout-7">
                   <h4 class="u-text u-text-default u-text-3">liste des commandes<br>
                   </h4>
-                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-6">
-                    <div class="u-container-layout u-valign-top-md u-valign-top-xs u-container-layout-8">
-                      
-                      <div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7">
-                       
-                        <div class="u-container-layout u-container-layout-9">
+                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-6" style="background-color: red;">
+                    <div class="u-container-layout u-valign-top-md u-valign-top-xs u-container-layout-8" >
+                        <div id="oldPlats">
+                          {% for plt in comm.prods.all %}
+                          <div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue" id="commPlt{{plt.id}}">
+                          
+                            <div class="u-container-layout u-container-layout-9" >
+                              <br>
+                              <button class="u-border-none u-btn u-button-style u-none u-btn-6" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
+                              </button>
+                              
+                              <img class="u-image u-image-round u-radius-10 u-image-2" src="/static/img/d653f4a99eb90427ac1a9837d3945c78922c34b1f87784e69f4d3fcf811cbc8dec3cbb073dac7f481d64ce2f3d68bdae11b687547568b961734e22_1280.jpg" alt="" data-image-width="1280" data-image-height="853">
+                              <div class="u-align-center u-form u-form-2">
+                                <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" style="padding: 0px;" source="email">
+                                  <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">
+                                    <label for="number-0d4c" class="u-label">Number Input</label>
+                                    <div class="u-input-row" data-value="1">
+                                      <input value="1" min="1" max="100" step="1" type="number" placeholder="" id="number-0d4c" name="number" class="u-input u-input-rectangle u-input-2">
+                                    </div>
+                                  </div>
+                                  <input type="text" name="prodId" value="{{plt.id}}" hidden>
+                                  <input type="submit" id="formSubmit" name="confEdit" value="{{comm.id}}" hidden>
+                                </form>
+                              </div>
+                              <h4 class="u-align-center u-text u-text-4">
+                                <div style="direction: rtl;">{{plt.prodPrix}}</div>
+                              </h4>
+                              <h4 class="u-align-center u-text u-text-5">{{plt.prodName}}<br>
+                              </h4>
+                            </div>
+                          </div>
+                          {% endfor %}
+                      </div>
+                      <div id="newPlats">
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <button class="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-8" onclick="submitTrigger()">ajouter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+    function delePlt(divName){
+      document.getElementById(divName).remove();
+    }
+    // function submitTrigger(){
+    //   document.getElementById('formSubmit').click(); hadi li tsubmiti l form 
+    // }
+    function insertNewPlats(value){
+      newPlts = document.getElementById('newPlats');
+      var [platId,platName,platPrix] = value.split(',');
+      newPlts.innerHTML +=`<div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue">
+                        
+                        <div class="u-container-layout u-container-layout-9" >
                           <br>
                           <a href="https://nicepage.com/c/text-on-image-html-templates" class="u-border-none u-btn u-button-style u-none u-btn-6"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
                           </a>
                           
-                          <img class="u-image u-image-round u-radius-10 u-image-2" src="/static/img/d653f4a99eb90427ac1a9837d3945c78922c34b1f87784e69f4d3fcf811cbc8dec3cbb073dac7f481d64ce2f3d68bdae11b687547568b961734e22_1280.jpg" alt="" data-image-width="1280" data-image-height="853">
+                          <img class="u-image u-image-round u-radius-10 u-image-2" src=platImg alt="" data-image-width="1280" data-image-height="853">
                           <div class="u-align-center u-form u-form-2">
                             <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" style="padding: 0px;" source="email">
                               <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">
@@ -994,24 +1053,13 @@
                             </form>
                           </div>
                           <h4 class="u-align-center u-text u-text-4">
-                            <div style="direction: rtl;">:price</div>
+                            <div style="direction: rtl;">`+platPrix+`</div>
                           </h4>
-                          <h4 class="u-align-center u-text u-text-5">ti​tle<br>
+                          <h4 class="u-align-center u-text u-text-5">`+platName+`<br>
                           </h4>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <a href="https://nicepage.com/html-website-builder" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-8">ajouter</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    
-    
-    
+                      </div>`
+    }
+  </script>
     {% endblock body %}
+    
