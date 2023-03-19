@@ -25,15 +25,18 @@ def serveurView(request):
     return render(request, "main/serveur.html", context)
 
 def loginPage(request):
+    context = {}
     users = User.objects.all()
     if 'login' in request.POST:
+        print("yoo")
         username = request.POST['username']
         pw = request.POST['password']
         for user in users:
             if username == user.username and pw == user.password:
                 print("found user")
                 request.sessoin['userType'] = user.userPriority
-    return render(request,"main/login.html")
+
+    return render(request,"main/login.html",context)
 
 
 @csrf_exempt
@@ -165,6 +168,7 @@ def search_product_function(request):
             result_list.append(product_dict)
         print(result_list)
     return JsonResponse({'data': result_list })
+
 def homeView(request):
     context = {}
     
