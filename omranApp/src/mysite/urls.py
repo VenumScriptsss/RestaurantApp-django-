@@ -31,5 +31,7 @@ urlpatterns = [
     path('ajouterEditer-product', ajouter_modifier_product, name='ajouterEditer-product'),
     path('editer-products', editProdsView, name='editer-products'),
     path('delete_product', delete_product, name='delete_product'),
+    path('home', homeView, name='home'),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
