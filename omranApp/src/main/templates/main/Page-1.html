@@ -904,7 +904,7 @@
         <div class="u-container-align-center-md u-container-align-center-sm u-container-style u-expanded-width-xl u-expanded-width-xxl u-grey-5 u-group u-opacity u-opacity-90 u-radius-14 u-shape-round u-group-1">
           <div class="u-container-layout u-container-layout-1">
             <div class="u-align-center u-expanded-width-md u-expanded-width-sm u-form u-form-1">
-              <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" source="email" name="form" style="padding: 0px;">
+              <form method="post" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" source="email" name="form" style="padding: 0px;">{% csrf_token %}
                 <div class="u-form-group u-form-input-layout-vertical u-form-radiobutton u-form-group-1">
                   <label class="u-label u-label-1">type de commande :</label>
                   <div class="u-form-radio-button-wrapper">
@@ -949,9 +949,11 @@
 
                   <div class="u-container-style u-expanded-width-xs u-group u-shape-rectangle u-group-3">
                     <div class="u-container-layout u-container-layout-4">
-                      <a href="https://nicepage.com/html-website-builder" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-2"> &nbsp;traditional</a>
-                      <a href="https://nicepage.com/html-website-builder" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-3">fast food</a>
-                      <a href="https://nicepage.com/html-website-builder" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-4">les autres</a>
+                      <form method="post" >{% csrf_token %}
+                        <button type="submit" name="cat" value="trad" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-2"> &nbsp;traditional</a>
+                        <button type="submit" name="cat" value="ff" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-3">fast food</button>
+                        <button type="submit" name="cat" value="autres" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-4">les autres</button>
+                      </form> 
                     </div>
                   </div>
                   <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-4 prods-container">
@@ -990,15 +992,14 @@
                               
                               <img class="u-image u-image-round u-radius-10 u-image-2" src="/static/img/d653f4a99eb90427ac1a9837d3945c78922c34b1f87784e69f4d3fcf811cbc8dec3cbb073dac7f481d64ce2f3d68bdae11b687547568b961734e22_1280.jpg" alt="" data-image-width="1280" data-image-height="853">
                               <div class="u-align-center u-form u-form-2">
-                                <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" style="padding: 0px;" source="email">
+                                <form class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" style="padding: 0px;" source="email">{% csrf_token %}
                                   <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">
                                     <label for="number-0d4c" class="u-label">Number Input</label>
                                     <div class="u-input-row" data-value="1">
-                                      <input value="1" min="1" max="100" step="1" type="number" placeholder="" id="number-0d4c" name="number" class="u-input u-input-rectangle u-input-2">
+                                      <input value="1" min="1" max="100" step="1" type="number" placeholder="" id="number-0d4c" name="number" class="u-input u-input-rectangle u-input-2" >
                                     </div>
                                   </div>
-                                  <input type="text" name="prodId" value="{{plt.id}}" hidden>
-                                  <input type="submit" id="formSubmit" name="confEdit" value="{{comm.id}}" hidden>
+                                  
                                 </form>
                               </div>
                               <h4 class="u-align-center u-text u-text-4">
@@ -1006,12 +1007,18 @@
                               </h4>
                               <h4 class="u-align-center u-text u-text-5">{{plt.prodName}}<br>
                               </h4>
-                            </div>
+                            </div>`
                           </div>
                           {% endfor %}
                       </div>
                       <div id="newPlats">
-                        
+                        <form method="post" id="newPlatsForm">{% csrf_token %}
+                          {% if pageType == "Editer Command" %}
+                            <input hidden type="submit" id="formSubmit" name="confEdit" value="{{comm.id}}" >
+                          {% else %}
+                            <input hidden type="submit" id="formSubmit" name="confEdit" value="newComm">
+                          {% endif %}
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -1027,30 +1034,29 @@
     function delePlt(divName){
       document.getElementById(divName).remove();
     }
-    // function submitTrigger(){
-    //   document.getElementById('formSubmit').click(); hadi li tsubmiti l form 
-    // }
+    function submitTrigger(){
+      document.getElementById('formSubmit').click();
+    }
     function insertNewPlats(value){
       newPlts = document.getElementById('newPlats');
-      var [platId,platName,platPrix,img] = value.split(',');
+      var [platId,platName,platPrix,platimg] = value.split(',');
       newPlts.innerHTML +=`<div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue">
                         
                         <div class="u-container-layout u-container-layout-9" >
                           <br>
-                          <a href="https://nicepage.com/c/text-on-image-html-templates" class="u-border-none u-btn u-button-style u-none u-btn-6"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
-                          </a>
+                          <button class="u-border-none u-btn u-button-style u-none u-btn-6" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
+                          </button>
                           
-                          <img class="u-image u-image-round u-radius-10 u-image-2" src="`+img+`" alt="" data-image-width="1280" data-image-height="853">
+                          <img class="u-image u-image-round u-radius-10 u-image-2" src="`+platimg+`" alt="" data-image-width="1280" data-image-height="853">
                           <div class="u-align-center u-form u-form-2">
-                            <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-horizontal u-form-spacing-0 u-inner-form" style="padding: 0px;" source="email">
+                            
                               <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">
                                 <label for="number-0d4c" class="u-label">Number Input</label>
                                 <div class="u-input-row" data-value="1">
                                   <input value="1" min="1" max="100" step="1" type="number" placeholder="" id="number-0d4c" name="number" class="u-input u-input-rectangle u-input-2">
                                 </div>
                               </div>
-                              
-                            </form>
+                              <input  hidden type="text" name="prodId`+platId+`" value=`+platId+` >
                           </div>
                           <h4 class="u-align-center u-text u-text-4">
                             <div style="direction: rtl;">`+platPrix+`</div>

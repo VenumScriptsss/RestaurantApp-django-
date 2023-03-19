@@ -27,8 +27,8 @@ def serveurView(request):
 def loginPage(request):
     users = User.objects.all()
     if 'login' in request.POST:
-        username = request.POST['uname']
-        pw = request.POST['psw']
+        username = request.POST['username']
+        pw = request.POST['password']
         for user in users:
             if username == user.username and pw == user.password:
                 print("found user")
@@ -63,19 +63,30 @@ def ajouterEditCommandView(request):
     if 'edit' in request.POST:
         context['pageType'] = 'Editer Command'
         comm=Command.objects.get(id=request.POST['edit'])
-        print(comm.prods.all())
         context['comm'] = comm
     if 'confEdit' in request.POST:
-        comm = Command.objects.get(id = request.POST['confEdit'])
-        for prod in request.POST:
-            if prod in ['confEdit','csrfmiddlewaretoken']:
-                print("skippedd ",request.POST)
-                continue
-            prod = Products.objects.get(id=request.POST[prod])
-            comm.prods.add(prod)
-            comm.commPrice+= prod.prodPrix
-        comm.save()
-    return render(request,"main/page-1.html",context)
+        if not request.POST['confEdit'] == 'newComm':
+            comm = Command.objects.get(id = request.POST['confEdit'])
+            print(request.POST)
+            for prod in request.POST:
+                if prod in ['csrfmiddlewaretoken','confEdit','number']:
+                    continue
+                prod = Products.objects.get(id=request.POST[prod])
+                comm.prods.add(prod)
+                comm.commPrice+= prod.prodPrix
+            comm.save()
+    if 'cat' in request.POST:
+        print(request.POST['cat'])
+        if request.POST['cat'] == 'trad':
+          context['prods'] = Products.objects.filter(prodCat = '1')
+        elif request.POST['cat'] == 'ff':
+          context['prods'] = Products.objects.filter(prodCat = '2')
+        else:
+          context['prods'] = Products.objects.filter(prodCat = '3')
+        
+        # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
+
+    return render(request,"main/page-1.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
     """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
@@ -159,3 +170,6 @@ def search_product_function(request):
             result_list.append(product_dict)
         print(result_list)
     return JsonResponse({'data': result_list })
+def homeView(request):
+    context = {}
+    
