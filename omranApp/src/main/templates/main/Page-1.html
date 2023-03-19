@@ -966,7 +966,7 @@
                             <img class="u-image u-image-round u-radius-14 u-image-1" src="{{prod.img.url}}" alt="" data-image-width="1280" data-image-height="853">
                             <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}}DA<br>
                             </h4>
-                            <button id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
+                            <button href="https://nicepage.com/c/tiles-website-templates" id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
                             </button>
                           </div>  
                         </div>
@@ -1038,16 +1038,16 @@
       document.getElementById('formSubmit').click();
     }
     function insertNewPlats(value){
-      newPlts = document.getElementById('newPlatsForm');
-      var [platId,platName,platPrix,platImg] = value.split(',');
-      newPlts.innerHTML +=`<div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue" id="commPlt{{plt.id}}">
+      newPlts = document.getElementById('newPlats');
+      var [platId,platName,platPrix] = value.split(',');
+      newPlts.innerHTML +=`<div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue">
                         
                         <div class="u-container-layout u-container-layout-9" >
                           <br>
                           <button class="u-border-none u-btn u-button-style u-none u-btn-6" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
                           </button>
                           
-                          <img class="u-image u-image-round u-radius-10 u-image-2" src=`+platImg+` alt="" data-image-width="1280" data-image-height="853">
+                          <img class="u-image u-image-round u-radius-10 u-image-2" src=platImg alt="" data-image-width="1280" data-image-height="853">
                           <div class="u-align-center u-form u-form-2">
                             
                               <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">
