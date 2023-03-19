@@ -34,8 +34,8 @@ def loginPage(request):
         pw = request.POST['password']
         for user in users:
             if username == user.username and pw == user.password:
-                print("found user")
-                request.sessoin['userType'] = user.userPriority
+                request.session['userType'] = user.userPriority
+                return redirect('home')
 
     return render(request,"main/login.html",context)
 
@@ -171,5 +171,7 @@ def search_product_function(request):
     return JsonResponse({'data': result_list })
 
 def homeView(request):
+    print(request.session['userType'])
     context = {}
+    return render(request,'main/home.html',context)
     
