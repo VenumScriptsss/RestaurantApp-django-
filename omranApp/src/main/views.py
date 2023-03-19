@@ -6,7 +6,7 @@ import os
 from django.conf import settings
 from .models import *
 
-
+from django.forms.models import model_to_dict
 # Create your views here.
 
 def caissierAdminView(request):
@@ -135,9 +135,8 @@ def editProdsView(request):
         prod.save()
     return render(request,"main/products.html",context)
 
-
-
 def delete_product(request):
+
     context = {}
     
     if 'delete_prod' in request.POST:
@@ -146,3 +145,17 @@ def delete_product(request):
     prods = Products.objects.all()
     context['products'] = prods
     return render(request,"main/products.html",context)
+
+
+@csrf_exempt
+def search_product_function(request):
+    if request.method == 'POST':
+        data= request.POST.get("data")
+        result=Products.objects.filter(prodName__contains=data)
+        result_list = []
+        for product in result:
+            product_dict = model_to_dict(product)
+            product_dict['img'] = product.img.url if product.img else None
+            result_list.append(product_dict)
+        print(result_list)
+    return JsonResponse({'data': result_list })

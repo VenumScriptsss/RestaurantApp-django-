@@ -941,7 +941,7 @@
                   
 
                   <form class="form_search"> 
-                    <input type="search" id="query" name="q" placeholder="Search..." class="search">
+                    <input type="search" id="search_query"  name="q" placeholder="Search..." class="search" required oninput="search_func(this)" >
                     <button class="icon_button">
                       <img class="icon_searsh" src="/static/img/search.png"/>
                    </button>
@@ -955,9 +955,9 @@
                     </div>
                   </div>
                   <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-4 prods-container">
-                    <div class="u-container-layout u-container-layout-5" style="display: grid;grid-template-columns: 1fr 1fr 1fr; max-height:200px;">
+                    <div class="u-container-layout u-container-layout-5" style="display: grid;grid-template-columns: 1fr 1fr 1fr; max-height:200px;" id="products_list">
                       {% for prod in prods %}
-                        <div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5" >
+                        <div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5"  >
                           <div class="u-container-layout u-container-layout-6">
                             <h5 class="u-align-center u-text u-text-1">{{prod.prodName}}<br>
                             </h5>
@@ -1020,7 +1020,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>query
       </div>
     </section>
     <script>
@@ -1060,6 +1060,61 @@
                         </div>
                       </div>`
     }
+
   </script>
-    {% endblock body %}
+
+
+
+  <script>
+      function search_func(input){
+      // Get the search field element by its ID
+       
+
+        executeFunction(input.value);
+      
+    }
+
+    function executeFunction(data) {
+          
+        products_list= document.getElementById("products_list");
+        
+        $.ajax({
+          type: 'POST',
+          url: '/search_product_function',
+          data: {
+            'data': data,
+          },
+          success: function(response) {
+            s=""
+       for (let i = 0; i < response.data.length; i++) {
+        s=s+`<div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5"  >
+                          <div class="u-container-layout u-container-layout-6">
+                            <h5 class="u-align-center u-text u-text-1">`+response.data[i].prodName+`+<br>
+                            </h5>
+                            <img class="u-image u-image-round u-radius-14 u-image-1" src="`+response.data[i].img+`" alt="" data-image-width="1280" data-image-height="853">
+                            <h4 class="u-align-center u-text u-text-2">`+response.data[i].prodPrix+`+DA<br>
+                            </h4>
+                            <button href="https://nicepage.com/c/tiles-website-templates" id="addprod" value="`+response.data[i].id+`,`+response.data[i].prodName+`,`+response.data[i].prodPrix+`,`+response.data[i].img+`" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
+                            </button>
+                          </div>  
+                        </div>`
+
+
+        
+       } 
+       products_list.innerHTML=s     
+        
+            
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.log("Error sending data:", errorThrown);
+      }
+        });
+        
+
+    }
+  </script>
+
+
+{% endblock body %}
     
