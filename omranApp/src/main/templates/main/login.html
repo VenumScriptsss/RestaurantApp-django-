@@ -172,7 +172,7 @@
           <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-middle-xs u-container-layout-1">
             <img class="u-image u-image-contain u-image-default u-preserve-proportions u-image-1" src="{% static 'img/download-removebg-preview1.png' %}"     alt="" data-image-width="152" data-image-height="107">
             <div class="u-align-center u-form u-form-1">
-              <form method="post" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px">{%csrf_token %}
+              <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" style="padding: 10px" source="email" name="form" method="post">{%csrf_token %}
                 <div class="u-form-group u-form-name u-label-none">
                   <label for="name-3b9a" class="u-label">Name</label>
                   <input type="text" placeholder="Entrez le nom d'utilisateur" id="name-3b9a" name="username" class="u-input u-input-rectangle u-radius-10 u-input-1" required="">
@@ -182,13 +182,13 @@
                   <input type="password" placeholder="Entrez le mot de pass" id="email-3b9a" name="password" class="u-input u-input-rectangle u-radius-10 u-input-2" required="">
                 </div>
                 <div class="u-align-center u-form-group u-form-submit u-label-none">
-                  <button type="submit" class="u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-arial u-hover-palette-1-dark-1 u-palette-1-base u-radius-10 u-btn-1" name="login">Log in<br>
+                  <button type="submit"  name="login">Log in<br>
                   </button>
                 </div>
-                <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+                <!-- <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                 <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
                 <input type="hidden" value="" name="recaptchaResponse">
-                <input type="hidden" name="formServices" value="8fbf8921606701a21f095a8b8eab8564">
+                <input type="hidden" name="formServices" value="8fbf8921606701a21f095a8b8eab8564"> -->
               </form>
             </div>
           </div>

@@ -27,6 +27,7 @@ def serveurView(request):
 def loginPage(request):
     context = {}
     users = User.objects.all()
+    print(request.POST)
     if 'login' in request.POST:
         print("yoo")
         username = request.POST['username']
@@ -78,9 +79,9 @@ def ajouterEditCommandView(request):
         if request.POST['cat'] == 'trad':
           context['prods'] = Products.objects.filter(prodCat = '1')
         elif request.POST['cat'] == 'ff':
-          context['prods'] = Products.objects.filter(prodCat = '2').values()
+          context['prods'] = Products.objects.filter(prodCat = '2')
         else:
-          context['prods'] = Products.objects.filter(prodCat = '3').values()
+          context['prods'] = Products.objects.filter(prodCat = '3')
 
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
