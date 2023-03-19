@@ -1007,7 +1007,7 @@
                               </h4>
                               <h4 class="u-align-center u-text u-text-5">{{plt.prodName}}<br>
                               </h4>
-                            </div>`
+                            </div>
                           </div>
                           {% endfor %}
                       </div>
@@ -1039,7 +1039,7 @@
     }
     function insertNewPlats(value){
       newPlts = document.getElementById('newPlats');
-      var [platId,platName,platPrix,platimg] = value.split(',');
+      var [platId,platName,platPrix,platImg] = value.split(',');
       newPlts.innerHTML +=`<div class="u-container-style u-expanded-width-md u-grey-10 u-group u-radius-15 u-shape-round u-group-7" style="background-color:blue">
                         
                         <div class="u-container-layout u-container-layout-9" >
@@ -1047,7 +1047,7 @@
                           <button class="u-border-none u-btn u-button-style u-none u-btn-6" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-1"><img src="/static/img/6861362.png" alt=""></span>&nbsp;
                           </button>
                           
-                          <img class="u-image u-image-round u-radius-10 u-image-2" src="`+platimg+`" alt="" data-image-width="1280" data-image-height="853">
+                          <img class="u-image u-image-round u-radius-10 u-image-2" src=`+platImg+` alt="" data-image-width="1280" data-image-height="853">
                           <div class="u-align-center u-form u-form-2">
                             
                               <div class="u-form-group u-form-number u-form-number-layout-number u-label-none u-form-group-4">

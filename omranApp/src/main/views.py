@@ -32,12 +32,7 @@ def loginPage(request):
         for user in users:
             if username == user.username and pw == user.password:
                 print("found user")
-                if user.userPriority == '1':
-                    return redirect('caissierAdmin')
-                elif user.userPriority == '2':
-                    return redirect('caissier')
-                elif user.userPriority == '3':
-                    return redirect('serveur')
+                request.sessoin['userType'] = user.userPriority
     return render(request,"main/login.html")
 
 
@@ -80,10 +75,10 @@ def ajouterEditCommandView(request):
         if request.POST['cat'] == 'trad':
           context['prods'] = Products.objects.filter(prodCat = '1')
         elif request.POST['cat'] == 'ff':
-          context['prods'] = Products.objects.filter(prodCat = '2')
+          context['prods'] = Products.objects.filter(prodCat = '2').values()
         else:
-          context['prods'] = Products.objects.filter(prodCat = '3')
-        
+          context['prods'] = Products.objects.filter(prodCat = '3').values()
+
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
     return render(request,"main/page-1.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
