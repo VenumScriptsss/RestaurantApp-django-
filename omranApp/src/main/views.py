@@ -29,11 +29,11 @@ def loginPage(request):
     users = User.objects.all()
     print(request.POST)
     if 'login' in request.POST:
-        print("yoo")
         username = request.POST['username']
         pw = request.POST['password']
         for user in users:
             if username == user.username and pw == user.password:
+                print("user found")
                 request.session['userType'] = user.userPriority
                 return redirect('home')
 
@@ -173,5 +173,7 @@ def search_product_function(request):
 def homeView(request):
     print(request.session['userType'])
     context = {}
+    context['userType'] = request.session['userType']
+    context['commands'] = Command.objects.all()
     return render(request,'main/home.html',context)
     

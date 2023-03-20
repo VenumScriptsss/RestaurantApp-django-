@@ -1,6 +1,12 @@
 {% extends 'base.html'%}
 {% block title %}
-    {{userType}}
+    {%if userType == '1' %}
+      Caissier Admin
+    {% elif userType == '2' %}
+      Caissier
+    {% else %}
+      Serveur
+    {% endif %}      
 {% endblock title%}
 {% load static %}
 {% block header%}
@@ -32,7 +38,7 @@
 {% block body%}
 
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-506b"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
-        <a href="https://nicepage.com" class="u-align-right u-image u-logo u-image-1">
+        <a href='home' class="u-align-right u-image u-logo u-image-1">
           <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
         </a>
       </div></header>
@@ -40,8 +46,10 @@
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-container-style u-grey-5 u-group u-radius-20 u-shape-round u-group-1">
           <div class="u-container-layout u-valign-middle u-container-layout-1">
-            <a href="editer-products" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1"> Editer les produits</button>
-            <a href="historique" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-2">Historique</button>
+            {% if userType == '1' %}
+              <a href="editer-products" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1"> Editer les produits</button>
+              <a href="historique" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-2">Historique</button>
+            {% endif %}
             <a href="ajouter-command" class="u-align-center u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-3">Ajouter commande<br>
             </a>
           </div>
@@ -69,55 +77,29 @@
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
               {% for comm in commands %}
-              {% if comm.encaissier is False %}
-                <tr style="height: 60px;" id="commTr_{{command.id}}">
+              {% if comm.encaisser is False %}
+                <tr style="height: 60px;" id="commTr_{{comm.id}}">
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm}}<br>
                   </td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}}<br>
-                  </td>
+                  </td>    
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <form action="editer-command">{% csrf_token %}
-                      <button type="submit" name="edit" value="comm.id" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" target="_blank">Editer<br>
+                    <form method="post" action="editer-command">{% csrf_token %}
+                      <button type="submit" name="edit" value={{comm.id}} class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" target="_blank">Editer<br>
                       </button>
                   </form>
                   </td>
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                  
+              {% if userType == '1' or userType == '2' %}
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                     <button name="encaissment" value={{comm.id}} onclick="removeComm(this.value)" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5">encaisser</button>
-                  </td>
+                </td>
+              {% endif %}
                 </tr>
                 {% endif %}
               {% endfor %}
-              <tr style="height: 60px;">
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">table 01</td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">13/05/2022<br>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">250.00<br>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                  <a class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" href="https://nicepage.com" target="_blank">Editer<br>
-                  </a>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                  <a class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" href="https://nicepage.com">encaisser</a>
-                </td>
-              </tr>
-
-
-              <tr style="height: 60px;">
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">table 01</td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">13/05/2022<br>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">250.00<br>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                  <a class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" href="https://nicepage.com" target="_blank">Editer<br>
-                  </a>
-                </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                  <a class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" href="https://nicepage.com">encaisser</a>
-                </td>
-              </tr>
+              
 
               
             </tbody>
