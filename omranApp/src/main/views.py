@@ -36,7 +36,8 @@ def loginPage(request):
                 print("user found")
                 request.session['userType'] = user.userPriority
                 return redirect('home')
-
+            else:
+                pass
     return render(request,"main/login.html",context)
 
 

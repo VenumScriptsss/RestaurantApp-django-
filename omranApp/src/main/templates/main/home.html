@@ -61,7 +61,9 @@
               <col width="18.39%">
               <col width="40.65%">
               <col width="3.23%">
-              <col width="20%">
+              {% if userType == '1' or userType == '2' %}
+                <col width="20%">
+              {% endif %}
             </colgroup>
             <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
               <tr style="height: 46px;">
@@ -72,7 +74,9 @@
                 <th class="u-table-cell">Prix total<br>
                 </th>
                 <th class="u-grey-25 u-table-cell u-table-cell-4"></th>
-                <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
+                {% if userType == '1' or userType == '2' %}
+                  <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
+                {% endif %}
               </tr>
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">

@@ -892,10 +892,10 @@
   {% endblock header%}
   {% block body %}
   <body class="u-body u-xxl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-0b00"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="https://nicepage.com" class="u-align-right u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
+        <a href="#" class="u-align-right u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
           <img src="/static/img/default-logo.png" class="u-logo-image u-logo-image-1">
         </a>
-        <a href="https://nicepage.cloud" class="u-align-left u-border-hover-grey-75 u-border-none u-btn u-button-style u-none u-btn-1"><span class="u-file-icon u-icon u-text-custom-color-1 u-icon-1"><img src="/static/img/318477-d74e274b.png" alt=""></span>
+        <a href="home" class="u-align-left u-border-hover-grey-75 u-border-none u-btn u-button-style u-none u-btn-1"><span class="u-file-icon u-icon u-text-custom-color-1 u-icon-1"><img src="/static/img/318477-d74e274b.png" alt=""></span>
           <br>
         </a>
       </div></header> 
@@ -966,7 +966,7 @@
                             <img class="u-image u-image-round u-radius-14 u-image-1" src="{{prod.img.url}}" alt="" data-image-width="1280" data-image-height="853">
                             <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}}DA<br>
                             </h4>
-                            <button href="https://nicepage.com/c/tiles-website-templates" id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
+                            <button id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
                             </button>
                           </div>  
                         </div>
@@ -1100,7 +1100,7 @@
                             <img class="u-image u-image-round u-radius-14 u-image-1" src="`+response.data[i].img+`" alt="" data-image-width="1280" data-image-height="853">
                             <h4 class="u-align-center u-text u-text-2">`+response.data[i].prodPrix+`+DA<br>
                             </h4>
-                            <button href="https://nicepage.com/c/tiles-website-templates" id="addprod" value="`+response.data[i].id+`,`+response.data[i].prodName+`,`+response.data[i].prodPrix+`,`+response.data[i].img+`" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
+                            <button id="addprod" value="`+response.data[i].id+`,`+response.data[i].prodName+`,`+response.data[i].prodPrix+`,`+response.data[i].img+`" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-5">ajouter<br>
                             </button>
                           </div>  
                         </div>`
