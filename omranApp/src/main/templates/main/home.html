@@ -37,11 +37,14 @@
 
 {% block body%}
 
-  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-506b"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
-        <a href='home' class="u-align-right u-image u-logo u-image-1">
-          <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+  <body class="u-body u-xl-mode" data-lang="en">
+    <header class="u-clearfix u-grey-10 u-header u-header" id="sec-0b00" style="margin-top:1.3em;margin-left: -5em;">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <a href="logout" class="u-align-left u-border-hover-grey-75 u-border-none u-btn u-button-style u-none u-btn-1">
+          <span class="u-file-icon u-icon u-text-custom-color-1 u-icon-1"><img src="/static/img/318477-d74e274b.png" alt="" height="50" width="50"></span>
         </a>
-      </div></header>
+      </div>
+    </header>
     <section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-container-style u-grey-5 u-group u-radius-20 u-shape-round u-group-1">
@@ -88,13 +91,12 @@
                   </td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}}<br>
                   </td>    
+                  <form method="post" action="editer-command">{% csrf_token %}
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <form method="post" action="editer-command">{% csrf_token %}
                       <button type="submit" name="edit" value={{comm.id}} class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" target="_blank">Editer<br>
                       </button>
-                  </form>
                   </td>
-                  
+                </form>
               {% if userType == '1' or userType == '2' %}
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                     <button name="encaissment" value={{comm.id}} onclick="removeComm(this.value)" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5">encaisser</button>

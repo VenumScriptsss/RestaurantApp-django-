@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>ajouter_commande</title>
+    <link rel="stylesheet" href="/static/nicepage(2).css" media="screen">
+    <link rel="stylesheet" href="/static/ajouter_commande.css" media="screen">
+    <script class="u-script" type="text/javascript" src="/static/jquery(2).js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="/static/nicepage(2).js" defer=""></script>
+    <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
+    <meta name="referrer" content="origin">
+    
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="ajouter_commande">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <body class="u-body u-xxl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-0b00"><div class="u-clearfix u-sheet u-sheet-1">
+        <a class="u-align-right u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
+          <img src="images/default-logo.png" class="u-logo-image u-logo-image-1">
+        </a>
+        <a class="u-align-left u-border-hover-grey-75 u-border-none u-btn u-button-style u-none u-btn-1"><span class="u-file-icon u-icon u-text-custom-color-1 u-icon-1"><img src="images/318477-d74e274b.png" alt=""></span>
+          <br>
+        </a>
+      </div></header> 
+    <section class="u-clearfix u-grey-10 u-section-1" id="sec-b75f">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width-xl u-expanded-width-xxl u-grey-5 u-group u-opacity u-opacity-90 u-radius-14 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <a class="u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-1"> Emporter </a>
+            <a class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-radius-15 u-btn-2">En table</a>
+            <div class="u-form u-form-1">
+              <form  class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 5px;" source="email">
+                <div class="u-form-group u-form-select u-label-none u-form-group-1">
+                  <label for="select-c85c" class="u-label">Dropdown</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-c85c" name="select" class="u-input u-input-rectangle u-radius-10 u-white u-input-1">
+                      <option value="Item 1">Item 1</option>
+                      <option value="Item 2">Item 2</option>
+                    </select>
+                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="u-clearfix u-gutter-18 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-grey-5 u-layout-cell u-opacity u-opacity-90 u-radius-25 u-shape-round u-size-41 u-layout-cell-1">
+                <div class="u-container-layout u-valign-bottom-xs u-container-layout-2">
+
+
+                  <form class="form_search"> 
+                    <input type="search" id="query" name="q" placeholder="Search..." class="search">
+                    <button class="icon-button">
+                      <img class="icon-searsh" src="/static/img/search.png"/>
+                   </button>
+                  </form>
+
+
+                  <div class="u-container-style u-expanded-width-xs u-group u-shape-rectangle u-group-3">
+                    <div class="u-container-layout u-container-layout-4">
+                      <a class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-4"> &nbsp;traditional</a>
+                      <a class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-5">fast food</a>
+                      <a class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-6">les autres</a>
+                    </div>
+                  </div>
+                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-4" >
+                    <div class="u-container-layout u-container-layout-5" style="display: grid;grid-template-columns: 1fr 1fr 1fr; max-height:200px;" id="products_list">
+                      {% for prod in prods %}
+                        <div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5">
+                        <div class="u-container-layout u-container-layout-6">
+                          <h5 class="u-align-center u-text u-text-1">{{prod.prodName}}<br>
+                          </h5>
+                          <img class="u-align-center u-image u-image-round u-radius-10 u-image-1" src="{{prod.img.url}}" alt="" data-image-width="1280" data-image-height="891">
+                          <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}}<br>
+                          </h4>
+                          <button id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-7">ajouter<br>
+                          </button>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-grey-5 u-layout-cell u-opacity u-opacity-90 u-radius-25 u-shape-round u-size-19 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-7">
+                  <h4 class="u-text u-text-default u-text-3">liste des commandes<br>
+                  </h4>
+                  <div class="u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-white u-group-6">
+                    <div class="u-container-layout u-valign-middle u-container-layout-8">
+                        <div id="oldPlats"></div>
+                        {% for plt in comm.prods.all %}
+                            <div  class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-center-xs u-container-style u-grey-10 u-group u-radius-15 u-shape-round u-group-7">
+                                <div class="u-container-layout u-container-layout-9">
+                                <a  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-8"><span class="u-file-icon u-icon u-text-custom-color-2 u-icon-1"><img src="/static/img/8371357-627a9a0f.png" alt=""></span>
+                                </a>
+                                <a  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
+                                </a>
+                                <img class="u-image u-image-round u-radius-10 u-image-2" src="/static/img/bce6e130b5ba92cf9966d33e390ec54ba673d7e292ce89446fe42e0d3da7a810efa134bfd53fdad4f2000d3dc3dcf10806100d13a9c9aef1d7c5a1_1280.jpg" alt="" data-image-width="1280" data-image-height="800">
+                                <a  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
+                                </a>
+                                <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-8">
+                                    <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-10">
+                                    <h4 class="u-align-center u-text u-text-4">01</h4>
+                                    </div>
+                                </div>
+                                <h4 class="u-align-center-xxl u-text u-text-5">
+                                    <div style="direction: rtl;">{{plt.prodPrix}} </div>
+                                </h4>
+                                <h4 class="u-align-center-xxl u-text u-text-6">{{plt.prodName}} <br>
+                                </h4>
+                                </div>
+                            </div>
+                      {% endfor %}
+                      <div id="newPlats">
+                        <form method="post" id="newPlatsForm">{% csrf_token %}
+                            {% if pageType == "Editer Command" %}
+                              <input hidden type="submit" id="formSubmit" name="confEdit" value="{{comm.id}}" >
+                            {% else %}
+                              <input hidden type="submit" id="formSubmit" name="confEdit" value="newComm">
+                            {% endif %}
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="u-align-center u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-11">ajouter</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+    
+  
+</body>
+<script>
+    function insertNewPlats(value){
+      newPlts = document.getElementById('newPlats');
+      var [platId,platName,platPrix,platImg] = value.split(',');
+      newPlts.innerHTML +=``
+                        
+                        
+    }
+</script>
+</html>

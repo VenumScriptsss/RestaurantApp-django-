@@ -86,7 +86,7 @@ def ajouterEditCommandView(request):
 
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
-    return render(request,"main/page-1.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
+    return render(request,"main/ajouter_commande.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
     """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
