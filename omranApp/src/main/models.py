@@ -47,6 +47,7 @@ class Command(models.Model):
     tableNum = models.IntegerField(null=False,help_text='enter le numero de la table',verbose_name='numero de table')
     prods = models.ManyToManyField(Products)
     dateComm = models.DateTimeField(auto_now_add=True,verbose_name='temps creation de la command')
+    prods_quantity=models.CharField(max_length=750,default="{}")
     encaisser = models.BooleanField(verbose_name='status d encaissemnt',default=False)
     encaissementTime = models.DateTimeField(auto_now_add=True,verbose_name='temps encaissement')
     flaged = models.BooleanField(verbose_name='modification au command')

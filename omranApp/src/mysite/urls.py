@@ -33,6 +33,8 @@ urlpatterns = [
     path('delete_product', delete_product, name='delete_product'),
     path('search_product_function', search_product_function, name='search_product_function'),
     path('home', homeView, name='home'),
+    path('history', history, name='history'),
+    path('history_submit', history_submit, name='history_submit'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

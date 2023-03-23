@@ -78,6 +78,7 @@
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
               {% for comm in commands %}
               {% if comm.encaisser is False %}
+                
                 <tr style="height: 60px;" id="commTr_{{comm.id}}">
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm}}<br>
@@ -85,6 +86,7 @@
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}}<br>
                   </td>    
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                    <br>
                     <form method="post" action="editer-command">{% csrf_token %}
                       <button type="submit" name="edit" value={{comm.id}} class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4" target="_blank">Editer<br>
                       </button>
@@ -93,7 +95,7 @@
                   
               {% if userType == '1' or userType == '2' %}
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <button name="encaissment" value={{comm.id}} onclick="removeComm(this.value)" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5">encaisser</button>
+                    <button name="encaissment" value={{comm.id}} onclick="removeComm(this.value)" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" >encaisser</button>
                 </td>
               {% endif %}
                 </tr>

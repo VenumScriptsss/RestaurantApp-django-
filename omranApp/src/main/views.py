@@ -5,8 +5,10 @@ from django.http import JsonResponse
 import os 
 from django.conf import settings
 from .models import *
-
+from django.db import connection
 from django.forms.models import model_to_dict
+import pandas as pd 
+from datetime import datetime, date, timedelta
 # Create your views here.
 
 def caissierAdminView(request):
@@ -29,6 +31,7 @@ def loginPage(request):
     users = User.objects.all()
     print(request.POST)
     if 'login' in request.POST:
+       
         username = request.POST['username']
         pw = request.POST['password']
         for user in users:
@@ -171,9 +174,69 @@ def search_product_function(request):
     return JsonResponse({'data': result_list })
 
 def homeView(request):
-    print(request.session['userType'])
-    context = {}
-    context['userType'] = request.session['userType']
-    context['commands'] = Command.objects.all()
+    comnd=Command.objects.all()
+    
+    context = {"commands":comnd,'userType':request.session['userType']}
     return render(request,'main/home.html',context)
     
+#----------------------------history--------------------------
+
+def history(request):
+    context={}
+    commnds=Command.objects.all().values()
+    df=pd.DataFrame(commnds)
+    df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
+    df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
+    df['commType'] = df['commType'].replace({2: True, 1: False})
+    df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
+    context['commands']=df.to_dict("records")
+    l=[]
+    for i in df['id']:
+            l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
+            #l.append(list(Command.objects.filter(id=i).first().prods.all()))
+    for i, d in enumerate(context['commands']):
+                    subject = l[i]
+                    d['prodNames'] = subject
+    
+    return render(request, "main\history.html",context=context) #---------    ----------#
+
+def history_submit(request):
+        context={}
+        commnds=Command.objects.all().values()
+        print(Command.objects.all().first().id)
+        df=pd.DataFrame(commnds)
+        Encaisser=request.POST.get('Encaisser')
+        Suppression=request.POST.get('Suppression')
+        date_from=request.POST.get('date_from')
+        date_to=request.POST.get('date-to')
+       
+        if(Encaisser!=""):
+          Encaisser=Encaisser=='true'  
+          df=df[ df['encaisser']==Encaisser ]
+          
+        if(Suppression!=""):
+          Suppression=Suppression=='true' 
+          df=df[df['flaged']==Suppression ]
+          
+        if(date_to!=""):
+           df=df[df['encaissementTime']<=date_to+" 23:59:59"]
+        if(date_from!=""):
+           df=df[df['encaissementTime']>=date_from]
+        df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
+        df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
+        df['commType'] = df['commType'].replace({2: True, 1: False})
+        df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
+        l=[]
+        for i in df['id']:
+            l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
+            #l.append(list(Command.objects.filter(id=i).first().prods.all()))
+        #context["prodNames"]=l
+        context['commands']=df.to_dict("records")
+        for i, d in enumerate(context['commands']):
+                    subject = l[i]
+                    
+                    d['prodNames'] = subject
+        print(context)
+        
+        return JsonResponse(context)
+
