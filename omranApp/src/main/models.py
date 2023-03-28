@@ -43,14 +43,15 @@ class Products(models.Model):
 
 class Command(models.Model):
     commtypeChoices = [('1','emporter'),('2','a table')]
-    commType = models.CharField(max_length=1,help_text='choisit le type de la command',choices=commtypeChoices,verbose_name='type de command')
-    tableNum = models.IntegerField(null=False,help_text='enter le numero de la table',verbose_name='numero de table')
+    commType = models.CharField(default='1', max_length=1,help_text='choisit le type de la command',choices=commtypeChoices,verbose_name='type de command')
+    tableNum = models.CharField(default='-1',max_length=2, null=False,help_text='enter le numero de la table',verbose_name='numero de table')
     prods = models.ManyToManyField(Products)
     dateComm = models.DateTimeField(auto_now_add=True,verbose_name='temps creation de la command')
     encaisser = models.BooleanField(verbose_name='status d encaissemnt',default=False)
     encaissementTime = models.DateTimeField(auto_now_add=True,verbose_name='temps encaissement')
-    flaged = models.BooleanField(verbose_name='modification au command')
+    flaged = models.BooleanField(verbose_name='modification au command',default=False)
     commPrice = models.IntegerField(verbose_name='prix total command',default=0,null=False)
+    prods_quantity=models.CharField(max_length=750,default="{}")
 
     def __str__(self):
         return str(self.id)

@@ -7,22 +7,12 @@ from django.conf import settings
 from .models import *
 
 from django.forms.models import model_to_dict
+
+
+
 # Create your views here.
 
-def caissierAdminView(request):
-    context = {}
-    context['commands'] = Command.objects.all()
-    return render(request,"main/caissierAdmin.html",context)
 
-def caissierView(request):
-    context = {}
-    context['commands'] = Command.objects.all()
-    return render(request,"main/caissier.html",context)
-
-def serveurView(request):
-    context = {}
-    context['commands'] = Command.objects.all()
-    return render(request, "main/serveur.html", context)
 
 def loginPage(request):
     context = {}
@@ -59,20 +49,45 @@ def ajouterEditCommandView(request):
     context = {}
     context['prods'] = Products.objects.all()
     context['pageType'] = 'Ajouter Command'
-    
+
     if 'edit' in request.POST:
         context['pageType'] = 'Editer Command'
         comm=Command.objects.get(id=request.POST['edit'])
         context['comm'] = comm
+        commQnt = eval(comm.prods_quantity)
+        context['commQnt'] = commQnt
+    
+    
     if 'confEdit' in request.POST:
-        if not request.POST['confEdit'] == 'newComm':
+        if request.POST['confEdit'] == 'newComm':
+            comm = Command()
+            comm.save()
+            for prod in request.POST.getlist('prodId_Qnt'):
+                id_qnt = prod.split(',')
+                plat = Products.objects.get(id=id_qnt[0])
+                comm.prods.add(plat)
+                prodQnt = eval(comm.prods_quantity)
+                prodQnt.update({id_qnt[0]:id_qnt[1]})
+                comm.prods_quantity = str(prodQnt)
+            comm.commPrice = request.POST['commPrix']    
+            if request.POST['typeComm'] == 'emporter':
+                comm.commType = '1'
+                comm.tableNum = '-1'
+            else:                
+                comm.commType = '2'
+                comm.tableNum = request.POST['typeComm']
+            comm.save()    
+            return redirect('home')
+        else:
             comm = Command.objects.get(id = request.POST['confEdit'])
             print(request.POST)
             for prod in request.POST:
                 if prod in ['csrfmiddlewaretoken','confEdit','number']:
                     continue
+                
                 prod = Products.objects.get(id=request.POST[prod])
                 comm.prods.add(prod)
+                
                 comm.commPrice+= prod.prodPrix
             comm.save()
     if 'cat' in request.POST:
