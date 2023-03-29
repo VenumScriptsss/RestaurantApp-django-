@@ -10,6 +10,8 @@ from django.forms.models import model_to_dict
 import pandas as pd 
 from datetime import datetime, date, timedelta
 # Create your views here.
+import ast
+
 
 def caissierAdminView(request):
     context = {}
@@ -39,7 +41,8 @@ def loginPage(request):
                 print("user found")
                 request.session['userType'] = user.userPriority
                 return redirect('home')
-
+            else:
+                pass
     return render(request,"main/login.html",context)
 
 
@@ -88,7 +91,7 @@ def ajouterEditCommandView(request):
 
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
-    return render(request,"main/page-1.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
+    return render(request,"main/ajouter_commande.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
     """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
@@ -185,11 +188,20 @@ def history(request):
     context={}
     commnds=Command.objects.all().values()
     df=pd.DataFrame(commnds)
+
+    prods=pd.DataFrame(Products.objects.all().values())
+    
+    prod_price={}
+    for i,j in zip(prods['prodName'],prods['prodPrix']):
+        prod_price[i]=j
+
     df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
     df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
     df['commType'] = df['commType'].replace({2: True, 1: False})
     df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
+    df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
     context['commands']=df.to_dict("records")
+    
     l=[]
     for i in df['id']:
             l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
@@ -197,19 +209,27 @@ def history(request):
     for i, d in enumerate(context['commands']):
                     subject = l[i]
                     d['prodNames'] = subject
-    
+    context['prod_price']=prod_price
+   
     return render(request, "main\history.html",context=context) #---------    ----------#
 
 def history_submit(request):
         context={}
         commnds=Command.objects.all().values()
-        print(Command.objects.all().first().id)
+        prods=pd.DataFrame(Products.objects.all().values())
+    
+        prod_price={}
+        for i,j in zip(prods['prodName'],prods['prodPrix']):
+            prod_price[i]=j
+       
+        #-----------------------------------------------
         df=pd.DataFrame(commnds)
+        ids=df['id']
         Encaisser=request.POST.get('Encaisser')
         Suppression=request.POST.get('Suppression')
         date_from=request.POST.get('date_from')
         date_to=request.POST.get('date-to')
-       
+        
         if(Encaisser!=""):
           Encaisser=Encaisser=='true'  
           df=df[ df['encaisser']==Encaisser ]
@@ -229,14 +249,16 @@ def history_submit(request):
         l=[]
         for i in df['id']:
             l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
-            #l.append(list(Command.objects.filter(id=i).first().prods.all()))
-        #context["prodNames"]=l
+        #----------------------------------------------   
+       
+        df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
         context['commands']=df.to_dict("records")
         for i, d in enumerate(context['commands']):
                     subject = l[i]
-                    
                     d['prodNames'] = subject
+
+        context['prod_price']=prod_price
+        context['ids']=list(ids)
         print(context)
-        
         return JsonResponse(context)
 

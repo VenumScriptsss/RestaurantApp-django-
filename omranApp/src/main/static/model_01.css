@@ -1,0 +1,248 @@
+
+    body{
+        background-color: rgb(247, 245, 242);
+        margin: auto;
+        align-content: center;
+        height: 100%;
+    }
+    .general_div{
+    
+        display: none;
+        background-color: rgba(0, 0, 0, 30%);
+        border: 0px solid;
+        
+        justify-content: center;
+        position:absolute;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+
+    }
+
+    .myModel{
+        background-color: #f2f2f2;
+        border: 0px solid;
+        margin-top: 30px;
+        justify-content: center;
+        position:absolute;
+        height: 570px;
+        width: 310px;
+        border-radius: 20px;
+    }
+
+    .closeButton{
+        
+        margin: 10px 8px;
+        display: inline-block;
+        float : right;
+        border-radius: 5px;
+        background-color: rgb(180, 180, 180);
+        width: 8%;
+        font-size: 1em;
+        border: 0px;
+        cursor: pointer;
+        
+    }
+    .title{
+        width: 50%;
+        margin-top: 10px;
+        margin-left: 23%;
+        
+        
+        display: inline-block;}
+
+    .iconClose{
+        margin-top: 4px;
+        width: 100%;
+        height: 100%;}
+
+    .head{
+        white-space: nowrap;
+    }
+
+    .div_table{
+        overflow-y: auto;
+        max-height: 70%;
+
+        background-color: #ffffff;
+        border: 0px solid;
+        margin: 0px auto;
+        vertical-align: middle;
+        height: 70%;
+        width: 95%;
+        border-radius: 10px;
+
+    }
+
+    .table {
+        margin: 10px auto;
+        border-collapse: collapse;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 16px;
+    }
+
+    tr.border-bottom {
+        height: 40px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .test{
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .confermedButton{
+        padding: 0px 15px;
+        height: 42px;
+        font-size: 16px;
+        margin: 5px auto;
+        vertical-align: middle;
+        border-radius: 10px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .clicked_button{
+        cursor: pointer;
+        padding: 0px 15px;
+        height: 42px;
+        font-size: 16px;
+        margin: 15px 50px;
+        vertical-align: middle;
+        border-radius: 10px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff}
+
+
+@media (max-width: 768px) {
+    
+    body{
+        background-color: rgb(247, 245, 242);
+        margin: auto;
+        align-content: center;
+        height: 100%;
+    }
+    .general_div{
+    
+        display: none;
+        background-color: rgba(0, 0, 0, 30%);
+        border: 0px solid;
+        
+        justify-content: center;
+        position:absolute;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+
+    }
+
+    .myModel{
+        background-color: #f2f2f2;
+        border: 0px solid;
+        margin-top: 30px;
+        justify-content: center;
+        position:absolute;
+        height: 550px;
+        width: 290px;
+        border-radius: 18px;
+    }
+
+    .closeButton{
+        
+        margin: 10px 8px;
+        display: inline-block;
+        float : right;
+        border-radius: 5px;
+        background-color: rgb(180, 180, 180);
+        width: 8%;
+        font-size: 1em;
+        border: 0px;
+        cursor: pointer;
+        
+    }
+    .title{
+        width: 50%;
+        margin-top: 10px;
+        margin-left: 20%;
+        font-size: 18px;
+       
+        
+        
+        display: inline-block;}
+
+    .iconClose{
+        margin-top: 4px;
+        width: 100%;
+        height: 100%;}
+
+    .head{
+        margin-top: 5px;
+        white-space: nowrap;
+    }
+
+    .div_table{
+        overflow-y: auto;
+        max-height: 70%;
+
+        background-color: #ffffff;
+        border: 0px solid;
+        margin: 0px auto;
+        vertical-align: middle;
+        height: 70%;
+        width: 95%;
+        border-radius: 10px;
+
+    }
+
+    }
+
+    .table {
+        margin: 10px auto;
+        border-collapse: collapse;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 14px;
+    }
+
+    tr.border-bottom {
+        height: 35px;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .test{
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .confermedButton{
+        padding: 0px 15px;
+        height: 38px;
+        font-size: 14px;
+        margin: 5px auto;
+        vertical-align: middle;
+        border-radius: 10px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+    .clicked_button{
+        cursor: pointer;
+        padding: 0px 15px;
+        height: 42px;
+        font-size: 16px;
+        margin: 15px 50px;
+        vertical-align: middle;
+        border-radius: 10px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff}
+
+
