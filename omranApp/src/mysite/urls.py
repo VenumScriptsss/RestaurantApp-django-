@@ -21,9 +21,7 @@ from django.conf.urls.static import static
 from main.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('caissierAdmin', caissierAdminView, name='caissierAdmin'),
-    path('caissier', caissierView, name='caissier'),
-    path('serveur', serveurView, name='serveur'),
+
     path('', loginPage, name='loginPage'),
     path('apply_function', apply_function, name='apply_function'),
     path('ajouter-command', ajouterEditCommandView, name='ajouter-command'),

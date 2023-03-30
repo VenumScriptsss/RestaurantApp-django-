@@ -87,7 +87,11 @@
               {% if comm.encaisser is False %}
                 
                 <tr style="height: 60px;" id="commTr_{{comm.id}}">
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
+                  {% if comm.tableNum == '-1' %}
+                    <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Emporter</td>
+                  {% else %}
+                    <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
+                  {% endif%}
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm}}<br>
                   </td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}}<br>

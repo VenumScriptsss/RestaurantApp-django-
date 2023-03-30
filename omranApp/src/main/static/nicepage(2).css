@@ -40993,8 +40993,8 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-button-style.u-custom-color-2,
         .u-button-style.u-custom-color-2[class*="u-border-"]
         {
-            color: #ffffff !important;
-            background-color: #268905 !important;
+            color: #ffffff ;
+            background-color: #268905 ;
         }
 
         .u-button-style.u-custom-color-2:hover,
@@ -41034,12 +41034,12 @@ a.u-link.u-text-hover-grey-90:hover {
         li.active > a.u-button-style.u-button-style.u-active-custom-color-2[class*="u-border-"],
         input.u-field-input.u-field-input.u-active-custom-color-2:checked
         {
-            color: #ffffff !important;
-            background-color: #268905 !important;
+            color: #ffffff ;
+            background-color: #268905 ;
         }
 
         a.u-link.u-hover-custom-color-2:hover {
-            color: #268905 !important;
+            color: #268905 ;
         }
 
         
