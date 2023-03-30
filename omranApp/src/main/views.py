@@ -60,6 +60,7 @@ def ajouterEditCommandView(request):
     
     if 'confEdit' in request.POST:
         if request.POST['confEdit'] == 'newComm':
+            # if request.POST.getlist('prodId_Qnt')
             comm = Command()
             comm.save()
             for prod in request.POST.getlist('prodId_Qnt'):
@@ -67,9 +68,10 @@ def ajouterEditCommandView(request):
                 plat = Products.objects.get(id=id_qnt[0])
                 comm.prods.add(plat)
                 prodQnt = eval(comm.prods_quantity)
-                prodQnt.update({id_qnt[0]:id_qnt[1]})
+                prodQnt.update({int(id_qnt[0]):id_qnt[1]})
                 comm.prods_quantity = str(prodQnt)
-            comm.commPrice = request.POST['commPrix']    
+            comm.commPrice = request.POST['commPrix']
+            print(request.POST)    
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
