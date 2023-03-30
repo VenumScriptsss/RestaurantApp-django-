@@ -9,7 +9,7 @@ from django.db import connection
 from django.forms.models import model_to_dict
 import pandas as pd 
 from datetime import datetime, date, timedelta
-
+from django.core import serializers
 
 
 # Create your views here.
@@ -66,6 +66,7 @@ def ajouterEditCommandView(request):
     
     if 'confEdit' in request.POST:
         if request.POST['confEdit'] == 'newComm':
+            # if request.POST.getlist('prodId_Qnt')
             comm = Command()
             comm.save()
             for prod in request.POST.getlist('prodId_Qnt'):
@@ -75,7 +76,8 @@ def ajouterEditCommandView(request):
                 prodQnt = eval(comm.prods_quantity)
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
                 comm.prods_quantity = str(prodQnt)
-            comm.commPrice = request.POST['commPrix']    
+            comm.commPrice = request.POST['commPrix']
+            print(request.POST)    
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
@@ -189,8 +191,24 @@ def search_product_function(request):
             product_dict = model_to_dict(product)
             product_dict['img'] = product.img.url if product.img else None
             result_list.append(product_dict)
-        print(result_list)
+       
     return JsonResponse({'data': result_list })
+
+@csrf_exempt
+def update_category_list(request):
+    if request.method == 'POST':
+        data= request.POST.get("data")
+        prods=Products.objects.filter(prodCat=data)
+
+        result_list = []
+        for product in prods:
+            product_dict = model_to_dict(product)
+            product_dict['img'] = product.img.url if product.img else None
+            result_list.append(product_dict)
+        #data = serializers.serialize('python', comnds)
+        context={"data":result_list}
+        return JsonResponse(context)
+
 
 def homeView(request):
     comnd=Command.objects.all()

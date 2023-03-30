@@ -33,6 +33,8 @@ urlpatterns = [
     path('home', homeView, name='home'),
     path('history', history, name='history'),
     path('history_submit', history_submit, name='history_submit'),
+    path('update_category_list', update_category_list, name='update_category_list'),
+
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
