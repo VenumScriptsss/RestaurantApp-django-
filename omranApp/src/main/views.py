@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from main.models import Command
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import os 
+from django.contrib.auth import authenticate, login
 from django.conf import settings
 from .models import *
 from django.db import connection
@@ -10,13 +12,25 @@ from django.forms.models import model_to_dict
 import pandas as pd 
 from datetime import datetime, date, timedelta
 from django.core import serializers
-
-
+from django.contrib.auth import logout
+from .functions import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 import ast
 
+def my_login_required(view_func):
+    def wrapper(request, *args, **kwargs):
+        try :
+            request.session['userType'] 
+            return view_func(request, *args, **kwargs)
+        except:
+            return redirect(reverse('loginPage'))
+    return wrapper
 
 
+def log_out(request):
+    logout(request)
+    return redirect('loginPage')
 
 def loginPage(request):
     context = {}
@@ -27,6 +41,7 @@ def loginPage(request):
         username = request.POST['username']
         pw = request.POST['password']
         for user in users:
+            
             if username == user.username and pw == user.password:
                 print("user found")
                 request.session['userType'] = user.userPriority
@@ -209,15 +224,16 @@ def update_category_list(request):
         context={"data":result_list}
         return JsonResponse(context)
 
-
+@my_login_required
 def homeView(request):
+    print(request.session['userType'])
     comnd=Command.objects.all()
     
     context = {"commands":comnd,'userType':request.session['userType']}
     return render(request,'main/home.html',context)
     
 #----------------------------history--------------------------
-
+@my_login_required
 def history(request):
     context={}
     commnds=Command.objects.all().values()
@@ -246,7 +262,7 @@ def history(request):
     context['prod_price']=prod_price
    
     return render(request, "main\history.html",context=context) #---------    ----------#
-
+@my_login_required
 def history_submit(request):
         context={}
         commnds=Command.objects.all().values()

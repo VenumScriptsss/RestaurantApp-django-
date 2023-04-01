@@ -100,15 +100,15 @@
                 <label class="u-label u-label-1">&nbsp;Suppression</label>
                 <div class="u-form-radio-button-wrapper">
                   <div class="u-input-row">
-                    <input id="field-12e3" type="radio" name="Suppression" value="true" class="u-field-input" checked="checked" data-calc="">
-                    <label class="u-field-label" for="field-12e3" style="font-size: 1.125rem;">Yes</label>
+                    <input id="field-12e3" type="radio" name="Suppression" value="true" class="u-field-input"  data-calc="">
+                    <label class="u-field-label" for="field-12e3" style="font-size: 1.125rem;">Oui</label>
                   </div>
                   <div class="u-input-row">
                     <input id="field-bb90" type="radio" name="Suppression" value="false" class="u-field-input" data-calc="">
                     <label class="u-field-label" for="field-bb90" style="font-size: 1.125rem;">No</label>
                   </div>
                   <div class="u-input-row">
-                    <input id="field-1596" type="radio" name="Suppression" value="" class="u-field-input" data-calc="">
+                    <input id="field-1596" type="radio" name="Suppression" value="" checked="checked" class="u-field-input" data-calc="">
                     <label class="u-field-label" for="field-1596" style="font-size: 1.125rem;">Oui et No</label>
                   </div>
                 </div>
@@ -117,7 +117,7 @@
                 <label class="u-label u-label-2">Encaisser</label>
                 <div class="u-form-radio-button-wrapper">
                   <div class="u-input-row">
-                    <input id="field-0f0a" type="radio" name="Encaisser" value="true" class="u-field-input" checked="checked" data-calc="">
+                    <input id="field-0f0a" type="radio" name="Encaisser" value="true" class="u-field-input"  data-calc="">
                     <label class="u-field-label" for="field-0f0a" style="font-size: 1.125rem;">Oui</label>
                   </div>
                   <div class="u-input-row">
@@ -125,18 +125,19 @@
                     <label class="u-field-label" for="field-31ea" style="font-size: 1.125rem;">No</label>
                   </div>
                   <div class="u-input-row">
-                    <input id="field-cb5f" type="radio" name="Encaisser" value="" class="u-field-input" data-calc="">
+                    <input id="field-cb5f" type="radio" name="Encaisser" value="" class="u-field-input" checked="checked" data-calc="">
                     <label class="u-field-label" for="field-cb5f" style="font-size: 1.125rem;">Oui et No</label>
                   </div>>
                 </div>
               </div>
-              <div class="u-form-date u-form-group u-form-input-layout-horizontal u-label-top">
-                <label for="date-cef4" class="u-label u-label-3">Avant la date</label>
-                <input type="text" readonly="readonly" placeholder="DD/MM/YYYY" id="date-cef4" name="date_from" class="u-input u-input-rectangle"  data-date-format="dd/mm/yyyy">
-              </div>
+              
               <div class="u-form-date u-form-group u-form-input-layout-horizontal u-label-top">
                 <label for="date-d316" class="u-label u-label-4">Après la date</label>
                 <input type="text" readonly="readonly" placeholder="MM/DD/YYYY" id="date-d316" name="date-to" class="u-input u-input-rectangle" data-date-format="dd/mm/yyyy">
+              </div>
+              <div class="u-form-date u-form-group u-form-input-layout-horizontal u-label-top">
+                <label for="date-cef4" class="u-label u-label-3">Avant la date</label>
+                <input type="text" readonly="readonly" placeholder="DD/MM/YYYY" id="date-cef4" name="date_from" class="u-input u-input-rectangle"  data-date-format="dd/mm/yyyy">
               </div>
               <div class="u-align-center u-form-group u-form-submit u-label-top">
                 <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10 u-btn-1"><span class="u-icon"></span>Recharche 
@@ -192,8 +193,7 @@
                 <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='{{comnd.id}}'onclick="openModal({{comnd.prodNames}},'{{comnd.id}}','{{comnd.commPrice}}',{{comnd.prods_quantity}},{{prod_price}})"">Afficher</button>
               </td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                <a class="u-border-none u-btn u-button-link u-button-style u-none u-btn-3" href="https://nicepage.com"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/3687412.png" alt=""></span>
-                </a>
+                
               </td>
             </tr>
           </tbody>
