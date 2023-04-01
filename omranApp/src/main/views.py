@@ -109,7 +109,7 @@ def ajouterEditCommandView(request):
 
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
-    return render(request,"main/ajouter_commande.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
+    return render(request,"main/ajouter_commande2.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
     """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
@@ -167,7 +167,7 @@ def editProdsView(request):
         prod = Products.objects.get(id=request.POST['act-dis'])
         prod.isActive = not prod.isActive
         prod.save()
-    return render(request,"main/products.html",context)
+    return render(request,"main/products2.html",context)
 
 def delete_product(request):
 
@@ -178,7 +178,7 @@ def delete_product(request):
         Products.objects.get(id=request.POST['delete_prod']).delete()
     prods = Products.objects.all()
     context['products'] = prods
-    return render(request,"main/products.html",context)
+    return render(request,"main/products2.html",context)
 
 
 @csrf_exempt

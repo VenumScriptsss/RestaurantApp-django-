@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>home_admin</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'products2.css' %}" media="screen">
+
+
+    <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="home_admin">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-506b"><div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-sheet-1">
+        <a href="https://nicepage.com" class="u-align-right u-image u-logo u-image-1">
+          <img src="/static/img/default-logo.png" class="u-logo-image u-logo-image-1">
+        </a>
+        <a href="home" class="icon-button">
+          <img class="icon-searsh" src="/static/img/318477-d74e274b.png"/>
+        </a>
+      </div></header>
+    <section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        
+        <div class="u-table u-table-responsive u-table-1">
+          <table class="u-table-entity">
+            <colgroup>
+              <col width="20%">
+              <col width="20%">
+              <col width="15%">
+              <col width="15%">
+              <col width="15%">
+              <col width="15%">
+            </colgroup>
+            <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
+              <tr style="height: 46px;">
+                <th class="u-table-cell"><span class="u-text-black">Nom de produits</span></th>
+                
+                  
+                <th class="u-table-cell">Le prix</th>
+                <th class="u-table-cell">Categorie<br></th>
+                
+                <th class="u-grey-25 u-table-cell u-table-cell-4"></th>
+                <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
+                <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
+              </tr>
+            </thead>
+            {% for prod in products %}
+            <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
+
+              <tr style="height: 60px;">
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodName}}</td>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodPrix}}<br>
+                </td>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodCat}}<br>
+                </td>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                  <form method="post">{% csrf_token %}
+                    {% if prod.isActive %} 
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #247c39 ; color : white">Active<br></button>
+                    {% else %}
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #ed450b ; color : white" >Disactiver<br></button>
+                      {% endif %}
+                  </form>
+                </td>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                  
+                  <form method="post" action="ajouterEditer-product">{% csrf_token %}
+                    <button  type="submit"  name="editPrd" value="{{prod.id}}" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" href="https://nicepage.com">Editer</button>
+                  </form>
+                  
+                </td>
+              
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                  <form method="post"  action="delete_product">{% csrf_token %}
+                  <button  type="submit"  type="submit" name="delete_prod" value={{prod.id}} class="icon-button2"><img class="icon-supprime" src="/static/img/3687412.png"/></button>
+                  </form >
+                </td>
+              </tr>
+
+              
+              
+
+              
+            </tbody>
+            {% endfor %}
+          </table>
+        </div>
+        <a href="ajouterEditer-product"><div class="text-center"><button class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 ajouter_button" type="submit" name="button_ajouter" >Ajouter Produit</button></div></a>
+      </div>
+    </section>
+    
+    
+ 
+  
+</body></html>
