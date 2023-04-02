@@ -65,6 +65,7 @@ def ajouterEditCommandView(request):
        
     
     if 'confEdit' in request.POST:
+        # if user chooses new command
         if request.POST['confEdit'] == 'newComm':
             # if request.POST.getlist('prodId_Qnt')
             comm = Command()

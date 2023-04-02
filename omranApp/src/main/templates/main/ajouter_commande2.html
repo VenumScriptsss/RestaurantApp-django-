@@ -111,7 +111,7 @@
         <div class="u-form u-form-1">
           <div class="u-form-group u-form-select u-label-none u-form-group-1">
             <label for="select-c85c" class="u-label">Dropdown</label>
-            <div class="u-form-select-wrapper" id="selectTableNumCont">
+            <div class="u-form-select-wrapper" id="selectTableNumCont" style="display:none">
               <select id="selectTableNum" name="tableNum"onchange="selectFunc(this.value)" class="u-input u-input-rectangle u-radius-10 u-white u-input-1" >
                 {% if pageType == 'Editer Command' %}
                   <option hidden value="{{comm.tableNum}}" selected></option>
@@ -189,9 +189,9 @@
                           {% for plt in comm.prods.all %}
                               <div  class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-center-xs u-container-style u-grey-10 u-group u-radius-15 u-shape-round u-group-7" id="commPlt{{plt.id}}">
                                 <div class="u-container-layout u-container-layout-9">
-                                  <a id="inceBtn{{plt.id}}" onclick="incrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-8"><span class="u-file-icon u-icon u-text-custom-color-2 u-icon-1"><img src="/static/img/8371357-627a9a0f.png" alt=""></span>
+                                  <a id="{{plt.id}},{{plt.prodPrix}}"  onclick="incrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-8"><span class="u-file-icon u-icon u-text-custom-color-2 u-icon-1"><img src="/static/img/8371357-627a9a0f.png" alt=""></span>
                                   </a>
-                                  <a id="decreBtn{{plt.id}}" onclick="decrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
+                                  <a id="{{plt.id}},{{plt.prodPrix}}" onclick="decrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
                                   </a>
                                   <img class="u-image u-image-round u-radius-10 u-image-2" src="{{plt.img.url}}" alt="" data-image-width="1280" data-image-height="800">
                                   <button  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
@@ -199,6 +199,7 @@
                                   <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-8">
                                       <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-10">
                                        <h4 class="u-align-center u-text u-text-4" id="commPltQnt{{plt.id}}">
+                                        
                                         {% for key,value in commQnt.items %}
                                           {% if key == plt.id %}
                                             {{value}}
@@ -214,12 +215,16 @@
                                   </h4>
                                 </div>
                               </div>
-                               <input hidden type="text" name="prodId_Qnt" value="{{plt.id}}"><!--fl value khass qnt -->
+                              {% for key,value in commQnt.items %}
+                                          {% if key == plt.id %}
+                                          <input hidden id="{{plt.id}}" type="text" name="prodId_Qnt" value="{{plt.id}},{{value}}">
+                                          {% endif %}
+                              {% endfor %}
                                
                         {% endfor %}
                         <input type="text" id="typeCommand" name="typeComm" value="-1" hidden>
                       </div>
-                      <div id="newPlats">
+                        <div id="newPlats">
                         </div>
                           {% if pageType == "Editer Command" %}
                                 <input hidden type="submit" id="formSubmit" name="confEdit" value="{{comm.id}}">
@@ -251,19 +256,11 @@
   
 </body>
 <script>
+  console.log(document.getElementById('11').value)
+  console.log(document.getElementById('13').value)
+
   function selectFunc(value){
     document.getElementById('typeCommand').value = value
-  }
-
-  function incrementBtn(platId){
-    platId = platId.split('inceBtn')[1]
-    qntField = document.getElementById('commPltQnt'+platId);
-    qntField.textContent = parseInt(qntField.textContent)+1;
-  }
-  function decrementBtn(platId){
-    platId = platId.split('decreBtn')[1]
-    qntField = document.getElementById('commPltQnt'+platId);
-    qntField.textContent = parseInt(qntField.textContent)-1;
   }
   function BtnEmporterEvent(){
     document.getElementById('emporterBtn').style='background-color:green'
@@ -277,12 +274,70 @@
   function BtnAtableEvent(){
     document.getElementById('selectTableNumCont').style='display:block'
   }
+
+  function incrementBtn(context){
+    var [platId,platPrix] = context.split(',')
+    commPrice = document.getElementById('commPriceTag')
+    commPricetxt = commPrice.textContent.split(' DA')
+    commPrxInput = document.getElementById('commPrixInput')
+
+    qntField = document.getElementById('commPltQnt'+platId);
+    qntField.textContent = parseInt(qntField.textContent)+1;
+
+    idQntinputVal = document.getElementById(platId)
+    document.getElementById(platId).value= platId+","+ qntField.textContent
+    console.log(document.getElementById(platId).value)
+    totalPrx = (parseInt(commPricetxt)+parseInt(platPrix))
+    commPrice.textContent = totalPrx+' DA'
+    document.getElementById('commPrixInput').value = totalPrx
+  }
+  function decrementBtn(context){
+    var [platId,platPrix] = context.split(',')
+    commPrice = document.getElementById('commPriceTag')
+    commPricetxt = commPrice.textContent.split(' DA')
+    commPrxInput = document.getElementById('commPrixInput')
+
+
+    qntField = document.getElementById('commPltQnt'+platId);
+    if (qntField.textContent == '1' ){
+      document.getElementById('commPlt'+platId).remove();
+      totalPrx = (parseInt(commPricetxt)-parseInt(platPrix))
+      commPrice.textContent = totalPrx+' DA'
+      document.getElementById('commPrixInput').value = totalPrx
+    }else{
+    qntField.textContent = parseInt(qntField.textContent)-1;
+
+    idQntinputVal = document.getElementById(platId)
+    document.getElementById(platId).value= platId+","+ qntField.textContent
+    console.log(document.getElementById(platId).value)
+    totalPrx = (parseInt(commPricetxt)-parseInt(platPrix))
+    commPrice.textContent = totalPrx+' DA'
+    document.getElementById('commPrixInput').value = totalPrx
+  }}
   
+  
+  function checkEmptyProdsList(){
+    elements = document.getElementsByTagName('*');
+    
+    for (var i = 0; i < elements.length; i++ ){
+      if (elements[i].id.startsWith('commPlt')){
+        console.log('found')
+        return false;
+      }
+      
+    }
+    return true;
+  }
+
   function submitTrigger(){
       selectValue = document.getElementById('selectTableNum')
-      document.getElementById('formSubmit').click();
+      if (checkEmptyProdsList()){
+        alert('il faux choisir des plats')
+      }
+      else{
+        document.getElementById('formSubmit').click();
+      }
       commForm = document.getElementById('commForm')
-      // console.log(document.getElementById('typeCommand').value)
     }
 
     function delePlt(divName){
@@ -297,28 +352,32 @@
       commPrxInput = document.getElementById('commPrixInput')
 
       if(document.getElementById('commPlt'+platId) != null){
+
         qntField = document.getElementById('commPltQnt'+platId);
         qntField.textContent = parseInt(qntField.textContent)+1;
         
-        idQntinputVal = document.getElementById('platIdQnt'+platId)
-        document.getElementById('platIdQnt'+platId).value= platId+","+(parseInt(idQntinputVal.value.split(',')[1])+1)
+        idQntinputVal = document.getElementById(platId)
+        document.getElementById(platId).value= platId+","+qntField.textContent
+        console.log(document.getElementById(platId).value)
         totalPrx = (parseInt(commPricetxt)+parseInt(platPrix))
         commPrice.textContent = totalPrx+' DA'
         document.getElementById('commPrixInput').value = totalPrx
       }else{
-        if(commPricetxt[0] == ' ' || commPricetxt[0] == ''){
-          commPrice.textContent = platPrix+' DA'
-          document.getElementById('commPrixInput').value = platPrix
-        }else{
-          commPrice.textContent = (parseInt(commPricetxt)+ parseInt(platPrix))+' DA'
-          document.getElementById('commPrixInput').value = (parseInt(commPricetxt)+ parseInt(platPrix))
-        }
+        form = document.getElementById('commForm')
+        prodIdQnt = document.createElement('input')
+        prodIdQnt.id = platId
+        prodIdQnt.type = 'text'
+        prodIdQnt.name = 'prodId_Qnt'
+        prodIdQnt.value = platId+',1'
+        prodIdQnt.setAttribute('hidden','')
+        form.appendChild(prodIdQnt);
+
         newPlts.innerHTML +=`<div  class="u-align-center-lg u-align-center-md u-align-center-sm u-align-center-xl u-align-center-xs u-container-style u-grey-10 u-group u-radius-15 u-shape-round u-group-7" id="commPlt`+platId+`">
                                 <div class="u-container-layout u-container-layout-9">
-                                  <a  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-8"><span class="u-file-icon u-icon u-text-custom-color-2 u-icon-1"><img src="/static/img/8371357-627a9a0f.png" alt=""></span>
-                                  </a>
-                                  <a  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
-                                  </a>
+                                  <a id="`+platId+`,`+platPrix+`"  onclick="incrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-8"><span class="u-file-icon u-icon u-text-custom-color-2 u-icon-1"><img src="/static/img/8371357-627a9a0f.png" alt=""></span>
+                                </a>
+                                <a id="`+platId+`,`+platPrix+`" onclick="decrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
+                                </a>
                                   <img class="u-image u-image-round u-radius-10 u-image-2" src="`+platImg+`" alt="" data-image-width="1280" data-image-height="800">
                                   <button onclick="delePlt('commPlt`+platId+`')" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
                                   </button>
@@ -333,8 +392,17 @@
                                   <h4 class="u-align-center-xxl u-text u-text-6">`+platName+` <br>
                                   </h4>
                                 </div>
-                              </div>
-                              <input id="platIdQnt`+platId+`" hidden type="text" name="prodId_Qnt" value="`+platId+`,1">`
+                              </div>`;
+
+
+
+        if(commPricetxt[0] == ' ' || commPricetxt[0] == ''){
+          commPrice.textContent = platPrix+' DA'
+          document.getElementById('commPrixInput').value = platPrix
+        }else{
+          commPrice.textContent = (parseInt(commPricetxt)+ parseInt(platPrix))+' DA'
+          document.getElementById('commPrixInput').value = (parseInt(commPricetxt)+ parseInt(platPrix))
+        }
     }
     }
 </script>
@@ -387,7 +455,7 @@ function update_category_list(value){
 function executeFunction(data) {
       
     products_list= document.getElementById("products_list");
-    window.print(products_list)
+    // window.print(products_list) hadi li tprintii
     $.ajax({
       type: 'POST',
       url: '/search_product_function',
@@ -409,8 +477,6 @@ function executeFunction(data) {
                         </div>
                       </div>`
 
-
-    
    } 
    products_list.innerHTML=s     
     
