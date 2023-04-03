@@ -92,9 +92,9 @@
                   {% else %}
                     <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
                   {% endif%}
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm}}<br>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|date:'d-m-Y'}}<br>
                   </td>
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}}<br>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}} DA<br>
                   </td>    
                   <form method="post" action="editer-command">{% csrf_token %}
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">

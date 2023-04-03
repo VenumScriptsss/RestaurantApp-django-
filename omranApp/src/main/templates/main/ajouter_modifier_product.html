@@ -78,7 +78,8 @@
     }
 
     form {
-        margin: 0 auto;
+        margin-left: 50%;
+        transform: translate(-50%);
         width: 50%;
         max-width: 500px;
         background-color: #fff;
@@ -133,7 +134,7 @@
 
 {% block body %}
 <h1 style="text-align:center;">Product Creation Form</h1>
-<form method="POST"  enctype="multipart/form-data">
+<form method="POST"  enctype="multipart/form-data" style="">
     {% csrf_token %}
     <label for="name">Product Name:</label>
     {%if editing is True%} 
@@ -156,9 +157,9 @@
   
       <select id="category" name="category" required>
           <option value="">Select Category</option>
-          <option value="Traditionelle">Traditionelle</option>
-          <option value="Modern">Modern</option>
-          <option value="Boissant">Boissant</option>
+          <option value="1">Traditionelle</option>
+          <option value="2">Modern</option>
+          <option value="3">Boissant</option>
       </select>
     {% if editing is True%}
       <script>
@@ -189,7 +190,7 @@
           <input type="checkbox" name="active" value="on">
           <span class="slider round"></span>
         </label>
-        <span class="switch-label">is active</span>
+        <span class="switch-label">activer</span>
       </div>
       {% if prod.isActive is True %}
         <script>
@@ -203,12 +204,14 @@
       {% endif %}
 
       <br>
+      <div style="margin-left:50%;transform:translate(-25%)">
     {% if editing is True%}
        <input type="text" style="display: none;" value="{{prod.id}}" name="id">
       <input type="submit" value="Submit" name="confirmEdit">
     {% else %}  
       <input type="submit" value="Submit" name="ajouterPrd">
     {%endif%}
+  </div>
 </form>
 <script>
 

@@ -56,21 +56,27 @@
                 <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
               </tr>
             </thead>
-            {% for prod in products %}
+            
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
-
+              {% for prod in products %}
               <tr style="height: 60px;">
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodName}}</td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodPrix}}<br>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodPrix}} DA<br>
                 </td>
-                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodCat}}<br>
+                <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                  {% for cat in catList %}
+                    {% if forloop.counter == prod.prodCat %}
+                      {{cat}}
+                    {% endif %}
+                  {% endfor %}
+                  <br>
                 </td>
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                   <form method="post">{% csrf_token %}
                     {% if prod.isActive %} 
-                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #247c39 ; color : white">Active<br></button>
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #ed450b ; color : white">Disactiver<br></button>
                     {% else %}
-                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #ed450b ; color : white" >Disactiver<br></button>
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #247c39; color : white" >Activer<br></button>
                       {% endif %}
                   </form>
                 </td>
@@ -84,24 +90,35 @@
               
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                   <form method="post"  action="delete_product">{% csrf_token %}
-                  <button  type="submit"  type="submit" name="delete_prod" value={{prod.id}} class="icon-button2"><img class="icon-supprime" src="/static/img/3687412.png"/></button>
+                    <button value="{{prod.id}}" onclick="deleProd(this.value)" type="button" class="icon-button2"><img class="icon-supprime" src="/static/img/3687412.png"/></button>
+                    <input id="deleBtn{{prod.id}}" hidden type="submit"  name="delete_prod" value={{prod.id}}>
                   </form >
                 </td>
               </tr>
-
-              
-              
-
-              
+              {% endfor %}
             </tbody>
-            {% endfor %}
+            
           </table>
         </div>
         <a href="ajouterEditer-product"><div class="text-center"><button class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 ajouter_button" type="submit" name="button_ajouter" >Ajouter Produit</button></div></a>
       </div>
     </section>
     
-    
+    <script>
+      function deleProd(prodId){
+        console.log(prodId)
+        choice = confirm('voulez vous vraiment supprimer ce produit ?')
+
+        if(choice){
+          console.log('true')
+          document.getElementById('deleBtn'+prodId).click();
+        }
+        else{
+          console.log('false')
+        }
+      }
+
+    </script>
  
   
 </body></html>
