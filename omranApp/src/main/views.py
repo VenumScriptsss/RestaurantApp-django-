@@ -59,7 +59,7 @@ def apply_function(request):
         comnd=Command.objects.get(id=id_)
         comnd.encaisser=True
         comnd.save()
-    return render(request,"main/caissierAdmin.html")
+    return render(request,"main/home.html")
 
 
 #-------------ajouter/editer command----------------lzm tedkhel mn caissier wdir edit w ab3at lform bch tbanlk
@@ -80,6 +80,7 @@ def ajouterEditCommandView(request):
        
     
     if 'confEdit' in request.POST:
+        # if user chooses new command
         if request.POST['confEdit'] == 'newComm':
             # if request.POST.getlist('prodId_Qnt')
             comm = Command()
@@ -104,15 +105,27 @@ def ajouterEditCommandView(request):
         else:
             comm = Command.objects.get(id = request.POST['confEdit'])
             print(request.POST)
-            for prod in request.POST:
-                if prod in ['csrfmiddlewaretoken','confEdit','number']:
-                    continue
-                
-                prod = Products.objects.get(id=request.POST[prod])
-                comm.prods.add(prod)
-                
-                comm.commPrice+= prod.prodPrix
-            comm.save()
+            for prod in request.POST.getlist('prodId_Qnt'):
+                id_qnt = prod.split(',')
+                plat = Products.objects.get(id=id_qnt[0])
+                comm.prods.add(plat)
+                prodQnt = eval(comm.prods_quantity)
+                if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
+                    print('flaged')
+                    if request.session['userType'] != '1':
+                        comm.flaged == True
+                prodQnt.update({int(id_qnt[0]):id_qnt[1]})
+                comm.prods_quantity = str(prodQnt)
+            comm.commPrice = request.POST['commPrix']
+            print(request.POST)    
+            if request.POST['typeComm'] == 'emporter':
+                comm.commType = '1'
+                comm.tableNum = '-1'
+            else:                
+                comm.commType = '2'
+                comm.tableNum = request.POST['typeComm']
+            comm.save()    
+            return redirect('home')
     if 'cat' in request.POST:
         print(request.POST['cat'])
         if request.POST['cat'] == 'trad':
@@ -134,7 +147,7 @@ def ajouter_modifier_product(request):
     if 'ajouterPrd' in request.POST:
         product_name = request.POST.get('name')
         price = float(request.POST.get('price'))
-        category = request.POST.get('category')
+        category = int(request.POST.get('category'))
         is_active = request.POST.get('active')
         image = request.FILES.get('image')
     
@@ -169,7 +182,7 @@ def ajouter_modifier_product(request):
         prod.isActive=request.POST.get('active')=='on'
         prod.save()
       
-        return redirect('editer-products')        
+        return redirect('home')        
 
     return render(request, "main/ajouter_modifier_product.html",context)
 
@@ -178,6 +191,7 @@ def editProdsView(request):
     prods = Products.objects.all().order_by('prodName')
     
     context['products'] = prods
+    context['catList'] = ['Traditionel', 'Modern', 'Autres'] 
     if 'act-dis' in request.POST:
         prod = Products.objects.get(id=request.POST['act-dis'])
         prod.isActive = not prod.isActive
@@ -189,8 +203,8 @@ def delete_product(request):
     context = {}
     
     if 'delete_prod' in request.POST:
-        print('done')
         Products.objects.get(id=request.POST['delete_prod']).delete()
+        return redirect('editer-products')
     prods = Products.objects.all()
     context['products'] = prods
     return render(request,"main/products2.html",context)
