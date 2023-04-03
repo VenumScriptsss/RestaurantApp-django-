@@ -1,9 +1,10 @@
 body{
     height: 100%;
+   
 }
 
 .tableDiv{
-    margin-top: 5em;
+    
     padding:2em;
     padding-left: 1em;
     max-height: 70%;

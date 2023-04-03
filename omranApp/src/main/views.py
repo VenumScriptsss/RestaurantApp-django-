@@ -124,7 +124,7 @@ def ajouterEditCommandView(request):
 
         # context['prods'] = Products.objects.get(prodCat = request.POST['cat'])
 
-    return render(request,"main/ajouter_commande.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
+    return render(request,"main/ajouter_commande2.html",context) #lazm nzid redirect ll prev page w hadi lzmha session bch na3raf type ta3 luser
     """ return render(request,"main/ajouterEditerComm.html",context) """
 
 
@@ -169,7 +169,7 @@ def ajouter_modifier_product(request):
         prod.isActive=request.POST.get('active')=='on'
         prod.save()
       
-        return redirect('caissierAdmin')        
+        return redirect('editer-products')        
 
     return render(request, "main/ajouter_modifier_product.html",context)
 
@@ -182,7 +182,7 @@ def editProdsView(request):
         prod = Products.objects.get(id=request.POST['act-dis'])
         prod.isActive = not prod.isActive
         prod.save()
-    return render(request,"main/products.html",context)
+    return render(request,"main/products2.html",context)
 
 def delete_product(request):
 
@@ -193,7 +193,7 @@ def delete_product(request):
         Products.objects.get(id=request.POST['delete_prod']).delete()
     prods = Products.objects.all()
     context['products'] = prods
-    return render(request,"main/products.html",context)
+    return render(request,"main/products2.html",context)
 
 
 @csrf_exempt
@@ -233,7 +233,7 @@ def homeView(request):
     return render(request,'main/home.html',context)
     
 #----------------------------history--------------------------
-@my_login_required
+
 def history(request):
     context={}
     commnds=Command.objects.all().values()
@@ -248,8 +248,9 @@ def history(request):
     df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
     df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
     df['commType'] = df['commType'].replace({2: True, 1: False})
-    df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
-    df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
+    #df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
+    #df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
+    df['prods_quantity']=df['prods_quantity'].apply(lambda x :prods_quantity(x))
     context['commands']=df.to_dict("records")
     
     l=[]
