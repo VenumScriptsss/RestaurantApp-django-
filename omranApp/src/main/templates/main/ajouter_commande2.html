@@ -194,7 +194,7 @@
                                   <a id="{{plt.id}},{{plt.prodPrix}}" onclick="decrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
                                   </a>
                                   <img class="u-image u-image-round u-radius-10 u-image-2" src="{{plt.img.url}}" alt="" data-image-width="1280" data-image-height="800">
-                                  <button id="{{plt.prodPrix}}" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10" onclick="delePlt('commPlt{{plt.id}}',this.id)"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
+                                  <button id="{{plt.prodPrix}},{{plt.id}}" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10" onclick="delePlt('commPlt{{plt.id}}',this.id)"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
                                   </button>
                                   <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-8">
                                       <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-10">
@@ -220,6 +220,7 @@
                                           <input hidden id="{{plt.id}}" type="text" name="prodId_Qnt" value="{{plt.id}},{{value}}">
                                           {% endif %}
                               {% endfor %}
+                              
                                
                         {% endfor %}
                         <input type="text" id="typeCommand" name="typeComm" value="-1" hidden>
@@ -260,6 +261,7 @@
   function selectFunc(value){
     document.getElementById('typeCommand').value = value
   }
+
   function BtnEmporterEvent(){
     document.getElementById('emporterBtn').style='background-color:green'
     document.getElementById('aTableBtn').style='background-color:gray'
@@ -289,6 +291,7 @@
     commPrice.textContent = totalPrx+' DA'
     document.getElementById('commPrixInput').value = totalPrx
   }
+
   function decrementBtn(context){
     var [platId,platPrix] = context.split(',')
     commPrice = document.getElementById('commPriceTag')
@@ -319,7 +322,6 @@
     
     for (var i = 0; i < elements.length; i++ ){
       if (elements[i].id.startsWith('commPlt')){
-        console.log('found')
         return false;
       }
       
@@ -338,8 +340,12 @@
       commForm = document.getElementById('commForm')
     }
 
-    function delePlt(divName,platPrix){
-      document.getElementById(divName).remove();
+    function delePlt(divName,context){
+      var [platPrix,platId] = context.split(',')
+      document.getElementById(divName).remove()//= 'background-color:red';
+      idQntinputVal = document.getElementById(platId)
+      document.getElementById(platId).value= platId+",0"
+      console.log(document.getElementById(platId).value)
 
       commPrice = document.getElementById('commPriceTag')
       commPricetxt = commPrice.textContent.split(' DA')
@@ -347,6 +353,7 @@
       totalPrx = (parseInt(commPricetxt)-parseInt(platPrix))
       commPrice.textContent = totalPrx+' DA'
       document.getElementById('commPrixInput').value = totalPrx
+      console.log(document.getElementById('commPrixInput').value)
     }
 
     function insertNewPlats(value){

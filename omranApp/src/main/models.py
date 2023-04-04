@@ -51,9 +51,10 @@ class Command(models.Model):
     encaisser = models.BooleanField(verbose_name='status d encaissemnt',default=False)
     encaissementTime = models.DateTimeField(auto_now_add=True,verbose_name='temps encaissement')
     flaged = models.BooleanField(verbose_name='modification au command',default=False)
+    flaged_prods=models.CharField(max_length=750,default="{}")
     commPrice = models.IntegerField(verbose_name='prix total command',default=0,null=False)
     prods_quantity=models.CharField(max_length=750,default="{}")
-    
+
 
     def __str__(self):
         return str(self.id)
