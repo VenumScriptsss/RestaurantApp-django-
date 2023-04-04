@@ -194,7 +194,7 @@
                                   <a id="{{plt.id}},{{plt.prodPrix}}" onclick="decrementBtn(this.id)" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-9"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/4561935.png" alt=""></span>
                                   </a>
                                   <img class="u-image u-image-round u-radius-10 u-image-2" src="{{plt.img.url}}" alt="" data-image-width="1280" data-image-height="800">
-                                  <button  class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10" onclick="delePlt('commPlt{{plt.id}}')"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
+                                  <button id="{{plt.prodPrix}}" class="u-align-center u-border-none u-btn u-button-style u-none u-btn-10" onclick="delePlt('commPlt{{plt.id}}',this.id)"><span class="u-file-icon u-icon u-icon-3"><img src="/static/img/3687412.png" alt=""></span>
                                   </button>
                                   <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-8">
                                       <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-xl u-container-layout-10">
@@ -256,8 +256,6 @@
   
 </body>
 <script>
-  console.log(document.getElementById('11').value)
-  console.log(document.getElementById('13').value)
 
   function selectFunc(value){
     document.getElementById('typeCommand').value = value
@@ -340,8 +338,15 @@
       commForm = document.getElementById('commForm')
     }
 
-    function delePlt(divName){
+    function delePlt(divName,platPrix){
       document.getElementById(divName).remove();
+
+      commPrice = document.getElementById('commPriceTag')
+      commPricetxt = commPrice.textContent.split(' DA')
+      commPrxInput = document.getElementById('commPrixInput')
+      totalPrx = (parseInt(commPricetxt)-parseInt(platPrix))
+      commPrice.textContent = totalPrx+' DA'
+      document.getElementById('commPrixInput').value = totalPrx
     }
 
     function insertNewPlats(value){

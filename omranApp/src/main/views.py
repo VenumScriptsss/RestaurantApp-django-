@@ -110,10 +110,11 @@ def ajouterEditCommandView(request):
                 plat = Products.objects.get(id=id_qnt[0])
                 comm.prods.add(plat)
                 prodQnt = eval(comm.prods_quantity)
-                if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
-                    print('flaged')
-                    if request.session['userType'] != '1':
-                        comm.flaged == True
+                if int(id_qnt[0]) in prodQnt:
+                    if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
+                        print('flaged')
+                        if request.session['userType'] != '1':
+                            comm.flaged == True
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
