@@ -87,6 +87,8 @@ def ajouterEditCommandView(request):
             comm.save()
             for prod in request.POST.getlist('prodId_Qnt'):
                 id_qnt = prod.split(',')
+                if id_qnt[1] == '0':
+                    continue
                 plat = Products.objects.get(id=id_qnt[0])
                 comm.prods.add(plat)
                 prodQnt = eval(comm.prods_quantity)
