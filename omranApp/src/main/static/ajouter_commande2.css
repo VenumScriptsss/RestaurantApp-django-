@@ -126,12 +126,14 @@
   margin-top: 10px;
   margin-bottom: 0;
   height: auto;
+  
 }
 
 .u-section-1 .u-container-layout-5 {
   
   padding: 30px 15px;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
   margin: 10px;
   
 

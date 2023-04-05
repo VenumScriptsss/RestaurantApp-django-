@@ -87,6 +87,8 @@ def ajouterEditCommandView(request):
             comm.save()
             for prod in request.POST.getlist('prodId_Qnt'):
                 id_qnt = prod.split(',')
+                if id_qnt[1] == '0':
+                    continue
                 plat = Products.objects.get(id=id_qnt[0])
                 comm.prods.add(plat)
                 prodQnt = eval(comm.prods_quantity)
@@ -110,11 +112,23 @@ def ajouterEditCommandView(request):
                 plat = Products.objects.get(id=id_qnt[0])
                 comm.prods.add(plat)
                 prodQnt = eval(comm.prods_quantity)
-                if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
-                    print('flaged')
-                    if request.session['userType'] != '1':
-                        comm.flaged == True
+                if int(id_qnt[0]) in prodQnt:
+                    if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
+                        if request.session['userType'] != '1':
+                            print('flaged')
+                            comm.flaged = True
+                            deletedProdNum =  int(prodQnt[int(id_qnt[0])]) - int(id_qnt[1])
+                            flagedProds =eval(comm.flaged_prods)
+                            flagedProds.update({int(id_qnt[0]):deletedProdNum})
+                            comm.flaged_prods = str(flagedProds)
+
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
+                print(prodQnt)
+                if prodQnt[int(id_qnt[0])] == '0':
+                    prodQnt.pop(int(id_qnt[0]))
+                    print('poped')
+                    comm.prods.remove(Products.objects.get(id=int(id_qnt[0])))
+                print(prodQnt)    
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
             print(request.POST)    
