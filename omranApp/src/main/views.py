@@ -252,13 +252,50 @@ def update_category_list(request):
         context={"data":result_list}
         return JsonResponse(context)
 
+#--------------------------home------------------------------
 @my_login_required
 def homeView(request):
-    print(request.session['userType'])
-    comnd=Command.objects.all()
+    context={}
+    commnds=Command.objects.all().values()
+    df=pd.DataFrame(commnds)
+
+    prods=pd.DataFrame(Products.objects.all().values())
     
-    context = {"commands":comnd,'userType':request.session['userType']}
+    prod_price={}
+    for i,j in zip(prods['prodName'],prods['prodPrix']):
+        prod_price[i]=j
+
+    #df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
+    #df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
+    #df['commType'] = df['commType'].replace({2: True, 1: False})
+    #df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
+    #df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
+    df['prods_quantity']=df['prods_quantity'].apply(lambda x :prods_quantity(x))
+    context['commands']=df.to_dict("records")
+    
+    l=[]
+    for i in df['id']:
+            l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
+            #l.append(list(Command.objects.filter(id=i).first().prods.all()))
+    for i, d in enumerate(context['commands']):
+                    subject = l[i]
+                    d['prodNames'] = subject
+    context['prod_price']=prod_price
+    context['userType']=request.session['userType']
+    print(context)
     return render(request,'main/home.html',context)
+
+
+@csrf_exempt
+def encaicement(request):
+   
+    if request.method == 'POST':
+       print(f"my data = {request.POST.get('id')}")
+       id=request.POST.get('id')
+       cmnd=Command.objects.filter(id=id).first()
+       cmnd.encaisser=True
+       cmnd.save()
+    return JsonResponse({})
     
 #----------------------------history--------------------------
 
@@ -341,3 +378,7 @@ def history_submit(request):
         print(context)
         return JsonResponse(context)
 
+#--------------------------------------------------------
+
+def test(request):
+    return render(request, 'main\\test.html',context={})
