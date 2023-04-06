@@ -8,6 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'nicepage.css' %}" media="screen">
 <link rel="stylesheet" href="{% static 'ajouter_commande2.css' %}"  media="screen">
+<link rel="stylesheet" href="{% static 'header.css' %}"  media="screen">
 <script class="u-script" type="text/javascript" src="/static/jquery(2).js" defer=""></script>
 <script class="u-script" type="text/javascript" src="/static/nicepage(2).js" defer=""></script>
     <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
@@ -19,9 +20,8 @@
         min-height: 1000px;
         max-height: 1100px;
         margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 0;
         height: auto;
-        justify-content: center;
         
       }
       .u-section-1 .u-container-layout-8 {
@@ -34,8 +34,7 @@
         
       .u-section-1 .u-container-layout-5 {
         
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: auto;
         margin: 10px;  }
       
 
@@ -53,7 +52,7 @@
         justify-content: center;  }
       
         .u-section-1 .u-group-5 {
-        width: 90%;
+        width: 430px;
         height: 110px;
         margin-top: 10px;
         margin-left: auto;
@@ -69,20 +68,20 @@
           padding-top: 15px;
           padding-bottom: 15px;}}
     
+      @media (max-width: 767px) {
+      .u-section-1 .u-group-5 {
+        width: 500px;}}
     
     @media (max-width: 575px) {
       .u-section-1 .u-group-5 {
-        width:110%;
+        width: 410px;
         height: 110px;
         margin-top: 10px;
-        left: -5%;
-        right: auto;
+        margin-left: auto;
+        margin-right: auto;
         display: block; }
-
         
             }
-
-          
 
     </style>
     
@@ -96,24 +95,20 @@
     <meta property="og:title" content="ajouter_commande">
     <meta property="og:type" content="website">
   <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
-  <body class="u-body u-xxl-mode" data-lang="en"><header class="u-clearfix u-grey-10 u-header u-header" id="sec-0b00"><div class="u-clearfix u-sheet u-sheet-1">
-    <a class="u-align-right u-image u-logo u-image-1" data-image-width="80" data-image-height="40">
-      <img src="/static/img/default-logo.png" class="u-logo-image u-logo-image-1">
-    </a>
-    <a href="home" class="u-align-left u-border-hover-grey-75 u-border-none u-btn u-button-style u-none u-btn-1"><span class="u-file-icon u-icon u-text-custom-color-1 u-icon-1"><img src="/static/img/318477-d74e274b.png" alt=""></span>
-      <br>
-    </a>
-  </div></header> 
+  <body class="u-body u-xxl-mode" data-lang="en">
+
+    {% include 'header.html' %}
 <section class="u-clearfix u-grey-10 u-section-1" id="sec-b75f">
   <div class="u-clearfix u-sheet u-sheet-1">
-    <div class="u-container-style u-expanded-width-xl u-expanded-width-xxl u-grey-5 u-group u-opacity u-opacity-90 u-radius-14 u-shape-round u-group-1">
+    <div class="u-container-style u-expanded-width-xl u-expanded-width-xxl u-grey-5 u-group u-opacity u-opacity-90 u-radius-14 u-shape-round u-group-1" >
       <div class="u-container-layout u-container-layout-1">
-        <button id="emporterBtn" class="u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-1" onclick="BtnEmporterEvent()"> Emporter </button>
-        <button id="aTableBtn"  class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-radius-15 u-btn-2"  onclick="BtnAtableEvent()">A table</button>
+        <button id="emporterBtn" class="u-border-none u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-1" onclick="BtnEmporterEvent()" style="background-color: #268905;"> Emporter </button>
+        <button id="aTableBtn"  class="u-border-none u-btn-round u-button-style u-custom-color-2 u-radius-15 u-btn-2"  onclick="BtnAtableEvent()" style="background-color: #858e99;">A table</button>
+     
+             
         
-            
-            
-        <div class="u-form u-form-1">
+        
+        <div class="u-form-1" >
           <div class="u-form-group u-form-select u-label-none u-form-group-1">
             <label for="select-c85c" class="u-label">Dropdown</label>
             <div class="u-form-select-wrapper" id="selectTableNumCont" style="display:none">
@@ -130,9 +125,12 @@
               <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
             </div>
           </div>
+          
 
-      </div>
-          </div>
+        </div>
+        
+        
+        </div>
         </div>
 
         <div class="u-clearfix u-gutter-18 u-layout-wrap u-layout-wrap-1">
@@ -153,9 +151,9 @@
                   <div class="u-container-style u-expanded-width-xs u-group u-shape-rectangle u-group-3">
                     <div class="u-container-layout u-container-layout-4">
                     
-                      <button type="submit" name="cat" value="1" onclick="update_category_list(this.value)" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-4"> &nbsp;traditional</button>
-                      <button type="submit" name="cat" value="2" onclick="update_category_list(this.value)" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-5">fast food</button>
-                      <button type="submit" name="cat" value="3" onclick="update_category_list(this.value)" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-6">les autres</button>
+                      <button type="submit" id="category_1" name="cat" value="1" onclick="update_category_list(this.value)" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-4"> &nbsp;traditional</button>
+                      <button type="submit" id="category_2" name="cat" value="2" onclick="update_category_list(this.value)" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-5">fast food</button>
+                      <button type="submit" id="category_3" name="cat" value="3" onclick="update_category_list(this.value)" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-6">les autres</button>
                     
                     </div>
                   </div>
@@ -268,14 +266,16 @@
   }
 
   function BtnEmporterEvent(){
-    document.getElementById('emporterBtn').style='background-color:green'
-    document.getElementById('aTableBtn').style='background-color:gray'
+    document.getElementById('emporterBtn').style='background-color:#268905'
+    document.getElementById('aTableBtn').style='background-color:#858e99'
 
     document.getElementById('typeCommand').value="emporter"
     document.getElementById('selectTableNumCont').style='display:none'
   }
-
+  
   function BtnAtableEvent(){
+    document.getElementById('emporterBtn').style='background-color:#858e99'
+    document.getElementById('aTableBtn').style='background-color:#268905'
     document.getElementById('selectTableNumCont').style='display:block'
   }
 
@@ -423,6 +423,14 @@
 
 <script>
 function update_category_list(value){
+  document.getElementById('category_1').style='background-color:#858e99'
+  document.getElementById('category_2').style='background-color:#858e99'
+  document.getElementById('category_3').style='background-color:#858e99'
+  
+  if (value === "1") {document.getElementById('category_1').style='background-color:#edbc0b'}
+  if (value === "2") {document.getElementById('category_2').style='background-color:#edbc0b'}
+  if (value === "3") {document.getElementById('category_3').style='background-color:#edbc0b'}
+  
   
   products_list= document.getElementById("products_list");
  $.ajax({
