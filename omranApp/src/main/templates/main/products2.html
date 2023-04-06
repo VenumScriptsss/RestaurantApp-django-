@@ -129,7 +129,7 @@
                 <th class="u-table-cell">Le prix</th>
                 <th class="u-table-cell">Categorie<br></th>
                 
-                <th class="u-grey-25 u-table-cell u-table-cell-4"></th>
+                <th class="u-grey-25 u-table-cell u-table-cell-4">Status</th>
                 <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
                 <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
               </tr>
@@ -151,8 +151,8 @@
                 </td>
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                   <form method="post">{% csrf_token %}
-                    {% if prod.isActive %} 
-                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #ed450b ; color : white">Disactiver<br></button>
+                    {% if not prod.isActive %} 
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #ed450b ; color : white">disActiver<br></button>
                     {% else %}
                       <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #247c39; color : white" >Activer<br></button>
                       {% endif %}

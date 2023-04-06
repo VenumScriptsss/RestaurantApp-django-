@@ -196,7 +196,7 @@ def ajouter_modifier_product(request):
         prod.isActive=request.POST.get('active')=='on'
         prod.save()
       
-        return redirect('home')        
+        return redirect('editer-products')        
 
     return render(request, "main/ajouter_modifier_product.html",context)
 
