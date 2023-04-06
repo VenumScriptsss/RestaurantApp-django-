@@ -151,7 +151,7 @@
                   <div class="u-container-style u-expanded-width-xs u-group u-shape-rectangle u-group-3">
                     <div class="u-container-layout u-container-layout-4">
                     
-                      <button type="submit" id="category_1" name="cat" value="1" onclick="update_category_list(this.value)" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-4"> &nbsp;traditional</button>
+                      <button type="submit" id="category_1" name="cat" value="1" onclick="update_category_list(this.value)" class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-align-left-xxl u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-radius-15 u-btn-4" style="background-color:#858e99 ; color: white;"> &nbsp;traditional</button>
                       <button type="submit" id="category_2" name="cat" value="2" onclick="update_category_list(this.value)" class="u-align-center u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-5">fast food</button>
                       <button type="submit" id="category_3" name="cat" value="3" onclick="update_category_list(this.value)" class="u-align-right u-border-none u-btn u-btn-round u-button-style u-palette-5-dark-1 u-radius-15 u-btn-6">les autres</button>
                     
@@ -423,11 +423,11 @@
 
 <script>
 function update_category_list(value){
-  document.getElementById('category_1').style='background-color:#858e99'
+  document.getElementById('category_1').style='background-color:#858e99; color: white;'
   document.getElementById('category_2').style='background-color:#858e99'
   document.getElementById('category_3').style='background-color:#858e99'
   
-  if (value === "1") {document.getElementById('category_1').style='background-color:#edbc0b'}
+  if (value === "1") {document.getElementById('category_1').style='background-color:#edbc0b;color: white;'}
   if (value === "2") {document.getElementById('category_2').style='background-color:#edbc0b'}
   if (value === "3") {document.getElementById('category_3').style='background-color:#edbc0b'}
   
