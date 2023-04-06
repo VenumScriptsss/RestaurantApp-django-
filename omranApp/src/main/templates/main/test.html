@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="liste des commandes">
+    <meta name="description" content="">
+    <title>moled_list</title>
+    <link rel="stylesheet" href="model_01.css" media="screen">
+    
+
+    <meta name="generator" content="Nicepage 5.7.9, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <meta name="theme-color" content="#f05510">
+    <meta property="og:title" content="moled_list">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+
+
+  <body class="" data-lang="en">
+
+        <button id="myBtn" class="clicked_button">Button</button>
+        <div id="myModal" class="general_div">
+            <div class="myModel">
+                <div class="head"><h3 class="title">liste des commandes</h3>
+                    <button id="closedButton" class="closeButton"><img class="iconClose" src="images/657059.png" alt="">
+                    </button>
+                </div>    
+                
+                <div class="div_table">
+                        <table class="table">
+                        <colgroup>
+                            <col width="55%">
+                            <col width="15%">
+                            <col width="30%">
+                        </colgroup>
+                        <tbody class="">
+                            <tr style="height: 40px;">
+                            <td class="">plat pizza</td>
+                            <td class="">2</td>
+                            <td class="">2500.00 DA</td>
+                            </tr>
+                            <tr style="height: 40px;">
+                            <td class="">shawarma</td>
+                            <td class="">2</td>
+                            <td class="">500.00 DA</td>
+                            </tr>
+                            
+                        </tbody>
+                        <tfoot >
+                            <tr class="border-bottom">
+                            <td  >TOTAL<span style="font-weight: 700;"></span></td>
+                            <td  colspan="2">250000.00 DA</td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                </div >
+                <div class="test">
+                    <button class="confermedButton">Encaisser</button><br>
+                    <button  class="confermedButton"> Imprimer et encaisser</button></div>
+            
+                </div>
+
+        </div>
+    </section>
+    
+    <script>
+    var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var closedButton = document.getElementById("closedButton");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "flex";
+}
+
+// When the user clicks on <span> (x), close the modal
+    closedButton.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+<div id="printable-content">
+  <h1>hello world</h1>
+</div>
+
+<button onclick="printer()">Print Div</button>
+
+
+<script>
+    function printer(){
+    
+   
+    var popupWindow = window.open('test', '_blank', 'width=600,height=400');
+      popupWindow.document.write('<html><head><title>Print Div</title>');
+      popupWindow.document.write('<link rel="stylesheet" href="/path/to/your/stylesheet.css">');
+      popupWindow.document.write('</head><body>');
+      popupWindow.document.write("<h1> hello nigga </h1>");
+      popupWindow.document.write('</body></html>');
+      popupWindow.document.close();
+      popupWindow.focus();
+      popupWindow.print();
+      popupWindow.close();
+      popupWindow.addEventListener('load', function() {
+          popupWindow.print();
+          popupWindow.close();
+      }, true);
+      
+ 
+    
+  }
+</script>
+</body></html>

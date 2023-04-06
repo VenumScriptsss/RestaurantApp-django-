@@ -19,9 +19,69 @@
   <script class="u-script" type="text/javascript" src="{% static 'home_jquery.js' %}" defer=""></script>
   <script class="u-script" type="text/javascript" src="{% static 'home_nicepage.js' %}" defer=""></script>
   <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
+  <style>
+    
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
   
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-  
+  <style>
+    .test{
+        margin-top: 5px;
+        text-align: center;
+    }
+    .confermedButton{
+        padding: 0px 15px;
+        height: 42px;
+        font-size: 16px;
+        margin: 5px auto;
+        vertical-align: middle;
+        border-radius: 10px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+  </style>
   
   <script type="application/ld+json">{
   "@context": "http://schema.org",
@@ -104,7 +164,7 @@
                 </form>
               {% if userType == '1' or userType == '2' %}
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <button name="encaissment" value={{comm.id}} onclick="removeComm(this.value)" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" >encaisser</button>
+                    <button name="encaissment"   class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5"onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})"">encaisser</button>
                 </td>
               {% endif %}
                 </tr>
@@ -121,9 +181,174 @@
     
     
  <script>
+
   function removeComm(obj){
         document.getElementById("commTr_"+obj).remove();
+        closeModal(obj)
+
+        $.ajax({
+          url: '/encaicement',
+          type: 'POST',
+          data:{'id':obj},
+          success: function(response) {},
+          error: function(xhr, status, error) {}
+
+        })
     };
  </script>
+ 
+ <script>
+  function printer(s){
+       console.log(s)
+   
+      var popupWindow = window.open('home', '_blank', 'width=600,height=400');
+        popupWindow.document.write('<html><head><title>Print Div</title>');
+        popupWindow.document.write('<link rel="stylesheet" href="/path/to/your/stylesheet.css">');
+        popupWindow.document.write('</head><body>');
+        popupWindow.document.write("<h1> hello </h1>");
+        popupWindow.document.write('</body></html>');
+        popupWindow.document.close();
+        popupWindow.focus();
+        popupWindow.print();
+        popupWindow.close();
+        popupWindow.addEventListener('load', function() {
+            popupWindow.print();
+            popupWindow.close();
+        }, true);
+        
+   
+      
+    }
+</script>
+</div>
+
+<!-------------------------------------------------------->
+
+ <script>
+  function openModal(prodNames,buttonId,price,prods_quant,prod_price) {
+   
+  
+
+    // Get the modal element
+    var modal = document.getElementById(buttonId+ "-modal");
+  
+    // If the modal doesn't exist, create it
+    if (!modal) {
+      modal = document.createElement("div");
+      //modal.style="width:50%;"
+      modal.id = buttonId + "-modal";
+      modal.classList.add("modal");
+  
+      // Add some content to the modal
+      var modalContent = document.createElement("div");
+      modalContent.classList.add("modal-content");
+      modal.appendChild(modalContent);
+  
+      var modalHeader = document.createElement("h2");
+      modalHeader.textContent = "La liste" ;
+      modalContent.appendChild(modalHeader);
+  
+      var modalText = document.createElement("p");
+      //modalText.textContent = "<br>Modal text " + buttonId+' ';
+      s=`<style>
+                        /* Style the table with the 'command-table' class */
+                        table.command-table {
+                          border-collapse: collapse;
+                          width: 100%;
+                          max-width: 500px;
+                          margin: 0 auto;
+                        }
+                        
+                        /* Style the table header */
+                        table.command-table th {
+                          background-color: #f2f2f2;
+                          color: #555;
+                          font-weight: bold;
+                          text-align: center;
+                          padding: 10px;
+                        }
+                        
+                        /* Style the table rows */
+                        table.command-table tr {
+                          border-bottom: 1px solid #ddd;
+                          
+                        }
+                        
+                        /* Style the table data */
+                        table.command-table td {
+                          padding: 10px;
+                          text-align: center;
+                        }
+                        
+                        /* Style the first row differently */
+                        table.command-table tr:first-child {
+                          font-weight: bold;
+                        }
+                        
+                      </style>`
+      s+=`<table class="command-table">
+                          <thead>
+                            <tr> <center>
+                              <th>Command</th> <th>quantité</th>  <th>prix</th>  </center>
+                            </tr>
+                          </thead>
+                          `
+      for (let i = 0; i < prodNames.length; i++) {
+        s+=`<tbody><tr>
+                              <td>`+prodNames[i]+`</td>
+                              <td>`+prods_quant[prodNames[i]]+`</td>  
+                              <td>`+prod_price[prodNames[i]]+`</td>                                 
+                            </tr></tbody>`
+        
+      }
+      s+=` <tfoot>
+      
+                        
+                            <tr > 
+                            <th >Total  :</th>
+                            <th>`+price+` DA</th>
+                            </tr>
+                            </tfoot>
+                          </table>
+                          <br><br>
+     `
+     htmlinner=s
+     s+=`
+              </div >
+                <div class="test">
+                    <button class="confermedButton" onclick="removeComm('${buttonId}')">Encaisser</button><br>
+                    <button  class="confermedButton" onclick="printer(${buttonId})"> Imprimer et encaisser</button>
+                </div>
+            
+              </div>
+      `
+      modalContent.innerHTML+=s
+      //modalContent.appendChild(modalText);
+      
+      var closeButton = document.createElement("button");
+      closeButton.textContent = "Close";
+      
+      closeButton.addEventListener("click", function() {
+        closeModal(buttonId);
+      });
+      modalContent.appendChild(closeButton);
+  
+      // Add the modal to the body of the document
+      document.body.appendChild(modal);
+    }
+  
+    // Show the modal
+    modal.style.display = "block";
+  
+  }
+  
+  function closeModal(buttonId) {
+    var modal = document.getElementById(buttonId + "-modal");
+    modal.style.display = "none";
+  }
+</script>
+
+<!------------------printer-->
+<div>
   
 {% endblock body %}
