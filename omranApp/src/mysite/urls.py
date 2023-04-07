@@ -31,6 +31,7 @@ urlpatterns = [
     path('delete_product', delete_product, name='delete_product'),
     path('search_product_function', search_product_function, name='search_product_function'),
     path('home', homeView, name='home'),
+    path('products2', editProdsView, name='product'),
     path('history', history, name='history'),
     path('history_submit', history_submit, name='history_submit'),
     path('update_category_list', update_category_list, name='update_category_list'),

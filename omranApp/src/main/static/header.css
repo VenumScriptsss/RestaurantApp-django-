@@ -1,0 +1,31 @@
+
+.header{
+  background-color: #e5e5e5;
+  
+}
+.div_head{
+    padding:0px 25px;
+    height: 80px;
+}
+
+.back-button{
+  display: inline-block;
+  
+  padding: 10px;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.back-button img {
+  height: 50px;
+  width: auto;
+}
+
+.logo{
+
+  display: inline-block;
+  float: right;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
