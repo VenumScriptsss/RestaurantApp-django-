@@ -1,0 +1,118 @@
+<script>
+  function openModal(prodNames,buttonId,price,prods_quant,prod_price) {
+   
+  
+    
+    
+    // Get the modal element
+    var modal = document.getElementById(buttonId+ "-modal");
+  
+    // If the modal doesn't exist, create it
+    if (!modal) {
+      modal = document.createElement("div");
+      //modal.style="width:50%;"
+      modal.id = buttonId + "-modal";
+      modal.classList.add("modal");
+  
+      // Add some content to the modal
+      var modalContent = document.createElement("div");
+      modalContent.classList.add("modal-content");
+      modal.appendChild(modalContent);
+  
+      var modalHeader = document.createElement("h2");
+      modalHeader.textContent = "La liste" ;
+      modalContent.appendChild(modalHeader);
+  
+      var modalText = document.createElement("p");
+      //modalText.textContent = "<br>Modal text " + buttonId+' ';
+      s=`<style>
+                        /* Style the table with the 'command-table' class */
+                        table.command-table {
+                          border-collapse: collapse;
+                          width: 100%;
+                          max-width: 500px;
+                          margin: 0 auto;
+                        }
+                        
+                        /* Style the table header */
+                        table.command-table th {
+                          background-color: #f2f2f2;
+                          color: #555;
+                          font-weight: bold;
+                          text-align: center;
+                          padding: 10px;
+                        }
+                        
+                        /* Style the table rows */
+                        table.command-table tr {
+                          border-bottom: 1px solid #ddd;
+                          
+                        }
+                        
+                        /* Style the table data */
+                        table.command-table td {
+                          padding: 10px;
+                          text-align: center;
+                        }
+                        
+                        /* Style the first row differently */
+                        table.command-table tr:first-child {
+                          font-weight: bold;
+                        }
+                        
+                      </style>`
+      s+=`<table class="command-table">
+                          <thead>
+                            <tr> <center>
+                              <th>Command</th> <th>quantité</th>  <th>prix</th>  </center>
+                            </tr>
+                          </thead>
+                          `
+      for (let i = 0; i < prodNames.length; i++) {
+        s+=`<tbody><tr>
+                              <td>`+prodNames[i]+`</td>
+                              <td>`+prods_quant[prodNames[i]]+`</td>  
+                              <td>`+prod_price[prodNames[i]]+`</td>                                 
+                            </tr></tbody>`
+        
+      }
+      s+=`
+                      `
+      s+=` <tfoot>
+      
+                        
+                            <tr > 
+                            <th >Total  :</th>
+                            <th>`+price+` DA</th>
+                            </tr>
+                            </tfoot>
+                          </table>
+                          <br>
+      
+      
+      `
+      modalContent.innerHTML+=s
+      //modalContent.appendChild(modalText);
+      
+      var closeButton = document.createElement("button");
+      closeButton.textContent = "Close";
+      
+      closeButton.addEventListener("click", function() {
+        closeModal(buttonId);
+      });
+      modalContent.appendChild(closeButton);
+  
+      // Add the modal to the body of the document
+      document.body.appendChild(modal);
+    }
+  
+    // Show the modal
+    modal.style.display = "block";
+  
+  }
+  
+  function closeModal(buttonId) {
+    var modal = document.getElementById(buttonId + "-modal");
+    modal.style.display = "none";
+  }
+</script>

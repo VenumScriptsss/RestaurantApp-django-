@@ -213,109 +213,195 @@
           modal = document.createElement("div");
           //modal.style="width:50%;"
           modal.id = buttonId + "-modal";
-          modal.classList.add("modal");
+          modal.classList.add("general_div");
       
-          // Add some content to the modal
-          var modalContent = document.createElement("div");
-          modalContent.classList.add("modal-content");
-          modal.appendChild(modalContent);
+          
       
-          var modalHeader = document.createElement("h2");
-          modalHeader.textContent = "La liste" ;
-          modalContent.appendChild(modalHeader);
-      
-          var modalText = document.createElement("p");
-          //modalText.textContent = "<br>Modal text " + buttonId+' ';
           s=`<style>
-                            /* Style the table with the 'command-table' class */
-                            table.command-table {
-                              border-collapse: collapse;
-                              width: 100%;
-                              max-width: 500px;
-                              margin: 0 auto;
-                            }
-                            
-                            /* Style the table header */
-                            table.command-table th {
-                              background-color: #f2f2f2;
-                              color: #555;
-                              font-weight: bold;
-                              text-align: center;
-                              padding: 10px;
-                            }
-                            
-                            /* Style the table rows */
-                            table.command-table tr {
-                              border-bottom: 1px solid #ddd;
-                              
-                            }
-                            
-                            /* Style the table data */
-                            table.command-table td {
-                              padding: 10px;
-                              text-align: center;
-                            }
-                            
-                            /* Style the first row differently */
-                            table.command-table tr:first-child {
-                              font-weight: bold;
-                            }
+
+    
+    .general_div{
+    
+        display: none;
+        background-color: rgba(0, 0, 0, 30%);
+        border: 0px solid;
+        justify-content: center;
+        position:absolute;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+
+    }
+
+    .myModel{
+        background-color: #f2f2f2;
+        border: 0px solid;
+        margin-top:5%;
+        margin-left: auto;
+        margin-right: auto;
+        
+        justify-content: center;
+        
+        height: 570px;
+        width: 380px;
+        border-radius: 20px;
+    }
+
+    .closeButton{
+        
+        margin: 13px 8px;
+        display: inline-block;
+        float : right;
+        border-radius: 5px;
+        background-color: rgb(180, 180, 180);
+        width: 26px;
+        height:20px;
+        font-size: 1em;
+        border: 0px;
+        cursor: pointer;
+        
+    }
+    .title{
+        width: 200px;
+        margin: 10px auto 10px 60px;
+        display: inline-block;
+        font-size:20px;}
+
+    .iconClose{
+        
+        width: 90%;
+        height: 90%;}
+
+    .head{
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .div_table{
+        overflow-y: auto;
+        background-color: #ffffff;
+        border: 0px solid;
+        margin: 0px auto;
+        vertical-align: middle;
+        height: 90%;
+        width: 95%;
+        border-radius: 10px;
+
+    }
+
+    .table {
+        margin: 10px auto;
+        border-collapse: collapse;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 16px;
+    }
+
+    tr.borders{
+        height: 40px;
+        border-top: 1.5px solid black;
+        border-bottom: 1.5px solid black;
+    }
+
+   td.td_style{font-size: 15px}
+
+@media (max-width: 768px) {
+
+    .myModel{
+        
+        height: 570px;
+        width: 340px;
+        border-radius: 18px;
+    }
+
+        
+    .title{
+      margin: 10px auto 10px 80px;
+        font-size: 18px;}
+
+    .table{font-size: 14px;}
+
+    tr.borders{
+        font-size: 15px;
+        height: 35px;
+       
+    }
+
+
+    
+}
                             
                           </style>`
-          s+=`<table class="command-table">
-                              <thead>
-                                <tr> <center>
-                                  <th>Command</th> <th>quantité</th>  <th>prix</th>  </center>
-                                </tr>
-                              </thead>
-                              `
-          for (let i = 0; i < prodNames.length; i++) {
-            s+=`<tbody><tr>
-                                  <td>`+prodNames[i]+`</td>
-                                  <td>`+prods_quant[prodNames[i]]+`</td>  
-                                  <td>`+prod_price[prodNames[i]]+`</td>                                 
-                                </tr></tbody>`
-            
-          }
-          s+=`
-                          `
-          s+=` <tfoot>
-          
+
+
+          s+=`<div class="myModel">
+                <div class="head"><h4 class="title">liste des commandes</h4>
+                    <button id="closedButton${buttonId}" class="closeButton"><img class="iconClose" src="media/657059.png" alt="">
+                    </button>
+                </div>    
+                
+                <div class="div_table">
+                        <table class="table">
+                        <colgroup>
+                            <col width="36%">
+                            <col width="5%">
+                            <col width="35%">
+                            <col width="25%">
+                        </colgroup>
+                        <thead>
+                            <tr> <center>
+                              <th>Command</th> <th>Qté</th>  <th>prix</th> <th>l'état</th>  </center>
+                            </tr>
+                          </thead>
+                        <tbody class="">` 
+                          for (let i = 0; i < prodNames.length; i++) {
+                          s+=`
+                            <tr style="height: 40px;">
+                            <td class="td_style">`+prodNames[i]+`</td>
+                            <td class="td_style">`+prods_quant[prodNames[i]]+`</td>
+                            <td class="td_style">`+prod_price[prodNames[i]]+` DA</td>
+                            <td class="td_style" style="color:red;">l'état</td>
+                            </tr>`  }
                             
-                                <tr > 
-                                <th >Total  :</th>
-                                <th>`+price+` DA</th>
-                                </tr>
-                                </tfoot>
-                              </table>
-                              <br>
+                            s+=`  
+                        </tbody>
+                        <tfoot >
+                            <tr class="borders">
+                            <td > <b>TOTAL: <b></td>
+                            <td  colspan="3"><b>`+price+` DA</b></td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                </div >
+                
+                </div>
+                              `
+          
+                              modal.innerHTML+=s
           
           
-          `
-          modalContent.innerHTML+=s
-          //modalContent.appendChild(modalText);
           
-          var closeButton = document.createElement("button");
-          closeButton.textContent = "Close";
-          
-          closeButton.addEventListener("click", function() {
-            closeModal(buttonId);
-          });
-          modalContent.appendChild(closeButton);
       
           // Add the modal to the body of the document
           document.body.appendChild(modal);
         }
-      
-        // Show the modal
         modal.style.display = "block";
+
+        closedbutton=document.getElementById("closedButton"+buttonId);
+
+        closedbutton.onclick=function(){
+
+          modal.style.display = "none";}
+        window.onclick = function(event) {
+          if (event.target == modal) {
+         modal.style.display = "none";}}
+
+
+         
       
       }
-      
-      function closeModal(buttonId) {
-        var modal = document.getElementById(buttonId + "-modal");
-        modal.style.display = "none";
-      }
+     
     </script>
   
 
