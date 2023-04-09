@@ -1,0 +1,512 @@
+{% extends 'base.html'%}
+{% load static %} 
+{% block header%}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>history</title>
+    <link rel="stylesheet" href="{% static 'nicepage.css' %}"  media="screen">
+<link rel="stylesheet" href="{% static 'history.css' %}"   media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'history_jquery.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'history_nicepage.js' %}"  defer=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+    <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
+    <meta name="referrer" content="origin">
+    <style>
+      .hidden {
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+    </style>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "historique",
+		"logo": "images/default-logo.png"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="history">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    </style>
+  {% endblock header%}
+  {% block body %}
+  {% include 'header.html' %}
+    <section class="u-clearfix u-grey-10 u-valign-top-xs u-section-1" id="sec-9891">
+      <div class="u-container-align-center-lg u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-grey-5 u-group u-radius-20 u-shape-round u-group-1">
+        <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-1">
+          <div class="u-expanded-width u-form u-form-1">
+
+
+
+            <form method="post" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" style="padding: 15px;"  name="form" id="my-form">
+              {% csrf_token %}
+              <div class="u-form-group u-form-input-layout-horizontal u-form-radiobutton u-label-top">
+                <label class="u-label u-label-1">&nbsp;Suppression</label>
+                <div class="u-form-radio-button-wrapper">
+                  <div class="u-input-row">
+                    <input id="field-12e3" type="radio" name="Suppression" value="true" class="u-field-input"  data-calc="">
+                    <label class="u-field-label" for="field-12e3" style="font-size: 1.125rem;">Oui</label>
+                  </div>
+                  <div class="u-input-row">
+                    <input id="field-bb90" type="radio" name="Suppression" value="false" class="u-field-input" data-calc="">
+                    <label class="u-field-label" for="field-bb90" style="font-size: 1.125rem;">No</label>
+                  </div>
+                  <div class="u-input-row">
+                    <input id="field-1596" type="radio" name="Suppression" value="" checked="checked" class="u-field-input" data-calc="">
+                    <label class="u-field-label" for="field-1596" style="font-size: 1.125rem;">Oui et No</label>
+                  </div>
+                </div>
+              </div>
+              <div class="u-form-group u-form-input-layout-horizontal u-form-radiobutton u-label-top">
+                <label class="u-label u-label-2">Encaisser</label>
+                <div class="u-form-radio-button-wrapper">
+                  <div class="u-input-row">
+                    <input id="field-0f0a" type="radio" name="Encaisser" value="true" class="u-field-input"  data-calc="">
+                    <label class="u-field-label" for="field-0f0a" style="font-size: 1.125rem;">Oui</label>
+                  </div>
+                  <div class="u-input-row">
+                    <input id="field-31ea" type="radio" name="Encaisser" value="false" class="u-field-input" data-calc="">
+                    <label class="u-field-label" for="field-31ea" style="font-size: 1.125rem;">No</label>
+                  </div>
+                  <div class="u-input-row">
+                    <input id="field-cb5f" type="radio" name="Encaisser" value="" class="u-field-input" checked="checked" data-calc="">
+                    <label class="u-field-label" for="field-cb5f" style="font-size: 1.125rem;">Oui et No</label>
+                  </div>>
+                </div>
+              </div>
+              
+              <div class="u-form-date u-form-group u-form-input-layout-horizontal u-label-top">
+                <label for="date-d316" class="u-label u-label-4">Après la date</label>
+                <input type="text" readonly="readonly" placeholder="MM/DD/YYYY" id="date-d316" name="date-to" class="u-input u-input-rectangle" data-date-format="dd/mm/yyyy">
+              </div>
+              <div class="u-form-date u-form-group u-form-input-layout-horizontal u-label-top">
+                <label for="date-cef4" class="u-label u-label-3">Avant la date</label>
+                <input type="text" readonly="readonly" placeholder="DD/MM/YYYY" id="date-cef4" name="date_from" class="u-input u-input-rectangle"  data-date-format="dd/mm/yyyy">
+              </div>
+              <div class="u-align-center u-form-group u-form-submit u-label-top">
+                <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-10 u-btn-1"><span class="u-icon"></span>Recharche 
+                </a>
+                <input type="submit" value="submit" class="u-form-control-hidden">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="u-table u-table-responsive u-table-1" id="query">
+        <table class="u-table-entity">
+          <colgroup>
+            <col width="15.29%">
+            <col width="12.66%">
+            <col width="14.87%">
+            <col width="17.84%">
+            <col width="14.06%">
+            <col width="18.31%">
+            <col width="6.97%">
+          </colgroup>
+          <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
+            <tr style="height: 77px;">
+              <th class="u-table-cell">N° de commande</th>
+              <th class="u-table-cell">
+                <span class="u-text-black">N° de table</span>
+              </th>
+              <th class="u-table-cell">La date<br>
+              </th>
+              <th class="u-grey-25 u-table-cell u-table-cell-4">&nbsp;Suppression</th>
+              <th class="u-grey-25 u-table-cell u-table-cell-5">Encaisser</th>
+              <th class="u-grey-25 u-table-cell u-table-cell-6">Liste des achats</th>
+              <th class="u-grey-25 u-table-cell u-table-cell-7"></th>
+            </tr>
+          </thead>
+          
+          {% for comnd in commands %}
+          <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1" id="div{{comnd.id}}" >
+            <tr style="height: 69px;">
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.id}}<br>
+              </td>
+              {% if comnd.commType %}
+                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.tableNum}}</td>
+              {% else %}
+                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"> / </td>
+              {% endif %}
+
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.dateComm}}<br>
+              </td>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.flaged}}</td>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.encaisser}}</td>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='{{comnd.id}}'onclick="openModal({{comnd.prodNames}},'{{comnd.id}}','{{comnd.commPrice}}',{{comnd.prods_quantity}},{{prod_price}})"">Afficher</button>
+              </td>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                
+              </td>
+            </tr>
+          </tbody>
+          
+          {% endfor %}
+        
+
+        </table>
+      </div>
+    </section>
+    
+    
+    <script>
+      function openModal(prodNames,buttonId,price,prods_quant,prod_price) {
+       
+      
+        
+        
+        // Get the modal element
+        var modal = document.getElementById(buttonId+ "-modal");
+      
+        // If the modal doesn't exist, create it
+        if (!modal) {
+          modal = document.createElement("div");
+          //modal.style="width:50%;"
+          modal.id = buttonId + "-modal";
+          modal.classList.add("general_div");
+      
+          
+      
+          s=`<style>
+
+    
+    .general_div{
+    
+        display: none;
+        background-color: rgba(0, 0, 0, 30%);
+        border: 0px solid;
+        justify-content: center;
+        position:absolute;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+
+    }
+
+    .myModel{
+        background-color: #f2f2f2;
+        border: 0px solid;
+        margin-top:5%;
+        margin-left: auto;
+        margin-right: auto;
+        
+        justify-content: center;
+        
+        height: 570px;
+        width: 380px;
+        border-radius: 20px;
+    }
+
+    .closeButton{
+        
+        margin: 13px 8px;
+        display: inline-block;
+        float : right;
+        border-radius: 5px;
+        background-color: rgb(180, 180, 180);
+        width: 26px;
+        height:20px;
+        font-size: 1em;
+        border: 0px;
+        cursor: pointer;
+        
+    }
+    .title{
+        width: 200px;
+        margin: 10px auto 10px 60px;
+        display: inline-block;
+        font-size:20px;}
+
+    .iconClose{
+        
+        width: 90%;
+        height: 90%;}
+
+    .head{
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .div_table{
+        overflow-y: auto;
+        background-color: #ffffff;
+        border: 0px solid;
+        margin: 0px auto;
+        vertical-align: middle;
+        height: 90%;
+        width: 95%;
+        border-radius: 10px;
+
+    }
+
+    .table {
+        margin: 10px auto;
+        border-collapse: collapse;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 16px;
+    }
+
+    tr.borders{
+        height: 40px;
+        border-top: 1.5px solid black;
+        border-bottom: 1.5px solid black;
+    }
+
+   td.td_style{font-size: 15px}
+
+@media (max-width: 768px) {
+
+    .myModel{
+        
+        height: 570px;
+        width: 340px;
+        border-radius: 18px;
+    }
+
+        
+    .title{
+      margin: 10px auto 10px 80px;
+        font-size: 18px;}
+
+    .table{font-size: 14px;}
+
+    tr.borders{
+        font-size: 15px;
+        height: 35px;
+       
+    }
+
+
+    
+}
+                            
+                          </style>`
+
+
+          s+=`<div class="myModel">
+                <div class="head"><h4 class="title">liste des commandes</h4>
+                    <button id="closedButton${buttonId}" class="closeButton"><img class="iconClose" src="media/657059.png" alt="">
+                    </button>
+                </div>    
+                
+                <div class="div_table">
+                        <table class="table">
+                        <colgroup>
+                            <col width="36%">
+                            <col width="5%">
+                            <col width="35%">
+                            <col width="25%">
+                        </colgroup>
+                        <thead>
+                            <tr> <center>
+                              <th>Command</th> <th>Qté</th>  <th>prix</th> <th>l'état</th>  </center>
+                            </tr>
+                          </thead>
+                        <tbody class="">` 
+                          for (let i = 0; i < prodNames.length; i++) {
+                          s+=`
+                            <tr style="height: 40px;">
+                            <td class="td_style">`+prodNames[i]+`</td>
+                            <td class="td_style">`+prods_quant[prodNames[i]]+`</td>
+                            <td class="td_style">`+prod_price[prodNames[i]]+` DA</td>
+                            <td class="td_style" style="color:red;">l'état</td>
+                            </tr>`  }
+                            
+                            s+=`  
+                        </tbody>
+                        <tfoot >
+                            <tr class="borders">
+                            <td > <b>TOTAL: <b></td>
+                            <td  colspan="3"><b>`+price+` DA</b></td>
+                            </tr>
+                        </tfoot>
+                        </table>
+                </div >
+                
+                </div>
+                              `
+          
+                              modal.innerHTML+=s
+          
+          
+          
+      
+          // Add the modal to the body of the document
+          document.body.appendChild(modal);
+        }
+        modal.style.display = "block";
+
+        closedbutton=document.getElementById("closedButton"+buttonId);
+
+        closedbutton.onclick=function(){
+
+          modal.style.display = "none";}
+        window.onclick = function(event) {
+          if (event.target == modal) {
+         modal.style.display = "none";}}
+
+
+         
+      
+      }
+     
+    </script>
+  
+
+
+  <script>
+    $(function() {
+      
+      $('#my-form').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+          url: '/history_submit',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(response) {
+            for (let i = 0; i < response.ids.length; i++) {
+             hide(response.ids[i])
+              
+            }
+            for (let i = 0; i < response.commands.length; i++) {
+             show(response.commands[i].id)
+              
+            }
+            /* var query=document.getElementById("query");
+            
+            s=`<table class="u-table-entity">
+                  <colgroup>
+                    <col width="15.29%">
+                    <col width="12.66%">
+                    <col width="14.87%">
+                    <col width="17.84%">
+                    <col width="14.06%">
+                    <col width="18.31%">
+                    <col width="6.97%">
+                  </colgroup>
+                  <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
+                    <tr style="height: 77px;">
+                      <th class="u-table-cell">N° de commande</th>
+                      <th class="u-table-cell">
+                        <span class="u-text-black">N° de table</span>
+                      </th>
+                      <th class="u-table-cell">La date<br>
+                      </th>
+                      <th class="u-grey-25 u-table-cell u-table-cell-4">&nbsp;Suppression</th>
+                      <th class="u-grey-25 u-table-cell u-table-cell-5">Encaisser</th>
+                      <th class="u-grey-25 u-table-cell u-table-cell-6">Liste des achats</th>
+                      <th class="u-grey-25 u-table-cell u-table-cell-7"></th>
+                    </tr>
+                  </thead>`
+           
+            
+            for (let i = 0; i < response.commands.length; i++) {
+                
+              
+            
+                s=s+`<tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
+                    <tr style="height: 69px;">
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].id+`<br>
+                      </td>
+                      `
+                      if (response.commands[i].tableNum==true) {
+                        s=s+` <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].tableNum+`</td>
+                      `
+                      } else {
+                        s=s+`<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"> / </td>`
+                      }
+                         
+                      s=s+ `
+
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].dateComm+`<br>
+                      </td>
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].flaged+`</td>
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].encaisser+`</td>
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                        <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='`+response.commands[i].id+`}}' onclick="openModal('${response.commands[i].prods_quantity})','`+response.commands[i].id+`','`+response.commands[i].commPrice+`','`+{}+`',{})"">Afficher</button>
+                      
+                      </td>
+                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                        <a class="u-border-none u-btn u-button-link u-button-style u-none u-btn-3" href="https://nicepage.com"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/3687412.png" alt=""></span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>`
+                  
+        
+                }
+               
+                
+      
+            s=s+"</table>"
+            query.innerHTML=s */
+          },
+          error: function(xhr, status, error) {
+            // handle error response
+          }
+        });
+      });
+    });
+    function hide(id){
+      document.getElementById("div"+id).style.display= 'none';
+     
+    }
+    function show(id){
+      d=document.getElementById("div"+id).style.display= 'table-row-group';
+      
+      
+    }
+    </script>
+    {% endblock body %}
