@@ -468,7 +468,9 @@ function update_category_list(value){
   function search_func(input){
   // Get the search field element by its ID
    
-
+  document.getElementById('category_1').style='background-color:#858e99; color: white;'
+  document.getElementById('category_2').style='background-color:#858e99;color: white;'
+  document.getElementById('category_3').style='background-color:#858e99;color: white;'
     executeFunction(input.value);
   
 }
@@ -486,6 +488,7 @@ function executeFunction(data) {
       success: function(response) {
         s=""
    for (let i = 0; i < response.data.length; i++) {
+
     s+=`<div class="u-container-style u-grey-10 u-group u-radius-18 u-shape-round u-group-5">
                         <div class="u-container-layout u-container-layout-6">
                           <h5 class="u-align-center u-text u-text-1">${response.data[i].prodName}<br>

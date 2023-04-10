@@ -172,18 +172,18 @@
             <tr style="height: 69px;">
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.id}}<br>
               </td>
-              {% if comnd.commType %}
-                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.tableNum}}</td>
+              {% if comnd.tableNum == '-1' %}
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Emporter</td> 
               {% else %}
-                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"> / </td>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.tableNum}}</td>
               {% endif %}
 
-              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.dateComm}}<br>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.dateComm|date:'d-m-Y'}}<br>
               </td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.flaged}}</td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.encaisser}}</td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='{{comnd.id}}'onclick="openModal({{comnd.prodNames}},'{{comnd.id}}','{{comnd.commPrice}}',{{comnd.prods_quantity}},{{prod_price}})"">Afficher</button>
+                <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='{{comnd.id}}'onclick="openModal({{comnd.prodNames}},'{{comnd.id}}','{{comnd.commPrice}}',{{comnd.prods_quantity}},{{prod_price}},{{comnd.flaged_prods}})"">Afficher</button>
               </td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                 
@@ -200,7 +200,7 @@
     
     
     <script>
-      function openModal(prodNames,buttonId,price,prods_quant,prod_price) {
+      function openModal(prodNames,buttonId,price,prods_quant,prod_price,prod_flaged) {
        
       
         
@@ -261,6 +261,12 @@
                               font-weight: bold;
                             }
                             
+                            .centered {
+                                              text-align: center;
+                                              display: flex;
+                                              justify-content: center;
+                                              align-items: center;
+                                          }
                           </style>`
           s+=`<table class="command-table">
                               <thead>
@@ -293,8 +299,35 @@
           
           `
           modalContent.innerHTML+=s
-          //modalContent.appendChild(modalText);
-          
+
+          //------------------------------------------------------------------------------
+          s=`
+          <div class="centered"><h3> flagged products</h3></div>
+
+          <table class="command-table">
+                              <thead>
+                                <tr> <center>
+                                  <th>prods</th> <th>quantity</th> </center>
+                                </tr>
+                              </thead>
+                                `
+                                var products = prod_flaged
+
+                        // Loop through the object using a for...in loop
+                        for (var key in products) {
+                          // Check if the key exists in the object (not inherited from prototype)
+                          if (products.hasOwnProperty(key)) {
+                            // Access the value associated with the current key
+                            var value = products[key];
+                            s+=`<tbody><tr>
+                                  <td>`+key+`</td>
+                                  <td>-`+value+`</td>  
+                                                                  
+                                </tr></tbody>`
+                          }
+                        }
+                        modalContent.innerHTML+=s
+          //------------------------------------------------------------------------------
           var closeButton = document.createElement("button");
           closeButton.textContent = "Close";
           
@@ -338,74 +371,6 @@
              show(response.commands[i].id)
               
             }
-            /* var query=document.getElementById("query");
-            
-            s=`<table class="u-table-entity">
-                  <colgroup>
-                    <col width="15.29%">
-                    <col width="12.66%">
-                    <col width="14.87%">
-                    <col width="17.84%">
-                    <col width="14.06%">
-                    <col width="18.31%">
-                    <col width="6.97%">
-                  </colgroup>
-                  <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
-                    <tr style="height: 77px;">
-                      <th class="u-table-cell">N° de commande</th>
-                      <th class="u-table-cell">
-                        <span class="u-text-black">N° de table</span>
-                      </th>
-                      <th class="u-table-cell">La date<br>
-                      </th>
-                      <th class="u-grey-25 u-table-cell u-table-cell-4">&nbsp;Suppression</th>
-                      <th class="u-grey-25 u-table-cell u-table-cell-5">Encaisser</th>
-                      <th class="u-grey-25 u-table-cell u-table-cell-6">Liste des achats</th>
-                      <th class="u-grey-25 u-table-cell u-table-cell-7"></th>
-                    </tr>
-                  </thead>`
-           
-            
-            for (let i = 0; i < response.commands.length; i++) {
-                
-              
-            
-                s=s+`<tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
-                    <tr style="height: 69px;">
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].id+`<br>
-                      </td>
-                      `
-                      if (response.commands[i].tableNum==true) {
-                        s=s+` <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].tableNum+`</td>
-                      `
-                      } else {
-                        s=s+`<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"> / </td>`
-                      }
-                         
-                      s=s+ `
-
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].dateComm+`<br>
-                      </td>
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].flaged+`</td>
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">`+response.commands[i].encaisser+`</td>
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                        <button class="u-border-none u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-2" id='`+response.commands[i].id+`}}' onclick="openModal('${response.commands[i].prods_quantity})','`+response.commands[i].id+`','`+response.commands[i].commPrice+`','`+{}+`',{})"">Afficher</button>
-                      
-                      </td>
-                      <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                        <a class="u-border-none u-btn u-button-link u-button-style u-none u-btn-3" href="https://nicepage.com"><span class="u-file-icon u-icon u-icon-2"><img src="/static/img/3687412.png" alt=""></span>
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>`
-                  
-        
-                }
-               
-                
-      
-            s=s+"</table>"
-            query.innerHTML=s */
           },
           error: function(xhr, status, error) {
             // handle error response

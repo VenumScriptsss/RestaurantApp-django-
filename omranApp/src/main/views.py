@@ -35,7 +35,7 @@ def log_out(request):
 def loginPage(request):
     context = {}
     users = User.objects.all()
-    print(request.POST)
+
     if 'login' in request.POST:
        
         username = request.POST['username']
@@ -43,7 +43,7 @@ def loginPage(request):
         for user in users:
             
             if username == user.username and pw == user.password:
-                print("user found")
+              
                 request.session['userType'] = user.userPriority
                 return redirect('home')
             else:
@@ -95,7 +95,7 @@ def ajouterEditCommandView(request):
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
-            print(request.POST)    
+         
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
@@ -106,7 +106,7 @@ def ajouterEditCommandView(request):
             return redirect('home')
         else:
             comm = Command.objects.get(id = request.POST['confEdit'])
-            print(request.POST)
+           
             for prod in request.POST.getlist('prodId_Qnt'):
                 id_qnt = prod.split(',')
                 plat = Products.objects.get(id=id_qnt[0])
@@ -115,7 +115,7 @@ def ajouterEditCommandView(request):
                 if int(id_qnt[0]) in prodQnt:
                     if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
                         if request.session['userType'] != '1':
-                            print('flaged')
+                           
                             comm.flaged = True
                             deletedProdNum =  int(prodQnt[int(id_qnt[0])]) - int(id_qnt[1])
                             flagedProds =eval(comm.flaged_prods)
@@ -123,15 +123,15 @@ def ajouterEditCommandView(request):
                             comm.flaged_prods = str(flagedProds)
 
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
-                print(prodQnt)
+            
                 if prodQnt[int(id_qnt[0])] == '0':
                     prodQnt.pop(int(id_qnt[0]))
-                    print('poped')
+                   
                     comm.prods.remove(Products.objects.get(id=int(id_qnt[0])))
-                print(prodQnt)    
+             
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
-            print(request.POST)    
+
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
@@ -141,7 +141,7 @@ def ajouterEditCommandView(request):
             comm.save()    
             return redirect('home')
     if 'cat' in request.POST:
-        print(request.POST['cat'])
+       
         if request.POST['cat'] == 'trad':
           context['prods'] = Products.objects.filter(prodCat = '1')
         elif request.POST['cat'] == 'ff':
@@ -186,7 +186,7 @@ def ajouter_modifier_product(request):
         context['prod'] = prod
 
     if 'confirmEdit' in request.POST:
-        print(request.POST)
+       
 
         
         prod = Products.objects.get(id=request.POST.get('id'))
@@ -196,7 +196,7 @@ def ajouter_modifier_product(request):
         prod.isActive=request.POST.get('active')=='on'
         prod.save()
       
-        return redirect('home')        
+        return redirect('editer-products')        
 
     return render(request, "main/ajouter_modifier_product.html",context)
 
@@ -224,25 +224,28 @@ def delete_product(request):
     return render(request,"main/products2.html",context)
 
 
+
+
 @csrf_exempt
 def search_product_function(request):
     if request.method == 'POST':
         data= request.POST.get("data")
+        all_prods=pd.DataFrame(Products.objects.all().values())
         result=Products.objects.filter(prodName__contains=data)
         result_list = []
         for product in result:
             product_dict = model_to_dict(product)
             product_dict['img'] = product.img.url if product.img else None
             result_list.append(product_dict)
-       
-    return JsonResponse({'data': result_list })
+    print(all_prods['id'])
+    return JsonResponse({'data': result_list,"ids":list(all_prods['id'])})
 
 @csrf_exempt
 def update_category_list(request):
     if request.method == 'POST':
         data= request.POST.get("data")
         prods=Products.objects.filter(prodCat=data)
-
+        
         result_list = []
         for product in prods:
             product_dict = model_to_dict(product)
@@ -250,6 +253,8 @@ def update_category_list(request):
             result_list.append(product_dict)
         #data = serializers.serialize('python', comnds)
         context={"data":result_list}
+        
+        
         return JsonResponse(context)
 
 #--------------------------home------------------------------
@@ -282,7 +287,7 @@ def homeView(request):
                     d['prodNames'] = subject
     context['prod_price']=prod_price
     context['userType']=request.session['userType']
-    print(context)
+    
     return render(request,'main/home.html',context)
 
 
@@ -290,7 +295,7 @@ def homeView(request):
 def encaicement(request):
    
     if request.method == 'POST':
-       print(f"my data = {request.POST.get('id')}")
+      
        id=request.POST.get('id')
        cmnd=Command.objects.filter(id=id).first()
        cmnd.encaisser=True
@@ -316,8 +321,9 @@ def history(request):
     #df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
     #df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
     df['prods_quantity']=df['prods_quantity'].apply(lambda x :prods_quantity(x))
+    df['flaged_prods']=df['flaged_prods'].apply(lambda x :prods_quantity(x))
     context['commands']=df.to_dict("records")
-    
+    print(df['flaged_prods'])
     l=[]
     for i in df['id']:
             l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
@@ -328,8 +334,10 @@ def history(request):
     context['prod_price']=prod_price
    
     return render(request, "main\history.html",context=context) #---------    ----------#
+
 @my_login_required
 def history_submit(request):
+    
         context={}
         commnds=Command.objects.all().values()
         prods=pd.DataFrame(Products.objects.all().values())
@@ -375,7 +383,8 @@ def history_submit(request):
 
         context['prod_price']=prod_price
         context['ids']=list(ids)
-        print(context)
+        
+        
         return JsonResponse(context)
 
 #--------------------------------------------------------

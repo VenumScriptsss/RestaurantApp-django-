@@ -4,7 +4,7 @@ from .models import *
 import ast
 
 def prods_quantity(x):
-    print(ast.literal_eval(x))
+  
     context={}
     s=ast.literal_eval(x)
     for key,value in s.items():
