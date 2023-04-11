@@ -35,7 +35,7 @@ def log_out(request):
 def loginPage(request):
     context = {}
     users = User.objects.all()
-    print(request.POST)
+    
     if 'login' in request.POST:
        
         username = request.POST['username']
@@ -43,7 +43,7 @@ def loginPage(request):
         for user in users:
             
             if username == user.username and pw == user.password:
-                print("user found")
+                
                 request.session['userType'] = user.userPriority
                 return redirect('home')
             else:
@@ -95,7 +95,7 @@ def ajouterEditCommandView(request):
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
-            print(request.POST)    
+            
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
@@ -106,7 +106,7 @@ def ajouterEditCommandView(request):
             return redirect('home')
         else:
             comm = Command.objects.get(id = request.POST['confEdit'])
-            print(request.POST)
+            
             for prod in request.POST.getlist('prodId_Qnt'):
                 id_qnt = prod.split(',')
                 plat = Products.objects.get(id=id_qnt[0])
@@ -115,7 +115,7 @@ def ajouterEditCommandView(request):
                 if int(id_qnt[0]) in prodQnt:
                     if int(prodQnt[int(id_qnt[0])])> int(id_qnt[1]):
                         if request.session['userType'] != '1':
-                            print('flaged')
+                            
                             comm.flaged = True
                             deletedProdNum =  int(prodQnt[int(id_qnt[0])]) - int(id_qnt[1])
                             flagedProds =eval(comm.flaged_prods)
@@ -123,15 +123,15 @@ def ajouterEditCommandView(request):
                             comm.flaged_prods = str(flagedProds)
 
                 prodQnt.update({int(id_qnt[0]):id_qnt[1]})
-                print(prodQnt)
+                
                 if prodQnt[int(id_qnt[0])] == '0':
                     prodQnt.pop(int(id_qnt[0]))
-                    print('poped')
+                    
                     comm.prods.remove(Products.objects.get(id=int(id_qnt[0])))
-                print(prodQnt)    
+                
                 comm.prods_quantity = str(prodQnt)
             comm.commPrice = request.POST['commPrix']
-            print(request.POST)    
+            
             if request.POST['typeComm'] == 'emporter':
                 comm.commType = '1'
                 comm.tableNum = '-1'
@@ -141,7 +141,7 @@ def ajouterEditCommandView(request):
             comm.save()    
             return redirect('home')
     if 'cat' in request.POST:
-        print(request.POST['cat'])
+        
         if request.POST['cat'] == 'trad':
           context['prods'] = Products.objects.filter(prodCat = '1')
         elif request.POST['cat'] == 'ff':
@@ -186,7 +186,7 @@ def ajouter_modifier_product(request):
         context['prod'] = prod
 
     if 'confirmEdit' in request.POST:
-        print(request.POST)
+        
 
         
         prod = Products.objects.get(id=request.POST.get('id'))
@@ -282,7 +282,7 @@ def homeView(request):
                     d['prodNames'] = subject
     context['prod_price']=prod_price
     context['userType']=request.session['userType']
-    print(context)
+    
     return render(request,'main/home.html',context)
 
 
@@ -290,7 +290,7 @@ def homeView(request):
 def encaicement(request):
    
     if request.method == 'POST':
-       print(f"my data = {request.POST.get('id')}")
+       
        id=request.POST.get('id')
        cmnd=Command.objects.filter(id=id).first()
        cmnd.encaisser=True
@@ -375,7 +375,7 @@ def history_submit(request):
 
         context['prod_price']=prod_price
         context['ids']=list(ids)
-        print(context)
+        
         return JsonResponse(context)
 
 #--------------------------------------------------------
