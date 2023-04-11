@@ -251,7 +251,6 @@ def update_category_list(request):
             product_dict = model_to_dict(product)
             product_dict['img'] = product.img.url if product.img else None
             result_list.append(product_dict)
-        #data = serializers.serialize('python', comnds)
         context={"data":result_list}
         
         
@@ -322,8 +321,10 @@ def history(request):
     #df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))
     df['prods_quantity']=df['prods_quantity'].apply(lambda x :prods_quantity(x))
     df['flaged_prods']=df['flaged_prods'].apply(lambda x :prods_quantity(x))
+    df['deleted_prods']=deleted_products(df['prods_quantity'],df['flaged_prods'])
+  
     context['commands']=df.to_dict("records")
-    print(df['flaged_prods'])
+    
     l=[]
     for i in df['id']:
             l.append(list(Command.objects.filter(id=i).first().prods.values_list('prodName', flat=True)))
