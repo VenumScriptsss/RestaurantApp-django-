@@ -147,20 +147,19 @@
 
 @media (max-width: 767px) {
   .u-section-1 .u-table-1 {
-    width: 628px;
-    margin-left: calc(((100% - 540px) / 2) + -44px);
+    width: 97%;
+    margin-left: 1.5%;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-table-1 {
-    width: 425px;
+    width: 500px;
     margin-left: calc(((100% - 340px) / 2) + -42px);
   }
 
-  .u-section-1 .u-table-body-1 {
-    font-size: 0.75rem;
-  }
+
+
 }
 
 .u-table-entity{

@@ -29,3 +29,10 @@
   margin-right: 10px;
 }
 
+
+@media (max-width: 575px) {
+  .div_head{
+    padding:0px 10px;  
+}
+}
+

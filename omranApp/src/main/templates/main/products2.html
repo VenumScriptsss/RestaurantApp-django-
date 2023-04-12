@@ -48,7 +48,7 @@
   border-radius: 0px 5px 5px 0 ;
   background-color: rgb(194, 193, 193);
   height: 100%;
-  width: 16%;
+  width: 15%;
   font-size: 1em;
   border: 0px;
   cursor: pointer;
@@ -63,6 +63,9 @@
       width: 1215px;
       margin: 20px auto ;
       overflow: auto;
+    }
+
+    .div_searsh{margin: 20px;
     }
 
     @media (max-width: 1199px) {
@@ -89,7 +92,15 @@
    
   }}
 
-  
+  @media (max-width: 450px) {
+    .div_searsh{width: 90%;
+                height: 40px;}
+    .form_search {
+      width: 95%;
+      height: 100%;
+     
+   
+  }}
 
 
 </style>
@@ -103,7 +114,7 @@
   {% include 'header.html' %}
     <section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
       <div class="u-clearfix u-sheet u-sheet-1">
-      <div style="margin: 20px;">
+      <div class="div_searsh">
         <form class="form_search" onsubmit="event.preventDefault();"> 
           <input type="search" id="query_search" name="q" placeholder="Search..." class="search" required oninput="search_func(this)">
           <button class="icon-button" onclick="void(0);" >
