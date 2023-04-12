@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Create New User</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f1f1f1;
+      }
+      
+      h1 {
+        text-align: center;
+        margin-top: 40px;
+        color: #444;
+      }
+      
+      form {
+        width: 80%;
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+      }
+      
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        font-size: 16px;
+      }
+      
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+      /* Style the error message */
+      .error {
+        color: #f44336;
+        font-size: 12px;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create New User</h1>
+    <form href="add_user" method="POST" id="user-form">
+        {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <div class="error" id="name-error"></div>
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <div class="error" id="password-error"></div>
+      
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+      <div class="error" id="confirm-password-error"></div>
+      
+      <label for="type">User Type:</label>
+      <select id="type" name="type">
+        <option value="1">Caissier Admin</option>
+        <option value="2">Caissier</option>
+        <option value="3">Serveur</option>
+      </select>
+      <br> <br> <br>
+      <input type="submit" value="Submit">
+    </form>
+  
+    <ul id="user-list" style="display: none;">
+        {% for user in users %}
+        <li>{{ user }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <script>
+        var users = [];
+     
+            
+        $('#user-list li').each(function() {
+                users.push($(this).text());
+            });
+             // do something with the list of users
+               
+        
+
+       const form = document.getElementById("user-form");
+        const nameInput = document.getElementById("name");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        const confirmPasswordError = document.getElementById("confirm-password-error");
+        const name_error = document.getElementById("name-error");
+        
+      //-------------------------------------------------------------------------
+      function checkPasswords() {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+          confirmPasswordError.textContent = "Passwords do not match";
+        } else {
+          confirmPasswordError.textContent = "";
+        }
+      }
+      confirmPasswordInput.addEventListener("input", checkPasswords);
+      //-------------------------------------------------------------------------
+      
+      function validateForm() {
+    let isValid = true;
+    if (confirmPasswordInput.value.trim()  != passwordInput.value.trim()) {
+      confirmPasswordError.textContent = "Confirm Password is incompatible";
+      isValid = false;
+
+    }
+    
+    // Return true if the form is valid, false otherwise
+    name_error.textContent=""
+    for (let i = 0; i < users.length; i++) {
+        if (nameInput.value == users[i]) {
+
+            isValid=false;
+            name_error.textContent="this user is already ecxiste"
+            break;
+        }
+        
+        
+    }
+    
+    return isValid;
+  }
+
+  // Add event listener to the form's submit event
+  form.addEventListener("submit", (event) => {
+    if (!validateForm()) {
+      event.preventDefault(); // prevent form submission if validation fails
+    }
+  });
+  
+  // Add event listener to the confirm password field's input event
+
+    </script>
+  </body>
+</html>

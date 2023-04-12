@@ -51,6 +51,17 @@ def loginPage(request):
     return render(request,"main/login.html",context)
 
 
+def add_user(request):
+    print("okey nigga")
+    if request.method=="POST":
+        user_name = request.POST.get('name')
+        user_password = request.POST.get('password')
+        user_type = request.POST.get('type')
+        user_type=int(user_type)
+        User(username=user_name,password=user_password,userPriority=user_type).save()
+    all_user=pd.DataFrame(User.objects.all().values())
+    context={"users":all_user['username']}
+    return render(request, "main/add_user.html",context)
 @csrf_exempt
 def apply_function(request):
    
@@ -61,6 +72,9 @@ def apply_function(request):
         comnd.save()
     return render(request,"main/home.html")
 
+
+def user_list_view(request):
+    return render(request, "main/user_list.html")
 
 #-------------ajouter/editer command----------------lzm tedkhel mn caissier wdir edit w ab3at lform bch tbanlk
 
@@ -177,7 +191,7 @@ def ajouter_modifier_product(request):
         
         product = Products(prodName=product_name, prodPrix=price, prodCat=category, isActive=is_active == 'on', img=img_name)
         product.save()
-    
+        
         return redirect('editer-products')
     
     if 'editPrd' in request.POST:
