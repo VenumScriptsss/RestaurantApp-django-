@@ -52,7 +52,7 @@
       background-color: rgb(0,0,0); /* Fallback color */
       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
-    
+    .table_header{height: 65px;}
     /* Modal Content */
     .modal-content {
       background-color: #fefefe;
@@ -76,6 +76,28 @@
       text-decoration: none;
       cursor: pointer;
     }
+
+    @media (max-width: 575px) {
+  .u-section-1 .u-table-1 {
+    width: 97%;
+    margin-left: 1.5%;
+  }
+  .table_header{height: 50px;}
+  .u-section-1 .u-table-header-1 {
+    font-size: 0.80rem;
+    
+  }
+  .u-section-1 .u-btn-2 {
+    font-size: 11px;
+    height: 35px;
+    width: 100%;
+  }
+  .u-section-1 .u-btn-1 {
+    font-size: 15px;
+  }
+
+}
+
     </style>
   {% endblock header%}
   {% block body %}
@@ -153,7 +175,7 @@
             <col width="6.97%">
           </colgroup>
           <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
-            <tr style="height: 77px;">
+            <tr class="table_header">
               <th class="u-table-cell">N° de commande</th>
               <th class="u-table-cell">
                 <span class="u-text-black">N° de table</span>

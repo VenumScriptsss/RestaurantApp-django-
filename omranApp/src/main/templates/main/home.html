@@ -82,6 +82,51 @@
         color: #ffffff;
         cursor: pointer;
     }
+
+    @media (max-width: 450px) {
+    .u-section-1 .u-group-1 {
+    width: 100%;
+    height: 120px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0px;
+    padding-right: 0px;
+    
+  }
+
+  .u-section-1 .u-btn-3 {
+    width: 42%;
+    text-align: center;
+    display:  block;
+    margin:auto auto 20px auto;
+   
+    }
+  .u-section-1 .u-btn-2 {
+    width: 42%;
+    text-align: center;
+    
+    display:  inline-block;
+    margin:-36px 5% 12px auto;
+    float: right;
+    
+    
+    }
+  .u-section-1 .u-btn-1 {
+    width: 42%;
+    text-align: center;
+    margin:20px auto auto 5%;
+    display: inline-block;
+
+    
+    }
+    .u-section-1 .u-table-1 {
+      margin-left: 0px;
+    width: 100%;
+  }
+  
+  
+
+}
   </style>
   
   <script type="application/ld+json">{
@@ -101,19 +146,19 @@
   <body class="u-body u-xl-mode" data-lang="en">
     {% include 'header3.html' %}
     <section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-container-style u-grey-5 u-group u-radius-20 u-shape-round u-group-1">
+      <div class="u-clearfix u-sheet u-sheet-1" >
+        <div class="u-container-style u-grey-5 u-group u-radius-20 u-shape-round u-group-1" >
           <div class="u-container-layout u-valign-middle u-container-layout-1">
             {% if userType == '1' %}
-              <a href="editer-products" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1"> Editer les produits</button>
-              <a href="history" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-2">Historique</button>
+              <a href="editer-products" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1"> Editer les produits</a>
+              <a href="history" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-2">Historique</a>
             {% endif %}
             <a href="ajouter-command" class="u-align-center u-btn u-btn-round u-button-style u-custom-color-3 u-radius-10 u-btn-3">Ajouter commande<br>
             </a>
           </div>
         </div>
-        <div class="u-table u-table-responsive u-table-1">
-          <table class="u-table-entity">
+        <div class="u-table u-table-responsive u-table-1" >
+          <table class="u-table-entity" >
             <colgroup>
               <col width="17.74%">
               <col width="18.39%">
