@@ -40,6 +40,8 @@ urlpatterns = [
     path('test', test, name='test'),
     path('add_user', add_user, name='add_user'),
      path('user_list', user_list_view, name='user_list'),
+    path('edit_user', edit_user, name='edit_user'),
+    path('edit_user_submit', edit_user_submit, name='edit_user_submit'),
     
 
 

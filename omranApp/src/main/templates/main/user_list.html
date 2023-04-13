@@ -3,50 +3,78 @@
 <head>
 	<title>User List</title>
 	<style>
-
-		body {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			background-color: #beb9b9;
-		}
 		table {
-			border-collapse: collapse;
-			width: 100%;
-			max-width: 800px;
-			box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-			background-color: #fff;
-			border-radius: 4px;
+		  font-family: Arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		  max-width: 600px;
+		  margin: 0 auto;
+		  border: 1px solid #ccc;
 		}
+		
 		th, td {
-			padding: 12px;
-			text-align: left;
-			border-bottom: 1px solid #f2f2f2;
+		  text-align: left;
+		  padding: 12px;
 		}
+		
 		th {
-			background-color: #bc1d1d;
-			font-weight: bold;
-			text-transform: uppercase;
-			font-size: 14px;
+		  background-color: #f2f2f2;
 		}
+		
+		td {
+		  border-bottom: 1px solid #ddd;
+		}
+		
 		button {
-			background-color: #3498db;
-			color: white;
-			border: none;
-			padding: 8px 16px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 14px;
-			margin: 4px 2px;
-			cursor: pointer;
-			border-radius: 4px;
-			transition: background-color 0.3s ease-in-out;
+		  background-color: #4CAF50;
+		  color: #fff;
+		  border: none;
+		  padding: 8px 12px;
+		  border-radius: 4px;
+		  cursor: pointer;
 		}
+		
 		button:hover {
-			background-color: #2980b9;
+		  background-color: #3e8e41;
 		}
+		
+		.edit {
+		  background-color: #2196F3;
+		}
+		
+		.edit:hover {
+		  background-color: #0b7dda;
+		}
+		
+		.delete {
+		  background-color: #f44336;
+		}
+		
+		.delete:hover {
+		  background-color: #da190b;
+		}
+		</style>
+		
+		
+		
+
+	<style>
+		.image-button {
+  border: none;
+  background: transparent;
+
+
+}
+.image-button:hover {
+  background-color: transparent;
+}
+
+.image-button img {
+  display: block;
+  width: 35%;
+  height: 35%;
+}
+
 
 	</style>
 </head>
@@ -61,21 +89,39 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>John Doe</td>
-				<td>Admin</td>
-				<td><button>Edit</button></td>
-				<td><button>Delete</button></td>
+			{% for user in users %}
+			<tr id="user{{user.id}}">
+				
+				<td>{{user.username}}</td>
+				<td>   {{user.get_userPriority_display}}</td>
+
+				  <form method="post" action="edit_user">{% csrf_token %} <td><button name="id" value="{{user.id}}">Edit</button></td></form>
+				<td><button class="image-button" onclick="delete_user('{{user.id}}')" ><img src="/static/img/3687412.png" style="width: 35%; height: 35%;"></button></td>
 			</tr>
-			<tr>
-				<td>Jane Doe</td>
-				<td>Regular User</td>
-				<td><button>Edit</button></td>
-				<td><button><img class="icon-supprime" src="/static/img/3687412.png"/></button></td>
-			</tr>
-            
+            {% endfor %}
 			<!-- Add more rows as needed -->
 		</tbody>
 	</table>
+
+
+<script>
+	function delete_user(val){
+       hide(val)
+
+	}
+
+	   function hide(id){
+      k=document.getElementById("user"+id)      
+      document.getElementById("user"+id).style.display= 'none';
+     
+    }
+    function show(id){
+      document.getElementById("user"+id).style.display= '';
+      
+      
+    }
+</script>
+
 </body>
 </html>
+

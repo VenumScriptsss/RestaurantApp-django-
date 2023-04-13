@@ -74,7 +74,40 @@ def apply_function(request):
 
 
 def user_list_view(request):
-    return render(request, "main/user_list.html")
+    if request.method=="POST":
+        print("im in this ")
+    users=User.objects.all()
+    context={"users":users}
+    return render(request, "main/user_list.html",context)
+
+def edit_user(request):   
+    if request.method=="POST":
+        all_user=pd.DataFrame(User.objects.all().values())
+        user_id=request.POST.get("id")
+        selected_user=all_user[all_user['id']==int(user_id)]
+        all_user.drop(selected_user.index,inplace=True)
+       
+        context={"users":all_user['username'],"page_type":'edit'}
+        context['selected_user']={'id':selected_user.values[0][0] ,'username':selected_user.values[0][1] , "password":selected_user.values[0][2],"user_type":selected_user.values[0][3]}
+    else:
+        users=User.objects.all()
+        context={"users":users}
+    return render(request, "main/add_user.html",context) 
+
+def edit_user_submit(request):
+    user_name = request.POST.get('name')
+    user_password = request.POST.get('password')
+    user_type = request.POST.get('type')
+    user_type=int(user_type)
+    user_id=int(request.POST.get('user_id'))
+    
+    user=User.objects.filter(id=user_id).first()
+    user.username=user_name
+    user.password=user_password
+    user.userPriority=user_type
+    user.save() 
+    
+    return redirect('user_list')
 
 #-------------ajouter/editer command----------------lzm tedkhel mn caissier wdir edit w ab3at lform bch tbanlk
 
