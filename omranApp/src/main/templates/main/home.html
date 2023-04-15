@@ -253,6 +253,31 @@
   
 
 }
+.icon-button2 {
+  background-color: transparent;
+  
+  width: 63px;
+  font-size: 1em;
+  border: 0px;
+  cursor: pointer;
+  
+}
+.icon-supprime{
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1199px) {
+  .icon-button2{width: 63px;}
+}
+@media (max-width: 991px) {
+  .icon-button2{width: 55px;}
+
+}
+
+@media (max-width: 575px) {
+  .icon-button2{width: 49px;}
+
+}
 
 
 
@@ -304,13 +329,14 @@
         <div class="u-table u-table-responsive u-table-1" >
           <table class="u-table-entity" >
             <colgroup>
-              <col width="17.74%">
-              <col width="18.39%">
-              <col width="40.65%">
-              <col width="3.23%">
+              <col width="15%">
+              <col width="20%">
+              <col width="15%">
+              <col width="18%">
               {% if userType == '1' or userType == '2' %}
-                <col width="20%">
+              <col width="18%"> 
               {% endif %}
+              <col width="14%">
             </colgroup>
             <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
               <tr style="height: 46px;">
@@ -324,6 +350,7 @@
                 {% if userType == '1' or userType == '2' %}
                   <th class="u-grey-25 u-table-cell u-table-cell-5"></th>
                 {% endif %}
+                <th class="u-grey-25 u-table-cell u-table-cell-4"></th>
               </tr>
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
@@ -336,7 +363,7 @@
                   {% else %}
                     <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
                   {% endif%}
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|time:"H:i"}}<br>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|time:"H:i"}} {{comm.dateComm|date:"| d/m/Y"}} <br>
                   </td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}} DA<br>
                   </td>    
@@ -351,6 +378,8 @@
                     <button name="encaissment"   class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5"onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})"">encaisser</button>
                 </td>
               {% endif %}
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"><button class="icon-button2" onclick="" ><img src="/static/img/3687412.png" class="icon-supprime"></button>
+							</td>
                 </tr>
                 {% endif %}
               {% endfor %}
