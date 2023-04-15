@@ -79,7 +79,10 @@
 {% endblock header %}
 {% block body %}
       {% include 'header4.html' %}
-      
+
+     
+      {%  if page_type %}
+
 <!-------------------------------------------------------------------------------------------------------------------->
             <h1 style="text-align:center;" >Editer l'utilisatuer</h1>
             <form action="edit_user_submit" method="POST" id="user-form">
@@ -111,76 +114,106 @@
             
               <input  name="user_id" value="{{selected_user.id}}" style="display: none;">
               
-              <input type="submit" value="Ajouter">
+              <input type="submit" value="Modifier">
             </form>
           
             
 
 
 <!-------------------------------------------------------------------------------------------------------------------->
-
-      
-      <script>
-        var users = [];
-    
+         {% else %}
+         <h1 style="text-align:center;" >Editer l'utilisatuer</h1>
+            <form href="add_user" method="POST" id="user-form">
+                {% csrf_token %}
             
-        $('#user-list li').each(function() {
-                users.push($(this).text());
-            });
-            // do something with the list of users
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name"  value =" " required>
+              <div class="error" id="name-error"></div>
               
-        
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password"  value=" " required>
+              <div class="error" id="password-error"></div>
+              
+              <label for="confirm-password">Confirm Password:</label>
+              <input type="password" id="confirm-password" name="confirm-password"  value =""  required>
+              <div class="error" id="confirm-password-error"></div>
+              
+              <label for="type">User Type:</label>
+              <select id="type" name="type">
+                <option value="1">Caissier Admin</option>
+                <option value="2">Caissier</option>
+                <option value="3">Serveur</option>
+              </select>
+    
+              <input type="submit" value="Ajouter">
+            </form>
+            <script>
 
-      const form = document.getElementById("user-form");
-        const nameInput = document.getElementById("name");
-        const passwordInput = document.getElementById("password");
-        const confirmPasswordInput = document.getElementById("confirm-password");
-        const confirmPasswordError = document.getElementById("confirm-password-error");
-        const name_error = document.getElementById("name-error");
-        
-      //-------------------------------------------------------------------------
-      function checkPasswords() {
-        if (passwordInput.value !== confirmPasswordInput.value) {
-          confirmPasswordError.textContent = "Passwords do not match";
-        } else {
-          confirmPasswordError.textContent = "";
-        }
-      }
-      confirmPasswordInput.addEventListener("input", checkPasswords);
-      //-------------------------------------------------------------------------
+              document.getElementById("password").value = "";
+          </script>
+          {% endif %}
+<!-------------------------------------------------------------------------------------------------------------------->
+<script>
+  var users = [];
+
       
-      function validateForm() {
-    let isValid = true;
-    if (confirmPasswordInput.value.trim()  != passwordInput.value.trim()) {
-      confirmPasswordError.textContent = "Confirm Password is incompatible";
-      isValid = false;
-
-    }
-    
-    // Return true if the form is valid, false otherwise
-    name_error.textContent=""
-    for (let i = 0; i < users.length; i++) {
-        if (nameInput.value == users[i]) {
-
-            isValid=false;
-            name_error.textContent="this user is already ecxiste"
-            break;
-        }
+  $('#user-list li').each(function() {
+          users.push($(this).text());
+      });
+      // do something with the list of users
         
-        
-    }
-    
-    return isValid;
-  }
-
-  // Add event listener to the form's submit event
-  form.addEventListener("submit", (event) => {
-    if (!validateForm()) {
-      event.preventDefault(); // prevent form submission if validation fails
-    }
-  });
   
-  // Add event listener to the confirm password field's input event
 
-    </script>
+const form = document.getElementById("user-form");
+  const nameInput = document.getElementById("name");
+  const passwordInput = document.getElementById("password");
+  const confirmPasswordInput = document.getElementById("confirm-password");
+  const confirmPasswordError = document.getElementById("confirm-password-error");
+  const name_error = document.getElementById("name-error");
+  
+//-------------------------------------------------------------------------
+function checkPasswords() {
+  if (passwordInput.value !== confirmPasswordInput.value) {
+    confirmPasswordError.textContent = "Passwords do not match";
+  } else {
+    confirmPasswordError.textContent = "";
+  }
+}
+confirmPasswordInput.addEventListener("input", checkPasswords);
+//-------------------------------------------------------------------------
+
+function validateForm() {
+let isValid = true;
+if (confirmPasswordInput.value.trim()  != passwordInput.value.trim()) {
+confirmPasswordError.textContent = "Confirm Password is incompatible";
+isValid = false;
+
+}
+
+// Return true if the form is valid, false otherwise
+name_error.textContent=""
+for (let i = 0; i < users.length; i++) {
+  if (nameInput.value == users[i]) {
+
+      isValid=false;
+      name_error.textContent="this user is already ecxiste"
+      break;
+  }
+  
+  
+}
+
+return isValid;
+}
+
+// Add event listener to the form's submit event
+form.addEventListener("submit", (event) => {
+if (!validateForm()) {
+event.preventDefault(); // prevent form submission if validation fails
+}
+});
+
+// Add event listener to the confirm password field's input event
+
+</script>
 {% endblock body %}

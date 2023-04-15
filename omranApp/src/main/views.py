@@ -59,6 +59,7 @@ def add_user(request):
         user_type = request.POST.get('type')
         user_type=int(user_type)
         User(username=user_name,password=user_password,userPriority=user_type).save()
+        return redirect('user_list')
     all_user=pd.DataFrame(User.objects.all().values())
     context={"users":all_user['username']}
     return render(request, "main/add_user.html",context)

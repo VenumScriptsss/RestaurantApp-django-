@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html>
-<head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<title>User List</title>
-=======
 <html style="font-size: 16px;" lang="en"><head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,7 +20,6 @@
 		"name": "",
 		"logo": "images/default-logo.png"
 }</script>
->>>>>>> 171ec4c60a3431b10ec1f935b7dfa5d30d921fd8
 	<style>
 		body{
 			padding: 0;
@@ -82,33 +75,6 @@
 	</style>
 </head>
 <body>
-<<<<<<< HEAD
-	<table>
-		<thead>
-			<tr>
-				<th>User Name</th>
-				<th>User Type</th>
-					<th>Edit</th>
-					<th>Delete</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for user in users %}
-			{% if user.deleted == False %}
-			<tr id="user{{user.id}}">
-				
-				<td>{{user.username}}</td>
-				<td>   {{user.get_userPriority_display}}</td>
-
-				  <form method="post" action="edit_user">{% csrf_token %} <td><button name="id" value="{{user.id}}">Edit</button></td></form>
-				<td><button class="image-button" onclick="delete_user('{{user.id}}')" ><img src="/static/img/3687412.png" style="width: 35%; height: 35%;"></button></td>
-			</tr>
-			{% endif %}
-            {% endfor %}
-			<!-- Add more rows as needed -->
-		</tbody>
-	</table>
-=======
 	{% include 'header.html' %}
 	<section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
 		<div class="u-clearfix u-sheet u-sheet-1">
@@ -131,6 +97,7 @@
 					</thead>
 					<tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
 						{% for user in users %}
+						{% if user.deleted == False %}
 						<tr style="height: 60px;" id="user{{user.id}}">
 							
 							<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{user.username}}</td>
@@ -144,6 +111,7 @@
 							<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"><button class="icon-button2" onclick="delete_user('{{user.id}}')" ><img src="/static/img/3687412.png" class="icon-supprime"></button>
 							</td>
 						</tr>
+						{% endif %}
 						{% endfor %}
 						<!-- Add more rows as needed -->
 					</tbody>
@@ -153,7 +121,6 @@
 		</div>
 	</section>
 	
->>>>>>> 171ec4c60a3431b10ec1f935b7dfa5d30d921fd8
 
 
 <script>
