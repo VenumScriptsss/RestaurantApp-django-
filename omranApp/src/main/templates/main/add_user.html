@@ -1,76 +1,87 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Create New User</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f1f1f1;
-      }
-      
-      h1 {
-        text-align: center;
-        margin-top: 40px;
-        color: #444;
-      }
-      
-      form {
-        width: 80%;
-        max-width: 500px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-      }
-      
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: #555;
-      }
-      
-      input,
-      select {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-        font-size: 16px;
-      }
-      
-      input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-      
-      input[type="submit"]:hover {
-        background-color: #3e8e41;
-      }
-      
-      /* Style the error message */
-      .error {
-        color: #f44336;
-        font-size: 12px;
-        margin-top: 4px;
-      }
-    </style>
-  </head>
-  <body>
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+<title>Product Creation Form</title>
 
-      {%  if page_type %}
+
+<style>
+    /* CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color:#e5e5e5
+    }
+
+    form {
+        margin-left: 50%;
+        transform: translate(-50%);
+        width: 500px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    input[type=text],
+    input[type=number],
+    input[type=password],
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: white;
+        font-size: 17px;
+    }
+
+    input[type=file] {
+        margin-bottom: 10px;
+    }
+
+    input[type=submit] {
+        background-color: #edbc0b;
+        color: black;
+        padding: 12px 20px;
+        border: none;
+        height: 50px;
+        width:30%;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 15px;
+        margin: 35px 35%;
+       
+    }
+
+    input[type=submit]:hover {
+        background-color: #dfb10a;
+        
+    }
+
+
+    .preview {
+        max-width: 100%;
+        height: auto;
+    }
+
+    @media (max-width: 575px) {
+    form{ margin-top: 50px ;
+      width: 400px;}
+   
+  }
+</style>
+{% endblock header %}
+{% block body %}
+      {% include 'header4.html' %}
+      
 <!-------------------------------------------------------------------------------------------------------------------->
-            <h1>EDIT User</h1>
+            <h1 style="text-align:center;" >Editer l'utilisatuer</h1>
             <form action="edit_user_submit" method="POST" id="user-form">
                 {% csrf_token %}
             
@@ -99,58 +110,16 @@
             </script>
             
               <input  name="user_id" value="{{selected_user.id}}" style="display: none;">
-              <br> <br> <br>
-              <input type="submit" value="Submit">
+              
+              <input type="submit" value="Ajouter">
             </form>
           
-            <ul id="user-list" style="display: none;">
-                {% for user in users %}
-                <li>{{ user }}</li>
-                {% endfor %}
-            </ul>
+            
 
 
 <!-------------------------------------------------------------------------------------------------------------------->
 
-      {% else %}
-
-
-
-
-          <h1>Create New User</h1>
-          <form href="add_user" method="POST" id="user-form">
-              {% csrf_token %}
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <div class="error" id="name-error"></div>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <div class="error" id="password-error"></div>
-            
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-            <div class="error" id="confirm-password-error"></div>
-            
-            <label for="type">User Type:</label>
-            <select id="type" name="type">
-              <option value="1">Caissier Admin</option>
-              <option value="2">Caissier</option>
-              <option value="3">Serveur</option>
-            </select>
-            <br> <br> <br>
-            <input type="submit" value="Submit">
-          </form>
-        
-          <ul id="user-list" style="display: none;">
-              {% for user in users %}
-              <li>{{ user }}</li>
-              {% endfor %}
-          </ul>
-
-
-        
-      {% endif %}
+      
       <script>
         var users = [];
     
@@ -214,5 +183,4 @@
   // Add event listener to the confirm password field's input event
 
     </script>
-  </body>
-</html>
+{% endblock body %}

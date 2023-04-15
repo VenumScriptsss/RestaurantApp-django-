@@ -1,85 +1,88 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
 <head>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>User List</title>
+=======
+<html style="font-size: 16px;" lang="en"><head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title>home_admin</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'products2.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'header.css' %}" media="screen">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.min.js"></script>
+
+    <meta name="generator" content="Nicepage 5.6.2, nicepage.com">
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"logo": "images/default-logo.png"
+}</script>
+>>>>>>> 171ec4c60a3431b10ec1f935b7dfa5d30d921fd8
 	<style>
-		table {
-		  font-family: Arial, sans-serif;
-		  border-collapse: collapse;
-		  width: 100%;
-		  max-width: 600px;
-		  margin: 0 auto;
-		  border: 1px solid #ccc;
-		}
-		
-		th, td {
-		  text-align: left;
-		  padding: 12px;
-		}
-		
-		th {
-		  background-color: #f2f2f2;
-		}
-		
-		td {
-		  border-bottom: 1px solid #ddd;
-		}
-		
-		button {
-		  background-color: #4CAF50;
-		  color: #fff;
-		  border: none;
-		  padding: 8px 12px;
-		  border-radius: 4px;
-		  cursor: pointer;
-		}
-		
-		button:hover {
-		  background-color: #3e8e41;
-		}
-		
-		.edit {
-		  background-color: #2196F3;
-		}
-		
-		.edit:hover {
-		  background-color: #0b7dda;
-		}
-		
-		.delete {
-		  background-color: #f44336;
-		}
-		
-		.delete:hover {
-		  background-color: #da190b;
-		}
-		</style>
-		
-		
-		
+		body{
+			padding: 0;
+			margin: 0;
+			background-color:  #e5e5e5;}
+			.u-section-1 .u-table-1 {
+      
+      max-height: 800px;
+      width: 1215px;
+      margin: 20px auto ;
+      overflow: auto;
+    }
 
-	<style>
-		.image-button {
-  border: none;
-  background: transparent;
+    .div_searsh{margin: 20px;
+    }
 
+    @media (max-width: 1199px) {
+    .u-section-1 .u-table-1 {
+    width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+  }}
 
-}
-.image-button:hover {
-  background-color: transparent;
-}
+  @media (max-width: 991px) {
+    .u-section-1 .u-table-1 {
+      width:97%;
+  }}
 
-.image-button img {
-  display: block;
-  width: 35%;
-  height: 35%;
-}
+  @media (max-width: 767px) {
+    .u-section-1 .u-table-1 {
+      width: 97%;
+  
+  }}
+
+  @media (max-width: 575px) {
+    .u-section-1 .u-table-1 {
+      width: 97%;
+   
+  }}
+
+  @media (max-width: 450px) {
+    .div_searsh{width: 90%;
+                height: 40px;}
+    .form_search {
+      width: 95%;
+      height: 100%;
+     
+   
+  }}
+
 
 
 	</style>
 </head>
 <body>
+<<<<<<< HEAD
 	<table>
 		<thead>
 			<tr>
@@ -105,6 +108,52 @@
 			<!-- Add more rows as needed -->
 		</tbody>
 	</table>
+=======
+	{% include 'header.html' %}
+	<section class="u-clearfix u-grey-10 u-section-1" id="sec-9891">
+		<div class="u-clearfix u-sheet u-sheet-1">
+			<div class="u-table u-table-responsive u-table-1" >
+				<table  class="u-table-entity">
+					<colgroup>
+						<col width="30%">
+						<col width="30%">
+						<col width="20%">
+						<col width="20%">
+						
+					  </colgroup>
+					<thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
+						<tr style="height: 60px;">
+							<th class="u-table-cell">Nom d'utilisatuer</th>
+							<th class="u-table-cell">Type d'utilisatuer</th>
+							<th class="u-table-cell"></th>
+							<th class="u-table-cell"></th>
+						</tr>
+					</thead>
+					<tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
+						{% for user in users %}
+						<tr style="height: 60px;" id="user{{user.id}}">
+							
+							<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{user.username}}</td>
+							<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">   {{user.get_userPriority_display}}</td>
+			
+						<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+							<form method="post" action="edit_user">{% csrf_token %} 
+								<button name="id" value="{{user.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button" >Edit</button>
+							</form>
+						</td>
+							<td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"><button class="icon-button2" onclick="delete_user('{{user.id}}')" ><img src="/static/img/3687412.png" class="icon-supprime"></button>
+							</td>
+						</tr>
+						{% endfor %}
+						<!-- Add more rows as needed -->
+					</tbody>
+				</table>
+			</div>
+			<a href="add_user"><div class="text-center"><button class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 ajouter_button" type="submit" name="button_ajouter" >Ajouter un utilisateur</button></div></a>
+		</div>
+	</section>
+	
+>>>>>>> 171ec4c60a3431b10ec1f935b7dfa5d30d921fd8
 
 
 <script>

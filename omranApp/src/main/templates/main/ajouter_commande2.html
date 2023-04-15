@@ -171,7 +171,7 @@
             <div class="u-form-select-wrapper" id="selectTableNumCont" style="display:none">
               <select id="selectTableNum" name="tableNum"onchange="selectFunc(this.value)" class="u-input u-input-rectangle u-radius-10 u-white u-input-1" >
                 {% if pageType == 'Editer Command' %}
-                  <option hidden value="{{comm.tableNum}}" selected></option>
+                  <option value="{{comm.tableNum}}" selected>table {{comm.tableNum}}</option>
                 {% endif %}
                 <option value="1">table 1</option>
                 <option value="2">table 2</option>
@@ -283,7 +283,7 @@
                               
                                
                         {% endfor %}
-                        <input type="text" id="typeCommand" name="typeComm" value="-1" hidden>
+                        <input type="text" id="typeCommand" name="typeComm" value="{{comm.tableNum}}" hidden>
                       </div>
                         <div id="newPlats">
                         </div>
@@ -292,7 +292,7 @@
                           {% else %}
                                 <input hidden type="submit" id="formSubmit" name="confEdit" value="newComm">
                           {% endif %}
-                          <input type="text" name="commPrix" id="commPrixInput" hidden>
+                          <input type="text" name="commPrix" id="commPrixInput" value="{{comm.commPrice}}" hidden>
                       </form>
                     </div>
                   </div>
@@ -317,7 +317,14 @@
   
 </body>
 <script>
-
+  window.onload = function(){
+    select = document.getElementById('selectTableNum')
+    if (select.value != "-1"){
+      document.getElementById('emporterBtn').style='background-color:#858e99'
+      document.getElementById('aTableBtn').style='background-color:#268905'
+      document.getElementById('selectTableNumCont').style='display:block'
+    }
+  }
   function selectFunc(value){
     document.getElementById('typeCommand').value = value
   }
@@ -389,11 +396,14 @@
   }
 
   function submitTrigger(){
-      selectValue = document.getElementById('selectTableNum')
+        
       if (checkEmptyProdsList()){
         alert('il faux choisir des plats')
       }
       else{
+        if(document.getElementById('typeCommand').value == ''){
+          document.getElementById('typeCommand').value=-1;
+        }
         document.getElementById('formSubmit').click();
       }
       commForm = document.getElementById('commForm')
