@@ -315,10 +315,10 @@
             <thead class="u-align-center u-grey-25 u-table-header u-text-black u-table-header-1">
               <tr style="height: 46px;">
                 <th class="u-table-cell">
-                  <span class="u-text-black">N° de table</span>
+                  <span class="u-text-black">N° de Table</span>
                 </th>
-                <th class="u-table-cell">date de saisie</th>
-                <th class="u-table-cell">Prix total<br>
+                <th class="u-table-cell">Temps de Saisie</th>
+                <th class="u-table-cell">Prix Total<br>
                 </th>
                 <th class="u-grey-25 u-table-cell u-table-cell-4"></th>
                 {% if userType == '1' or userType == '2' %}
@@ -327,7 +327,7 @@
               </tr>
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
-              {% for comm in commands %}
+              {% for comm in todayComms %}
               {% if comm.encaisser is False %}
                 
                 <tr style="height: 60px;" id="commTr_{{comm.id}}">
@@ -336,7 +336,7 @@
                   {% else %}
                     <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
                   {% endif%}
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|date:'d-m-Y'}}<br>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|time:"H:i"}}<br>
                   </td>
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.commPrice}} DA<br>
                   </td>    

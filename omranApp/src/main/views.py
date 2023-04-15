@@ -304,10 +304,11 @@ def update_category_list(request):
         return JsonResponse(context)
 
 #--------------------------home------------------------------
-@my_login_required
+
 def homeView(request):
     context={}
     commnds=Command.objects.all().values()
+    context['todayComms'] = commnds.filter(dateComm__date= date.today())
     df=pd.DataFrame(commnds)
 
     prods=pd.DataFrame(Products.objects.all().values())
