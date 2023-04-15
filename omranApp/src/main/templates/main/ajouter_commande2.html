@@ -169,15 +169,16 @@
           <div class="u-form-group u-form-select u-label-none u-form-group-1">
             <label for="select-c85c" class="u-label">Dropdown</label>
             <div class="u-form-select-wrapper" id="selectTableNumCont" style="display:none">
-              <select id="selectTableNum" name="tableNum"onchange="selectFunc(this.value)" class="u-input u-input-rectangle u-radius-10 u-white u-input-1" >
+              <select id="selectTableNum" name="tableNum" onchange="selectFunc(this.value)" class="u-input u-input-rectangle u-radius-10 u-white u-input-1" >
                 {% if pageType == 'Editer Command' %}
-                  <option value="{{comm.tableNum}}" selected>table {{comm.tableNum}}</option>
+                  <option value="{{comm.tableNum}}" selected>numero table</option>
                 {% endif %}
-                <option value="1">table 1</option>
-                <option value="2">table 2</option>
                 {% if pageType == 'Ajouter Command' %}
                 <option value="-1" selected hidden>numero table</option>
                 {% endif %}
+                <option value="1">table 1</option>
+                <option value="2">table 2</option>
+                
               </select>
               <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
             </div>
@@ -323,6 +324,7 @@
       document.getElementById('emporterBtn').style='background-color:#858e99'
       document.getElementById('aTableBtn').style='background-color:#268905'
       document.getElementById('selectTableNumCont').style='display:block'
+      document.getElementById("selectTableNum").selectedIndex = parseInt(select.value);
     }
   }
   function selectFunc(value){

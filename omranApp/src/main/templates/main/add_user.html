@@ -75,6 +75,49 @@
       width: 400px;}
    
   }
+  .icon-button2 {
+  background-color: transparent;
+  
+  width: 50px;
+  height: 37px;
+  font-size: 1em;
+  border: 0px solid red;
+  cursor: pointer;
+  margin:auto 5px ;
+  
+}
+.icon-supprime{
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 1199px) {
+  .icon-button2{width: 63px;}
+}
+@media (max-width: 991px) {
+  .icon-button2{width: 55px;}
+
+}
+
+@media (max-width: 575px) {
+  .icon-button2{
+    
+    width: 45px;
+  height: 34px;
+  }
+
+}
+.input{
+
+  display:flex;
+  background-color: white;
+  border-radius: 10px;
+  padding: 0px;
+  border: 1px solid #ccc;
+
+  
+
+}
+  
 </style>
 {% endblock header %}
 {% block body %}
@@ -88,19 +131,25 @@
             <form action="edit_user_submit" method="POST" id="user-form">
                 {% csrf_token %}
             
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" value="{{selected_user.username}}" required>
+              <label for="name">le nom:</label>
+              <input type="text" id="name" name="name" placeholder="Entrez le nom" value="{{selected_user.username}}" required>
               <div class="error" id="name-error"></div>
-              
-              <label for="password">Password:</label>
-              <input type="password" id="password" name="password" value="{{selected_user.password}}" required>
+
+
+              <label for="password">Le mot de pass:</label>
+              <div class="input">
+                <input type="password" id="password" name="password" placeholder="Entrez le mot de pass" value="{{selected_user.password}}" style="margin: 0px; border: 0px;" required>
+                <button type="button" id="toggle-password1" class="icon-button2"><img src="/static/img/show.png" class="icon-supprime" id="img1"></button>
+              </div>
               <div class="error" id="password-error"></div>
               
-              <label for="confirm-password">Confirm Password:</label>
-              <input type="password" id="confirm-password" name="confirm-password" value="{{selected_user.password}}" required>
+              <label for="confirm-password">Confirmation de mot de pass:</label>
+              <div class="input">
+              <input type="password" id="confirm-password" placeholder="confirmer le mot de pass" name="confirm-password" value="{{selected_user.password}}" style="margin: 0px; border: 0px;" required>
+              <button type="button" id="toggle-password2" class="icon-button2"><img src="/static/img/show.png" class="icon-supprime" id="img2"></button></div>
               <div class="error" id="confirm-password-error"></div>
               
-              <label for="type">User Type:</label>
+              <label for="type">Type d'utilisateur</label>
               <select id="type" name="type">
                 <option value="1">Caissier Admin</option>
                 <option value="2">Caissier</option>
@@ -118,7 +167,35 @@
             </form>
           
             
+            <script>
+              var toggleButton1 = document.getElementById("toggle-password1");
+              var toggleButton2 = document.getElementById("toggle-password2");
+             var passwordInput1 = document.getElementById("password");
+             var passwordInput2 = document.getElementById("confirm-password");
+             var img1 = document.getElementById("img1");
+             var img2 = document.getElementById("img2");
+             
+             toggleButton1.addEventListener("click", function() {
+               if (passwordInput1.type === "password") {
+                 passwordInput1.type = "text";
+                 img1.src="/static/img/hide.png"
+               } else {
+                 passwordInput1.type = "password";
+                 img1.src="/static/img/show.png";
+               }
+             });
 
+             toggleButton2.addEventListener("click", function() {
+               if (passwordInput2.type === "password") {
+                 passwordInput2.type = "text";
+                 img2.src="/static/img/hide.png"
+               } else {
+                 passwordInput2.type = "password";
+                 img2.src="/static/img/show.png";
+               }
+             });
+                 </script>
+                
 
 <!-------------------------------------------------------------------------------------------------------------------->
          {% else %}
