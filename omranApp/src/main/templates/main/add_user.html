@@ -128,25 +128,25 @@
             <form action="edit_user_submit" method="POST" id="user-form">
                 {% csrf_token %}
             
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" value="{{selected_user.username}}" required>
+              <label for="name">le nom:</label>
+              <input type="text" id="name" name="name" placeholder="Entrez le nom" value="{{selected_user.username}}" required>
               <div class="error" id="name-error"></div>
 
 
-              <label for="password">Password:</label>
+              <label for="password">Le mot de pass:</label>
               <div class="input">
                 <input type="password" id="password" name="password" placeholder="Entrez le mot de pass" value="{{selected_user.password}}" style="margin: 0px; border: 0px;" required>
                 <button type="button" id="toggle-password1" class="icon-button2"><img src="/static/img/show.png" class="icon-supprime" id="img1"></button>
               </div>
               <div class="error" id="password-error"></div>
               
-              <label for="confirm-password">Confirm Password:</label>
+              <label for="confirm-password">Confirmation de mot de pass:</label>
               <div class="input">
               <input type="password" id="confirm-password" placeholder="confirmer le mot de pass" name="confirm-password" value="{{selected_user.password}}" style="margin: 0px; border: 0px;" required>
               <button type="button" id="toggle-password2" class="icon-button2"><img src="/static/img/show.png" class="icon-supprime" id="img2"></button></div>
               <div class="error" id="confirm-password-error"></div>
               
-              <label for="type">User Type:</label>
+              <label for="type">Type d'utilisateur</label>
               <select id="type" name="type">
                 <option value="1">Caissier Admin</option>
                 <option value="2">Caissier</option>
