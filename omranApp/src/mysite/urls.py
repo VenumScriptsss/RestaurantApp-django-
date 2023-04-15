@@ -42,6 +42,7 @@ urlpatterns = [
      path('user_list', user_list_view, name='user_list'),
     path('edit_user', edit_user, name='edit_user'),
     path('edit_user_submit', edit_user_submit, name='edit_user_submit'),
+    path('delete_user', delete_user, name='delete_user'),
     
 
 

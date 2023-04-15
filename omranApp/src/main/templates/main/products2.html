@@ -150,7 +150,7 @@
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1" id="prods_list">
               
               {% for prod in products %}
-         
+              {% if prod.deleted == False %}
               <tr style="height: 60px;" id="prod_{{prod.id}}">
               
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{prod.prodName}}</td>
@@ -190,7 +190,7 @@
                 </td>
               
               </tr>
-           
+               {% endif %}
               {% endfor %}
             </tbody>
             

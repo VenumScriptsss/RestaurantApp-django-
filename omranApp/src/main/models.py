@@ -13,7 +13,7 @@ class User(models.Model):
     username = models.CharField(max_length=14,verbose_name="username",null=False)
     password = models.CharField(max_length=30,verbose_name="password", null=False)
     userPriority = models.CharField(max_length=1,choices=userPriorityChoices,null=False,verbose_name="usertype")
-
+    deleted=models.BooleanField(default=False)
     def __str__(self):
         return self.username
     
@@ -32,7 +32,7 @@ class Products(models.Model):
     prodCat = models.IntegerField(choices=prodCatChoices,null=False,help_text='choisit la categorie de ce produit',verbose_name='categorie de produit')
     isActive = models.BooleanField(help_text='activer ou desactiver ce produit', verbose_name='status de produit',default=True)
     img=models.ImageField(default='default.jpg',upload_to='profile_pics')
-
+    deleted=models.BooleanField(default=False)
     
     def __str__(self):
         return self.prodName

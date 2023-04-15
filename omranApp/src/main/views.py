@@ -52,7 +52,7 @@ def loginPage(request):
 
 
 def add_user(request):
-    print("okey nigga")
+ 
     if request.method=="POST":
         user_name = request.POST.get('name')
         user_password = request.POST.get('password')
@@ -74,8 +74,7 @@ def apply_function(request):
 
 
 def user_list_view(request):
-    if request.method=="POST":
-        print("im in this ")
+
     users=User.objects.all()
     context={"users":users}
     return render(request, "main/user_list.html",context)
@@ -108,6 +107,16 @@ def edit_user_submit(request):
     user.save() 
     
     return redirect('user_list')
+
+@csrf_exempt
+def delete_user(request):
+  
+     user_id=int(request.POST.get('id'))
+     user=User.objects.filter(id=user_id).first()
+     user.deleted=True
+     user.save()
+
+     return JsonResponse({})
 
 #-------------ajouter/editer command----------------lzm tedkhel mn caissier wdir edit w ab3at lform bch tbanlk
 
@@ -264,7 +273,9 @@ def delete_product(request):
     context = {}
     
     if 'delete_prod' in request.POST:
-        Products.objects.get(id=request.POST['delete_prod']).delete()
+        prod=Products.objects.get(id=request.POST['delete_prod'])
+        prod.deleted=True
+        prod.save()
         return redirect('editer-products')
     prods = Products.objects.all()
     context['products'] = prods
@@ -278,13 +289,16 @@ def search_product_function(request):
     if request.method == 'POST':
         data= request.POST.get("data")
         all_prods=pd.DataFrame(Products.objects.all().values())
+        all_prods.drop(all_prods[all_prods['deleted']==True].index,inplace=True)
+
         result=Products.objects.filter(prodName__contains=data)
         result_list = []
         for product in result:
+            if(product.deleted):continue
             product_dict = model_to_dict(product)
             product_dict['img'] = product.img.url if product.img else None
             result_list.append(product_dict)
-    print(all_prods['id'])
+  
     return JsonResponse({'data': result_list,"ids":list(all_prods['id'])})
 
 @csrf_exempt

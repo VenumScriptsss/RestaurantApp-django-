@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>User List</title>
 	<style>
 		table {
@@ -90,6 +91,7 @@
 		</thead>
 		<tbody>
 			{% for user in users %}
+			{% if user.deleted == False %}
 			<tr id="user{{user.id}}">
 				
 				<td>{{user.username}}</td>
@@ -98,6 +100,7 @@
 				  <form method="post" action="edit_user">{% csrf_token %} <td><button name="id" value="{{user.id}}">Edit</button></td></form>
 				<td><button class="image-button" onclick="delete_user('{{user.id}}')" ><img src="/static/img/3687412.png" style="width: 35%; height: 35%;"></button></td>
 			</tr>
+			{% endif %}
             {% endfor %}
 			<!-- Add more rows as needed -->
 		</tbody>
@@ -107,6 +110,16 @@
 <script>
 	function delete_user(val){
        hide(val)
+	   $.ajax({
+        
+		type: 'POST',
+          url: '/delete_user',
+          data: {
+            'id':val},
+        
+          success: function(response) {}
+
+	   });
 
 	}
 
