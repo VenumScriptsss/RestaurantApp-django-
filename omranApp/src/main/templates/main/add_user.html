@@ -117,7 +117,11 @@
   
 
 }
-  
+.error {
+        color: #f44336;
+        font-size: 12px;
+        margin-top: 4px;
+      }
 </style>
 {% endblock header %}
 {% block body %}
@@ -230,6 +234,12 @@
           </script>
           {% endif %}
 <!-------------------------------------------------------------------------------------------------------------------->
+<ul id="user-list" style="display: none;">
+  {% for user in users %}
+  <li>{{ user }}</li>
+  {% endfor %}
+</ul>
+
 <script>
   var users = [];
 
@@ -251,7 +261,7 @@ const form = document.getElementById("user-form");
 //-------------------------------------------------------------------------
 function checkPasswords() {
   if (passwordInput.value !== confirmPasswordInput.value) {
-    confirmPasswordError.textContent = "Passwords do not match";
+    confirmPasswordError.textContent = "Les mots de passe ne correspondent pas";
   } else {
     confirmPasswordError.textContent = "";
   }
@@ -262,18 +272,20 @@ confirmPasswordInput.addEventListener("input", checkPasswords);
 function validateForm() {
 let isValid = true;
 if (confirmPasswordInput.value.trim()  != passwordInput.value.trim()) {
-confirmPasswordError.textContent = "Confirm Password is incompatible";
+confirmPasswordError.textContent = "Les mots de passe ne correspondent pas";
 isValid = false;
 
 }
 
 // Return true if the form is valid, false otherwise
 name_error.textContent=""
+console.log(users)
 for (let i = 0; i < users.length; i++) {
+  
   if (nameInput.value == users[i]) {
 
       isValid=false;
-      name_error.textContent="this user is already ecxiste"
+      name_error.textContent="cet utilisateur existe déjà"
       break;
   }
   

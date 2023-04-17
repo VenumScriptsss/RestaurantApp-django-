@@ -32,6 +32,7 @@ def log_out(request):
     logout(request)
     return redirect('loginPage')
 
+@csrf_exempt
 def loginPage(request):
     context = {}
     users = User.objects.all()
@@ -63,6 +64,8 @@ def add_user(request):
     all_user=pd.DataFrame(User.objects.all().values())
     context={"users":all_user['username']}
     return render(request, "main/add_user.html",context)
+
+
 @csrf_exempt
 def apply_function(request):
    
@@ -453,4 +456,4 @@ def history_submit(request):
 #--------------------------------------------------------
 
 def test(request):
-    return render(request, 'main\\test.html',context={})
+    return render(request, 'main/test.html',context={})
