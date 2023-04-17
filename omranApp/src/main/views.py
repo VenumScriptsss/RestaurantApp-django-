@@ -353,6 +353,8 @@ def homeView(request):
     context['prod_price']=prod_price
     context['userType']=request.session['userType']
     
+    if 'cancelComm' in request.POST:
+        Command.objects.get(id=request.POST['cancelComm']).isCanceled=True
     return render(request,'main/home.html',context)
 
 

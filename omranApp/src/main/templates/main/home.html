@@ -354,8 +354,8 @@
               </tr>
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
-              {% for comm in todayComms %}
-              {% if comm.encaisser is False %}
+              {% for comm in commands %}
+              {% if comm.encaisser is False or comm.isCanceled is False %}
                 
                 <tr style="height: 60px;" id="commTr_{{comm.id}}">
                   {% if comm.tableNum == '-1' %}
@@ -375,10 +375,11 @@
                 </form>
               {% if userType == '1' or userType == '2' %}
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <button name="encaissment"   class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5"onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})"">encaisser</button>
+                    <button name="encaissment" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5"onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})"">encaisser</button>
                 </td>
               {% endif %}
-              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell"><button class="icon-button2" onclick="" ><img src="/static/img/3687412.png" class="icon-supprime"></button>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
+                <button class="icon-button2" name="cancelComm" value="{{comm.id}}"><img src="/static/img/3687412.png" class="icon-supprime"></button>
 							</td>
                 </tr>
                 {% endif %}
