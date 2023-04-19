@@ -1,0 +1,300 @@
+.general_div2{
+    
+    display: none;
+    background-color: rgba(0, 0, 0, 30%);
+    border: 0px solid;
+    
+    justify-content: center;
+    position:fixed;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+
+}
+
+.myModel2{
+  background-color: #f2f2f2;
+    border: 0px solid;
+    padding-top:5px;
+    margin:60px auto auto auto;
+    justify-content: center;
+    
+    height: 450px;
+    width: 500px;
+    border-radius: 20px;
+}
+
+.closeButton2{
+    
+    margin: 0px 8px;
+    display: inline-block;
+    float : right;
+    border-radius: 5px;
+    background-color: rgb(180, 180, 180);
+    width: 27px;
+    height: 25px;
+    font-size: 1em;
+    border: 0px;
+    cursor: pointer;
+    
+}
+.title{
+    width: 50%;
+    margin-top: 10px;
+    margin-left: 23%;
+    
+    
+    display: inline-block;}
+
+.iconClose2{
+    
+    width: 90%;
+    height: 80%;}
+
+.head2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    height: 40px;
+    
+}
+
+.div_table2{
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 0px solid;
+    margin: 0px auto;
+    vertical-align: middle;
+    height: 83%;
+    width: 95%;
+    border-radius: 10px;
+
+}
+
+
+
+
+.confermedButton2{
+    padding: 0px 15px;
+    height: 38px;
+    display: block;
+    font-size: 16px;
+    margin: 15px auto ;
+    vertical-align: middle;
+    border-radius: 7px ;
+    background-color: #3d8905;
+    border: 0px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+form {
+margin: 30px auto;
+ padding: 10px 10px;
+ height: 220px;
+ width: 90%;
+ background-color: rgb(245,245,245);
+ border-radius: 10px;
+ 
+}
+
+.atention{
+    padding: 0px;
+    margin: 0px auto;
+    top: -20px;
+    font-family: 'Times New Roman', Times, serif;
+font-size: 14px;
+color: red;
+
+}
+.input_1{
+height: 35px;
+width: 30%;
+border-radius: 7px;
+border: 1px solid black;
+margin: 5px;
+padding-left:5px ;
+}
+.input_1::-webkit-inner-spin-button,
+.input_1::-webkit-outer-spin-button {
+
+background-color: #fff; /* Change background color */
+/* Add border */
+height: 40px; /* Set height */
+width: 18px; /* Set width */
+text-align: center; /* Center text */
+color: #333; /* Change text color */
+font-size: 12px; /* Change font size */
+cursor: pointer; 
+}
+.div02 , .div01{
+    margin-top: 10px;
+    display: flex;
+  justify-content: center;
+  align-items: center;}
+
+.switch {
+position:relative;
+display: inline-block;
+width: 60px;
+height: 28px;
+margin-left:15% ;
+margin-right:15px  ;
+}
+
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.slider:before {
+position: absolute;
+content: "";
+height: 22px;
+width: 22px;
+left: 4px;
+bottom: 3px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+input:checked + .slider {
+background-color: #2196F3;
+}
+
+input:focus + .slider {
+box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+-webkit-transform: translateX(28px);
+-ms-transform: translateX(28px);
+transform: translateX(28px);
+}
+
+/* Rounded sliders */
+.slider.round {
+border-radius: 28px;
+}
+
+.slider.round:before {
+border-radius: 50%;
+}
+
+
+.btn10{
+display: inline-block;
+padding: 12px 10px;
+font-size: 16px;
+font-weight: bold;
+text-decoration: none;
+color: #fff;
+background-color: #478ac9;
+border: none;
+border-radius: 10px;
+box-shadow: none;
+cursor: pointer;
+text-align: center;
+width: 30%; 
+height:45px;
+margin: 1%;/* Set width */
+/* Set height */
+}
+.btn10:hover{background-color: #478ac9;color :white}
+
+
+
+.hidden_button{
+width: 96%;
+margin: 30px auto;
+}
+
+@media (max-width: 757px) {
+.myModel2{width: 400px;}
+
+.btn10{font-size: 13px;
+    padding: 12px 8px;}
+
+ label{font-size: 14px;}
+ .confermedButton2{ 
+   
+    padding: 0px 10px;
+    width:80px;
+    font-size: 14px;
+    height: 34px;}
+
+    .input_1{
+        height: 34px;
+        width: 27%;}
+        form {width:94%;}
+}
+
+@media (max-width: 575px) {
+.atention{
+    
+    font-size: 12px;}
+.myModel2{width: 350px;}
+
+.btn10{font-size: 11px;
+    padding: auto 5px;}
+
+ label{font-size: 13px;}
+ .confermedButton2{ 
+    padding: 0px 10px;
+    width:85px;
+    font-size: 13px;
+    height: 35px;
+    }
+
+    .input_1{
+        height: 34px;
+        width: 28%;
+      }
+        form {width:96%;
+        margin-left:2%;
+        margin-right:2%;}
+        }
+
+
+        @media (max-width: 480px) {
+            .atention{
+                
+                font-size: 12px;}
+            .myModel2{width: 350px;}
+            
+            .btn10{font-size: 11px;
+                padding: auto 5px;}
+            
+             label{font-size: 12px;}
+             .confermedButton2{ 
+                padding: 0px 10px;
+                width:80px;
+                font-size: 12px;
+                height: 33px;
+                }
+            
+                .input_1{
+                    height: 32px;
+                    width: 26%;
+                  }
+                    form {width:96%;
+                    margin-left:2%;
+                    margin-right:2%;}
+                    }
+            
+              
