@@ -355,8 +355,22 @@ def homeView(request):
     
     if 'cancelComm' in request.POST:
         Command.objects.get(id=request.POST['cancelComm']).isCanceled=True
-    return render(request,'main/home.html',context)
 
+    if 'confTablNumEdit' in request.POST:
+        print(request.POST['numOfTables'])
+        admin = User.objects.get(admin=1)
+        admin.tablesNum = request.POST['numOfTables']
+        admin.save()
+
+    if 'dailyReset' in request.POST:
+        print(request.POST['dailyReset'])
+        admin = User.objects.get(admin=1)
+        if request.POST['dailyReset'] == 'on':
+            admin.dailyReset = True
+        else:
+            admin.dailyReset = False
+        admin.save()
+    return render(request,'main/home.html',context)
 
 @csrf_exempt
 def encaicement(request):

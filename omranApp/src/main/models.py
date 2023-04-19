@@ -14,6 +14,9 @@ class User(models.Model):
     password = models.CharField(max_length=30,verbose_name="password", null=False)
     userPriority = models.CharField(max_length=1,choices=userPriorityChoices,null=False,verbose_name="usertype")
     deleted=models.BooleanField(default=False)
+    tablesNum = models.IntegerField(default=0)
+    dailyReset = models.BooleanField(default=False)
+    admin = models.IntegerField(default=0)
     def __str__(self):
         return self.username
     

@@ -1093,15 +1093,15 @@ h5{font-family: 'Times New Roman', Times, serif;
                     <a href="history" class="btn10">Historique</a>
                     
                   </div>
-                  <form >
+                  <form method='post'>{% csrf_token %}
                     <label style="margin: 5px;">nombre des tables:</label>
-                    <input type="number"  class="input_1">
-                    <input type="submit"  value="confirmer" class="confermedButton2">  
+                    <input type="text" name="numOfTables" class="input_1" value = 1>
+                    <input type="submit"  value="confirmer" name="confTablNumEdit" class="confermedButton2">  
                   </form>  
-                  <form >
+                  <form method='post'>{% csrf_token %}
                     <label style="margin: 15px 5px ; display: inline-block;">mettre à jour:</label>
                     <label class="switch">
-                      <input type="checkbox">
+                      <input type="checkbox" name="dailyReset">
                       <span class="slider round"></span>
                     </label>
                     <input type="submit"  value="confirmer" class="confermedButton2">
