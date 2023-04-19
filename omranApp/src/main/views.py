@@ -129,6 +129,8 @@ def ajouterEditCommandView(request):
     context = {}
     context['prods'] = Products.objects.all()
     context['pageType'] = 'Ajouter Command'
+    admin = User.objects.get(admin=1)
+    context['tablesNum'] = range(1, admin.tablesNum)
 
     if 'edit' in request.POST:
         context['pageType'] = 'Editer Command'
@@ -326,7 +328,7 @@ def update_category_list(request):
 def homeView(request):
     context={}
     commnds=Command.objects.all().values()
-    context['todayComms'] = commnds.filter(dateComm__date= date.today())
+    todayComms = commnds.filter(dateComm__date= date.today())
     df=pd.DataFrame(commnds)
 
     prods=pd.DataFrame(Products.objects.all().values())
@@ -356,20 +358,24 @@ def homeView(request):
     if 'cancelComm' in request.POST:
         Command.objects.get(id=request.POST['cancelComm']).isCanceled=True
 
-    if 'confTablNumEdit' in request.POST:
-        print(request.POST['numOfTables'])
-        admin = User.objects.get(admin=1)
-        admin.tablesNum = request.POST['numOfTables']
-        admin.save()
+    admin = User.objects.get(admin=1)
 
-    if 'dailyReset' in request.POST:
-        print(request.POST['dailyReset'])
-        admin = User.objects.get(admin=1)
-        if request.POST['dailyReset'] == 'on':
+    if 'settingsInfo' in request.POST:
+        print('yoo')
+        admin.tablesNum = request.POST['numOfTables']
+        if request.POST.get('dailyReset') == 'on':
+            print('daily on')
             admin.dailyReset = True
         else:
+            print('daily off')
             admin.dailyReset = False
         admin.save()
+        
+    if admin.dailyReset:
+        context['commands'] = todayComms
+    context['tablesNum'] = admin.tablesNum
+    context['dailyReset'] = admin.dailyReset
+
     return render(request,'main/home.html',context)
 
 @csrf_exempt

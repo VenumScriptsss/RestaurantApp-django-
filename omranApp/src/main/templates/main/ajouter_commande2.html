@@ -176,9 +176,10 @@
                 {% if pageType == 'Ajouter Command' %}
                 <option value="-1" selected hidden>numero table</option>
                 {% endif %}
-                <option value="1">table 1</option>
-                <option value="2">table 2</option>
-                
+                {% for i in tablesNum %}
+                  <option value="{{i}}">Table {{i}}</option>
+                {% endfor %}
+
               </select>
               <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
             </div>
