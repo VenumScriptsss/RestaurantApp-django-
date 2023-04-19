@@ -248,7 +248,7 @@
         background-color: rgba(0, 0, 0, 30%);
         border: 0px solid;
         justify-content: center;
-        position:absolute;
+        position: fixed;
         top:0px;
         right:0px;
         bottom:0px;
@@ -259,7 +259,7 @@
     .myModel{
         background-color: #f2f2f2;
         border: 0px solid;
-        margin-top:5%;
+        margin-top:30px;
         margin-left: auto;
         margin-right: auto;
         
@@ -360,6 +360,16 @@
                                               justify-content: center;
                                               align-items: center;
                                           }
+
+
+                                          @media (max-width: 575px) {
+
+.myModel{
+    margin-top:100px;
+    
+    
+}
+    
                           </style>`
 
 
@@ -391,7 +401,7 @@
                             <td class="td_style">`+prod_price[prodNames[i]]+` DA</td>
                             `
                             if(prod_flaged[prodNames[i]]==undefined){
-                           s+=`<td class="td_style" style="color:red;"> </td>`
+                           s+=`<td class="td_style" style="color:green;"></td>`
                             }
                             else{
                               s+=`<td class="td_style" style="color:red;">-${prod_flaged[prodNames[i]]}</td>`
@@ -403,7 +413,7 @@
                             for (let i = 0; i < deleted_prods.length; i++) {
                               s+=`
                               
-                            <tr style="height: 40px; background-color: red;" >
+                            <tr style="height: 40px; background-color: rgba(255,0,0,60%)" >
                             <td class="td_style">`+deleted_prods[i]+`</td>
                             <td class="td_style"></td>
                             <td class="td_style">   </td>

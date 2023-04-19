@@ -91,7 +91,7 @@
  
   
 }
-.hidden_button{
+.hidden_button2{
   float: right;
   margin: auto 10px auto auto  ;
   display: inline-block;
@@ -109,11 +109,13 @@
   display: inline-block;
   margin: auto  ;
   padding: 10px 0px;
+  font-family: Arial, Helvetica, sans-serif
 
 }
 
 
   .u-section-1 .u-btn-1 {
+  float: right;
   width: 170px;
   font-size: 1.125rem;
   text-align: center;
@@ -121,41 +123,24 @@
   
   margin: auto 10px auto auto  ;
   padding: 10px 0px;
+  font-family: Arial, Helvetica, sans-serif
   
 }
 
-.u-section-1 .u-btn-0 {
-  font-size: 1.125rem;
-  width: 170px;
-  text-align: center;
-  display: inline-block;
-  
-  margin: auto 10px    ;
-  padding: 10px 0px;
-
-}
-
-.u-section-1 .u-btn-2 {
-  font-size: 1.125rem;
-  width: 170px;
-  text-align: center;
-  display: inline-block;
-  padding: 10px 0px;
-  margin: auto 0px auto 10px ;}
 
   @media (max-width: 1191px) { 
     .u-section-1 .u-group-1 {
   width: 115%;
   margin: 20px 7.5% 20px -7.5%;
 }
-.u-section-1 .u-btn-0 ,.u-section-1 .u-btn-1 ,.u-section-1 .u-btn-2 {
+.u-section-1 .u-btn-1  {
   font-size: 1rem;
   width: 140px;
 
 }
-.u-section-1 .u-btn-0{margin: auto 5px ;}
-.u-section-1 .u-btn-1{margin: auto 5px auto auto ;}
-.u-section-1 .u-btn-2{margin: auto 5px;}
+
+.u-section-1 .u-btn-1{margin: auto 5px ;}
+
 
 .u-section-1 .u-btn-3 {
   font-size: 1rem;
@@ -168,18 +153,14 @@
   margin: 20px 5% 20px -5%;
 }
 
-.u-section-1 .u-btn-0 ,.u-section-1 .u-btn-1 ,.u-section-1 .u-btn-2 {
+.u-section-1 .u-btn-1  {
   font-size: 1rem;
   width: 150px;
-
 }
 
 .u-section-1 .u-btn-3 {
   font-size: 1rem;
   width: 180px;
- 
-  
-  
 }
 }
 @media (max-width: 770px) { 
@@ -187,53 +168,52 @@
   width: 120%;
   margin: 20px 10% 20px -10%;
 }
-.u-section-1 .u-btn-0 ,.u-section-1 .u-btn-1 ,.u-section-1 .u-btn-2 {
+.u-section-1 .u-btn-1  {
   font-size: 1rem;
-  width: 130px;
-
+  width: 150px;
 }
 
-.u-section-1 .u-btn-3 {
-  font-size: 1rem;
-  width: 170px;
-  
-  
-}
+
 }
 
 
 @media (max-width: 575px) { 
+  .hidden_button2{
+    width: 50%;
+    
+}
+.hidden_button1{
+  width: 50%;
+ 
+}
+  .u-section-1 .u-btn-3 {
+  font-size: 15px;
+  width: 90%;
+  height:  45px;
+}
+
+
+  .u-section-1 .u-btn-1 {
+  width: 85%;
+  font-size: 15px;
+  height:  45px;
+}
     .u-section-1 .u-group-1 {
   width: 130%;
-  height: 160px;
+
   margin: 20px 15% 20px -15%;
   position: relative;
 }
-.hidden_button1{
- position: absolute;
- width: 50%;
- margin: 25px 25%;
 
-}
-.hidden_button{
-  width: 100%;
-  margin: auto 1% 30px 1%;
+
 
 }
 
-
-.u-section-1 .u-btn-0 ,.u-section-1 .u-btn-1 ,.u-section-1 .u-btn-2 {
-  font-size: 1rem;
-  width: 30%;
-  margin: auto 1.3%;
-
-}
-.u-section-1 .u-btn-3 {
-
-  display: block;
-}
-}
 @media (max-width: 450px) {
+  .u-section-1 .u-btn-3 {width: 100%;}
+  .u-section-1 .u-btn-1 {width: 95%;}
+
+
     .u-section-1 .u-group-1 {
     width: 100%;
     height: 120px;
@@ -312,12 +292,11 @@
               </a>
             </div>
             
-            <div class="hidden_button">
+            <div class="hidden_button2">
               {% if userType == '1' %}
             
-              <a href="editer-products" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1">Les produits</a>
-              <a href="user_list" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-0">Les utilisatuer</a>
-              <a href="history" class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-2">Historique</a>
+              <button class="u-align-right u-btn u-btn-round u-button-style u-radius-10 u-btn-1" onclick="opensetting()" >Les paramatres</button>
+              
               {% endif %}
             </div>
             
@@ -375,7 +354,7 @@
                 </form>
               {% if userType == '1' or userType == '2' %}
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                    <button name="encaissment" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5"onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})"">encaisser</button>
+                    <button name="encaissment" class="u-btn u-btn-round u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-radius-8 u-btn-5" onclick="openModal({{comm.prodNames}},'{{comm.id}}','{{comm.commPrice}}',{{comm.prods_quantity}},{{prod_price}})">encaisser</button>
                 </td>
               {% endif %}
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
@@ -600,12 +579,12 @@ tr.borders{
 
    
    .general_div{
-   
+        
        display: none;
        background-color: rgba(0, 0, 0, 30%);
        border: 0px solid;
        justify-content: center;
-       position:absolute;
+       position: fixed;
        top:0px;
        right:0px;
        bottom:0px;
@@ -629,7 +608,7 @@ tr.borders{
    .myModel{
        background-color: #f2f2f2;
        border: 0px solid;
-       margin-top:5%;
+       margin-top:30px;
        margin-left: auto;
        margin-right: auto;
        
@@ -656,7 +635,7 @@ tr.borders{
    }
    .title{
        width: 200px;
-       margin: 10px auto 10px 60px;
+       margin: 10px auto 10px 23%;
        display: inline-block;
        font-size:20px;}
 
@@ -705,7 +684,7 @@ tr.borders{
        height: 570px;
        width: 340px;
        border-radius: 18px;
-       margin-top:5%;
+       
    }
    .confermedButton{
         
@@ -727,6 +706,14 @@ tr.borders{
 
    
 }
+
+      @media (max-width: 575px) {
+
+      .myModel{
+          margin-top:100px;
+          
+          
+      }
                            
                          </style>`
 
@@ -808,6 +795,350 @@ tr.borders{
   
 </script>
 
+<script>
+  function opensetting() {
+       
+      
+        
+        
+       // Get the modal element
+       var modal = document.getElementById("modal_setting");
+     
+       // If the modal doesn't exist, create it
+       if (!modal) {
+         modal = document.createElement("div");
+         //modal.style="width:50%;"
+         modal.id = "modal_setting";
+         modal.classList.add("general_div2");
+     
+         
+     
+         s=`<style>
+
+    
+    .general_div2{
+    
+        display: none;
+        background-color: rgba(0, 0, 0, 30%);
+        border: 0px solid;
+        
+        justify-content: center;
+        position:fixed;
+        top:0px;
+        right:0px;
+        bottom:0px;
+        left:0px;
+
+    }
+
+    .myModel2{
+      background-color: #f2f2f2;
+        border: 0px solid;
+        padding-top:5px;
+        margin:60px auto auto auto;
+        justify-content: center;
+        
+        height: 450px;
+        width: 500px;
+        border-radius: 20px;
+    }
+
+    .closeButton2{
+        
+        margin: 0px 8px;
+        display: inline-block;
+        float : right;
+        border-radius: 5px;
+        background-color: rgb(180, 180, 180);
+        width: 27px;
+        height: 25px;
+        font-size: 1em;
+        border: 0px;
+        cursor: pointer;
+        
+    }
+    .title{
+        width: 50%;
+        margin-top: 10px;
+        margin-left: 23%;
+        
+        
+        display: inline-block;}
+
+    .iconClose2{
+        
+        width: 90%;
+        height: 80%;}
+
+    .head2{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        white-space: nowrap;
+        height: 40px;
+        
+    }
+
+    .div_table2{
+        overflow-y: auto;
+        background-color: #ffffff;
+        border: 0px solid;
+        margin: 0px auto;
+        vertical-align: middle;
+        height: 83%;
+        width: 95%;
+        border-radius: 10px;
+
+    }
+
+    
+
+
+    .confermedButton2{
+        padding: 0px 15px;
+        height: 38px;
+        float: right;
+        display: inline-block;
+        font-size: 16px;
+        margin: 5px ;
+        vertical-align: middle;
+        border-radius: 7px ;
+        background-color: #3d8905;
+        border: 0px;
+        color: #ffffff;
+        cursor: pointer;
+    }
+
+form {
+    margin: 30px auto;
+     padding: 10px 10px;
+     height: 70px;
+     width: 90%;
+     background-color: rgb(245,245,245);
+     border-radius: 10px;
+     
+}
+h5{font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    color: red;}
+.input_1{
+    height: 35px;
+    width: 30%;
+    border-radius: 7px;
+    border: 1px solid black;
+    margin: 5px;
+    padding-left:5px ;
+}
+.input_1::-webkit-inner-spin-button,
+.input_1::-webkit-outer-spin-button {
+    
+  background-color: #fff; /* Change background color */
+  /* Add border */
+  height: 40px; /* Set height */
+  width: 18px; /* Set width */
+  text-align: center; /* Center text */
+  color: #333; /* Change text color */
+  font-size: 12px; /* Change font size */
+  cursor: pointer; 
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+    top:-20px;
+    margin-left:12% ;
+    margin-right:auto ;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    transform: translateX(28px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 28px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+.btn10{
+    display: inline-block;
+  padding: 12px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  background-color: #478ac9;
+  border: none;
+  border-radius: 10px;
+  box-shadow: none;
+  cursor: pointer;
+  text-align: center;
+  width: 30%; 
+  height:45px;
+  margin: 1%;/* Set width */
+   /* Set height */
+}
+.btn10:hover{background-color: #478ac9;color :white}
+
+
+
+.hidden_button{
+    width: 96%;
+    margin: 30px auto;
+}
+
+@media (max-width: 757px) {
+    .myModel2{width: 400px;}
+
+    .btn10{font-size: 13px;
+        padding: 12px 8px;}
+
+     label{font-size: 14px;}
+     .confermedButton2{ 
+        margin: 7px ;
+        padding: 0px 10px;
+        width:80px;
+        font-size: 14px;
+        height: 34px;}
+
+        .input_1{
+            height: 34px;
+            width: 27%;}
+            form {width:94%;}
+}
+
+@media (max-width: 500px) {
+    .myModel2{width: 350px;}
+
+    .btn10{font-size: 11px;
+        padding: auto 5px;}
+
+     label{font-size: 11px;}
+     .confermedButton2{ 
+        margin: 7px ;
+        padding: 0px 10px;
+        width:80px;
+        font-size: 12px;
+        height: 32px;
+        }
+
+        .input_1{
+            height: 34px;
+            width: 25%;
+          }
+            form {width:96%;
+            margin-left:2%;}
+            margin-reight:2%;}
+}
+
+                           
+                         </style>`
+
+
+         s+=`<div class="myModel2">
+                <div class="head2">
+                    <button id="closedButton" class="closeButton2"><img class="iconClose2" src="media/657059.png" alt="">
+                    </button>
+                </div>    
+                <div class="div_table2" >
+                  <div class="hidden_button">
+                                      
+                    <a href="editer-products" class="btn10">Les produits</a>
+                    <a href="user_list" class="btn10">Les utilisatuer</a>
+                    <a href="history" class="btn10">Historique</a>
+                    
+                  </div>
+                  <form >
+                    <label style="margin: 5px;">nombre des tables:</label>
+                    <input type="number"  class="input_1">
+                    <input type="submit"  value="confirmer" class="confermedButton2">  
+                  </form>  
+                  <form >
+                    <label style="margin: 15px 5px ; display: inline-block;">mettre à jour:</label>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                    <input type="submit"  value="confirmer" class="confermedButton2">
+                    <h5>Si vous l'activez, la liste de commandes sera effacée après 12:00 pm</h5>
+                  </form> 
+                </div >
+                
+                </div>                             `
+         
+                             modal.innerHTML+=s
+         
+         
+         
+     
+         // Add the modal to the body of the document
+         document.body.appendChild(modal);
+       }
+       modal.style.display = "block";
+
+       closedbutton=document.getElementById("closedButton");
+
+       closedbutton.onclick=function(){
+
+         modal.style.display = "none";}
+
+       window.onclick = function(event) {
+         if (event.target == modal) {
+        modal.style.display = "none";}}
+
+
+        
+     
+     }
+    
+  
+  
+</script>
 <!------------------printer-->
 <div>
   
