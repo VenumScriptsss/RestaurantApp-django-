@@ -335,13 +335,13 @@
             </thead>
             <tbody class="u-align-center u-grey-5 u-table-body u-text-black u-table-body-1">
               {% for comm in commands %}
-              {% if comm.encaisser is False or comm.isCanceled is False %}
+              {% if comm.encaisser is False and comm.isCanceled is False %}
                 
                 <tr style="height: 60px;" id="commTr_{{comm.id}}">
                   {% if comm.tableNum == '-1' %}
                     <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Emporter</td>
                   {% else %}
-                    <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.tableNum}}</td>
+                    <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Tabel {{comm.tableNum}}</td>
                   {% endif%}
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comm.dateComm|time:"H:i"}} {{comm.dateComm|date:"| d/m/Y"}} <br>
                   </td>
@@ -359,7 +359,7 @@
                 </td>
               {% endif %}
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
-                <button class="icon-button2" name="cancelComm" value="{{comm.id}}"><img src="/static/img/3687412.png" class="icon-supprime"></button>
+                <button class="icon-button2" name="cancelComm" value="{{comm.id}}" onclick="cancelComm(this.value)"><img src="/static/img/3687412.png" class="icon-supprime"></button>
 							</td>
                 </tr>
                 {% endif %}
@@ -380,18 +380,18 @@
         <div class="div_table2" >
           <div class="hidden_button">
                               
-            <a href="editer-products" class="btn10">Les produits</a>
-            <a href="user_list" class="btn10">Les utilisatuer</a>
+            <a href="editer-products" class="btn10">Stock</a>
+            <a href="user_list" class="btn10">Personelle</a>
             <a href="history" class="btn10">Historique</a>
             
           </div>
           <form method='post'>{% csrf_token %}
             <div class="div01">
-            <label style="margin: 10px; display: inline-block;">nombre des tables:</label>
+            <label style="margin: 10px; display: inline-block;">Nombre des Tables:</label>
             <input type="text" name="numOfTables" class="input_1" value = {{tablesNum}}>
             </div>
             <div class="div02">
-            <label style="margin: 10px ; display: inline-block;">mettre à jour:</label>
+            <label style="margin: 10px ; display: inline-block;">Commands d'aujourd'hui:</label>
             <label class="switch" >
               {% if dailyReset %}
                 <input type="checkbox" name="dailyReset" checked >
@@ -412,7 +412,17 @@
     
     
  <script>
+  function cancelComm(context){
+    document.getElementById("commTr_"+context).remove();
+    $.ajax({
+          url: '/cancelComm',
+          type: 'POST',
+          data:{'id':context},
+          success: function(response) {},
+          error: function(xhr, status, error) {}
 
+        })
+  }
   function removeComm(obj){
         document.getElementById("commTr_"+obj).remove();
         document.getElementById(obj+ "-modal").style.display = "none";

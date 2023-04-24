@@ -130,7 +130,7 @@ def ajouterEditCommandView(request):
     context['prods'] = Products.objects.all()
     context['pageType'] = 'Ajouter Command'
     admin = User.objects.get(admin=1)
-    context['tablesNum'] = range(1, admin.tablesNum)
+    context['tablesNum'] = range(1, admin.tablesNum+1)
 
     if 'edit' in request.POST:
         context['pageType'] = 'Editer Command'
@@ -388,6 +388,17 @@ def encaicement(request):
        cmnd.encaisser=True
        cmnd.save()
     return JsonResponse({})
+
+@csrf_exempt
+def cancelComm(request):
+    if request.method == 'POST':
+        print('in there')
+        id = request.POST.get('id')
+        print(id)
+        comm = Command.objects.get(id=id)
+        comm.isCanceled=True
+        comm.save()
+        return JsonResponse({})
     
 #----------------------------history--------------------------
 
@@ -402,8 +413,8 @@ def history(request):
     for i,j in zip(prods['prodName'],prods['prodPrix']):
         prod_price[i]=j
 
-    df['flaged'] = df['flaged'].replace({True: 'yes', False: 'no'})
-    df['encaisser'] = df['encaisser'].replace({True: 'yes', False: 'no'})
+    df['flaged'] = df['flaged'].replace({True: 'Oui', False: 'Non'})
+    df['encaisser'] = df['encaisser'].replace({True: 'Oui', False: 'Non'})
     df['commType'] = df['commType'].replace({2: True, 1: False})
     #df["dateComm"] = df["dateComm"].dt.strftime("%d-%m-%Y")
     #df['prods_quantity']=df['prods_quantity'].apply(lambda x :ast.literal_eval(x))

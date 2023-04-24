@@ -37,6 +37,7 @@ urlpatterns = [
     path('update_category_list', update_category_list, name='update_category_list'),
     path('logout', log_out, name='logout'),
     path('encaicement', encaicement, name='encaicement'),
+    path('cancelComm', cancelComm, name='cancelComm'),
     path('test', test, name='test'),
     path('add_user', add_user, name='add_user'),
      path('user_list', user_list_view, name='user_list'),

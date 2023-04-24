@@ -120,11 +120,11 @@
                   </div>
                   <div class="u-input-row">
                     <input id="field-bb90" type="radio" name="Suppression" value="false" class="u-field-input" data-calc="">
-                    <label class="u-field-label" for="field-bb90" style="font-size: 1.125rem;">No</label>
+                    <label class="u-field-label" for="field-bb90" style="font-size: 1.125rem;">Non</label>
                   </div>
                   <div class="u-input-row">
                     <input id="field-1596" type="radio" name="Suppression" value="" checked="checked" class="u-field-input" data-calc="">
-                    <label class="u-field-label" for="field-1596" style="font-size: 1.125rem;">Oui et No</label>
+                    <label class="u-field-label" for="field-1596" style="font-size: 1.125rem;">Oui et Non</label>
                   </div>
                 </div>
               </div>
@@ -137,11 +137,11 @@
                   </div>
                   <div class="u-input-row">
                     <input id="field-31ea" type="radio" name="Encaisser" value="false" class="u-field-input" data-calc="">
-                    <label class="u-field-label" for="field-31ea" style="font-size: 1.125rem;">No</label>
+                    <label class="u-field-label" for="field-31ea" style="font-size: 1.125rem;">Non</label>
                   </div>
                   <div class="u-input-row">
                     <input id="field-cb5f" type="radio" name="Encaisser" value="" class="u-field-input" checked="checked" data-calc="">
-                    <label class="u-field-label" for="field-cb5f" style="font-size: 1.125rem;">Oui et No</label>
+                    <label class="u-field-label" for="field-cb5f" style="font-size: 1.125rem;">Oui et Non</label>
                   </div>>
                 </div>
               </div>
@@ -197,10 +197,10 @@
               {% if comnd.tableNum == '-1' %}
                   <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Emporter</td> 
               {% else %}
-                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.tableNum}}</td>
+                  <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">Table {{comnd.tableNum}}</td>
               {% endif %}
 
-              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell" >{{comnd.dateComm|date:'d-m-Y'}}<br>
+              <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell" >{{comnd.dateComm|time:"H:i"}} {{comnd.dateComm|date:"| d/m/Y"}}<br>
               </td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.flaged}}</td>
               <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">{{comnd.encaisser}}</td>

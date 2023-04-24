@@ -168,9 +168,9 @@
                 <td class="u-border-1 u-border-grey-5 u-border-no-left u-border-no-right u-table-cell">
                   <form method="post">{% csrf_token %}
                     {% if not prod.isActive %} 
-                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #ed450b ; color : white">disActiver<br></button>
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 activer_button"  style="background-color: #ed450b ; color : white">inactif<br></button>
                     {% else %}
-                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #247c39; color : white" >Activer<br></button>
+                      <button  type="submit"  name="act-dis" value="{{prod.id}}" class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-2 u-radius-8 u-text-body-alt-color u-text-hover-white u-btn-4 disactiver_button" style="background-color: #247c39; color : white" >Actife<br></button>
                       {% endif %}
                   </form>
                 </td>

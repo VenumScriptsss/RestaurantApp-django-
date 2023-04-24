@@ -227,7 +227,7 @@
                           <h5 class="u-align-center u-text u-text-1">{{prod.prodName}}<br>
                           </h5>
                           <img class="u-align-center u-image u-image-round u-radius-10 u-image-1" src="{{prod.img.url}}" alt="" data-image-width="1280" data-image-height="891">
-                          <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}}<br>
+                          <h4 class="u-align-center u-text u-text-2">{{prod.prodPrix}} DA<br>
                           </h4>
                           <button id="addprod" value="{{prod.id}},{{prod.prodName}},{{prod.prodPrix}},{{prod.img.url}}" onclick="insertNewPlats(this.value)" class="u-active-custom-color-4 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-3 u-radius-6 u-btn-7">ajouter<br>
                           </button>
@@ -271,9 +271,9 @@
                                       </div>
                                   </div>
                                   <h4 class="u-align-center-xxl u-text u-text-5">
-                                      <div style="direction: rtl;">{{plt.prodPrix}} </div>
+                                      <div >{{plt.prodPrix}} DA </div>
                                   </h4>
-                                  <h4 class="u-align-center-xxl u-text u-text-6">{{plt.prodName}} <br>
+                                  <h4 class="u-align-center-xxl u-text u-text-6" style="underline">{{plt.prodName}} <br>
                                   </h4>
                                 </div>
                               </div>
